@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Chronoshift - a game by ITYELABS</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Chronoshift is a third-person survival adventure through Earth's past. Watch the cinematic trailer and follow the development of Era 1, the Dinosaur Era.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chronoshift - a game by ITYELABS">
+<meta property="og:description" content="Stranded sixty-six million years ago. Survive every era of history and find the way home.">
+<meta property="og:image" content="https://veetoltd.github.io/chronoshift/img/cover.jpg">
+<meta property="og:url" content="https://veetoltd.github.io/chronoshift/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ConsolePCGaming">
+<meta name="twitter:image" content="https://veetoltd.github.io/chronoshift/img/cover.jpg">
+<link rel="icon" type="image/png" href="img/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+html, body { margin: 0; } img { max-width: 100%; }
+/* Layout: a dig site through time - full-bleed hero, then the dev log as dated strata, the eras as stacked rock layers.
+   One committed look (volcanic dusk from Era 1), dark in both host themes. */
+:root {
+  --basalt: #15100d;      /* page ground */
+  --ash: #211a16;         /* raised surfaces */
+  --seam: #3a2e26;        /* rules, borders */
+  --bone: #f1e8d8;        /* text */
+  --dust: #b1a491;        /* secondary text */
+  --ember: #ec7a2c;       /* accent: lava */
+  --bronze: #d9aa52;      /* headings accent: the logo's gold */
+  --portal: #86d6ff;      /* status: in development */
+  --f-display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --f-body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  --f-label: "Barlow Condensed", "Arial Narrow", "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+body { background: var(--basalt); color: var(--bone); font: 400 1.0625rem/1.65 var(--f-body); }
+a { color: var(--bronze); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--portal); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 700; line-height: 1.1; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.9rem, 4.2vw, 3rem); color: var(--bone); }
+p { margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.label { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ember); }
+.lede { color: var(--dust); max-width: 62ch; font-size: 1.125rem; }
+section { padding-block: clamp(56px, 9vw, 112px); }
+.sec-head { display: grid; gap: 14px; margin-bottom: clamp(28px, 4vw, 48px); }
+
+/* header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(21,16,13,0.92); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: rgba(21,16,13,0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--seam); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
+.top img { height: 34px; width: auto; display: block; }
+.top nav { display: flex; gap: clamp(12px, 2.4vw, 28px); flex-wrap: wrap; justify-content: flex-end; }
+.top nav a { font: 600 0.85rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dust); text-decoration: none; }
+.top nav a:hover { color: var(--bone); }
+@media (max-width: 640px) { .top nav a.opt { display: none; } }
+
+/* hero */
+.hero { position: relative; padding: 0; overflow: hidden; border-bottom: 1px solid var(--seam); }
+.hero img.bg { width: 100%; height: clamp(440px, 62vw, 760px); object-fit: cover; object-position: 50% 40%; display: block; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,16,13,0) 35%, rgba(21,16,13,0.55) 62%, var(--basalt) 100%), linear-gradient(90deg, rgba(21,16,13,0.65) 0%, rgba(21,16,13,0) 55%); }
+.hero .copy { position: absolute; inset: auto 0 0 0; z-index: 2; padding-block: 0 clamp(28px, 5vw, 56px); }
+.hero .copy .wrap { display: grid; gap: 18px; }
+.hero .wordmark { width: min(560px, 86%); height: auto; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6)); }
+.hero .tag { font-family: var(--f-display); font-size: clamp(1.15rem, 2.4vw, 1.6rem); color: var(--bone); max-width: 30ch; text-wrap: balance; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.chip { font: 600 0.78rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; padding: 8px 12px; border: 1px solid var(--seam); background: rgba(33,26,22,0.8); color: var(--dust); }
+.chip.live { color: var(--portal); border-color: rgba(134,214,255,0.45); }
+.chip.live::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--portal); margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 10px var(--portal); animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.35; } }
+.btn { display: inline-flex; align-items: center; gap: 10px; font: 700 0.9rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 20px; text-decoration: none; border: 1px solid var(--ember); color: var(--basalt); background: var(--ember); }
+.btn:hover { background: #ff8f3e; }
+.btn.ghost { background: transparent; color: var(--bone); border-color: var(--seam); }
+.btn.ghost:hover { border-color: var(--bronze); }
+
+/* numbers */
+.tally { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-top: 1px solid var(--seam); border-bottom: 1px solid var(--seam); }
+.tally div { padding: 22px 18px; border-right: 1px solid var(--seam); display: grid; gap: 6px; }
+.tally div:last-child { border-right: 0; }
+.tally b { font: 700 clamp(1.9rem, 3.6vw, 2.6rem)/1 var(--f-display); color: var(--bronze); font-variant-numeric: tabular-nums; }
+.tally span { font: 500 0.95rem/1.3 var(--f-label); letter-spacing: 0.06em; color: var(--dust); }
+@media (max-width: 640px) { .tally div { border-right: 0; border-bottom: 1px solid var(--seam); } .tally div:last-child { border-bottom: 0; } }
+
+/* trailer */
+.trailer { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: start; }
+.trailer video { width: 100%; aspect-ratio: 16 / 9; max-width: 100%; background: #000; display: block; border: 1px solid var(--seam); }
+.trailer .side { display: grid; gap: 18px; min-width: 0; }
+.vo { border-left: 2px solid var(--bronze); padding-left: 16px; font-family: var(--f-display); font-size: 1.15rem; color: var(--bone); }
+.credits { font-size: 0.9rem; color: var(--dust); }
+@media (max-width: 860px) { .trailer { grid-template-columns: 1fr; } }
+
+/* powers */
+.band { background: var(--ash); border-top: 1px solid var(--seam); border-bottom: 1px solid var(--seam); }
+.powers { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.power { display: grid; grid-template-rows: auto 1fr; background: var(--basalt); border: 1px solid var(--seam); }
+.power img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; max-width: 100%; }
+.power div { padding: 14px 14px 18px; display: grid; gap: 6px; align-content: start; }
+.power h3 { font-size: 1.15rem; }
+.power p { font-size: 0.95rem; color: var(--dust); line-height: 1.5; }
+.power .key { font: 600 0.72rem/1 var(--f-label); letter-spacing: 0.16em; text-transform: uppercase; color: var(--c, var(--ember)); }
+@media (max-width: 1000px) { .powers { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .powers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* morph */
+.morph { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.morph figure { margin: 0; position: relative; overflow: hidden; border: 1px solid var(--seam); }
+.morph img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; max-width: 100%; transition: transform 0.6s ease; }
+.morph figure:hover img { transform: scale(1.04); }
+.morph figcaption { position: absolute; inset: auto 0 0 0; padding: 40px 16px 14px; background: linear-gradient(180deg, rgba(21,16,13,0), rgba(21,16,13,0.92)); display: grid; gap: 2px; }
+.morph figcaption b { font: 700 1.25rem/1.1 var(--f-display); }
+.morph figcaption span { font-size: 0.92rem; color: var(--dust); }
+@media (max-width: 760px) { .morph { grid-template-columns: 1fr; } }
+
+/* dev log strata */
+.log { display: grid; gap: 0; border-left: 1px solid var(--seam); margin-left: 6px; }
+.entry { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 0 0 36px 28px; position: relative; }
+.entry::before { content: ""; position: absolute; left: -7px; top: 6px; width: 13px; height: 13px; background: var(--basalt); border: 2px solid var(--bronze); transform: rotate(45deg); }
+.entry.now::before { background: var(--ember); border-color: var(--ember); box-shadow: 0 0 14px var(--ember); }
+.entry time { font: 600 0.95rem/1.4 var(--f-label); letter-spacing: 0.08em; text-transform: uppercase; color: var(--bronze); font-variant-numeric: tabular-nums; }
+.entry h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.entry ul { margin: 0; padding-left: 18px; color: var(--dust); display: grid; gap: 4px; }
+.entry li::marker { color: var(--ember); }
+.entry .n { font: 500 0.82rem/1 var(--f-label); letter-spacing: 0.1em; color: var(--dust); text-transform: uppercase; margin-top: 6px; display: block; }
+@media (max-width: 680px) { .entry { grid-template-columns: 1fr; gap: 6px; } }
+
+/* gallery */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.gallery button { all: unset; cursor: zoom-in; display: block; position: relative; overflow: hidden; border: 1px solid var(--seam); }
+.gallery button:focus-visible { outline: 2px solid var(--portal); outline-offset: 2px; }
+.gallery img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; max-width: 100%; transition: filter 0.3s; }
+.gallery button:hover img { filter: brightness(1.15); }
+.gallery .wide { grid-column: span 2; grid-row: span 2; }
+.gallery .wide img { height: 100%; }
+@media (max-width: 760px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+dialog { border: 1px solid var(--seam); background: var(--basalt); color: var(--bone); padding: 0; max-width: min(1400px, 94vw); }
+dialog::backdrop { background: rgba(8,6,5,0.88); }
+dialog img { display: block; max-width: 100%; max-height: 82vh; }
+dialog .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px; font-size: 0.95rem; color: var(--dust); }
+dialog button { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; background: transparent; color: var(--bone); border: 1px solid var(--seam); padding: 9px 12px; cursor: pointer; }
+
+/* eras as rock layers */
+.strata { display: grid; gap: 0; border: 1px solid var(--seam); }
+.layer { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 14px 18px; border-bottom: 1px solid rgba(0,0,0,0.35); background: var(--l); }
+.layer:last-child { border-bottom: 0; }
+.layer .no { font: 700 0.85rem/1 var(--f-label); letter-spacing: 0.12em; color: rgba(241,232,216,0.55); font-variant-numeric: tabular-nums; }
+.layer b { font: 700 clamp(1rem, 2vw, 1.25rem)/1.2 var(--f-display); }
+.layer .st { font: 600 0.75rem/1 var(--f-label); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(241,232,216,0.6); }
+.layer.cur { outline: 2px solid var(--ember); outline-offset: -2px; }
+.layer.cur .st { color: var(--portal); }
+.roadmap-note { margin-top: 14px; color: var(--dust); font-size: 0.95rem; }
+
+/* follow */
+.follow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.follow .plate { background: #e3e3e3; padding: 18px; display: grid; place-items: center; border: 1px solid var(--seam); }
+.follow .plate img { width: 100%; max-width: 520px; height: auto; display: block; }
+.follow .links { display: grid; gap: 10px; }
+.follow .links a { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; border: 1px solid var(--seam); text-decoration: none; color: var(--bone); background: var(--ash); }
+.follow .links a:hover { border-color: var(--ember); }
+.follow .links b { font: 700 1rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; }
+.follow .links span { color: var(--dust); font-size: 0.95rem; overflow-wrap: anywhere; }
+@media (max-width: 760px) { .follow { grid-template-columns: 1fr; } }
+
+/* footer */
+footer { border-top: 1px solid var(--seam); padding-block: 40px 56px; }
+footer .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center; }
+footer .studio { width: 116px; height: 116px; display: block; }
+footer .who { display: grid; gap: 6px; color: var(--dust); font-size: 0.95rem; }
+footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); }
+.veeto { width: 150px; height: 84px; border: 1px dashed var(--seam); display: grid; place-items: center; text-align: center; font: 600 0.75rem/1.3 var(--f-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); }
+@media (max-width: 680px) { footer .wrap { grid-template-columns: 1fr; justify-items: start; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a href="#top" aria-label="Chronoshift home"><img src="img/wordmark.png" alt="Chronoshift" width="200" height="56"></a>
+    <nav aria-label="Sections">
+      <a href="#trailer">Trailer</a>
+      <a href="#powers" class="opt">Powers</a>
+      <a href="#log">Dev log</a>
+      <a href="#gallery" class="opt">Gallery</a>
+      <a href="#eras">Eras</a>
+      <a href="#follow">Follow</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Chronoshift">
+    <img class="bg" src="img/hero.jpg" alt="The hero stands under a rock arch, looking out over lava fields toward the volcano while a pteranodon flies overhead" width="1600" height="900">
+    <div class="copy">
+      <div class="wrap">
+        <img class="wordmark" src="img/wordmark.png" alt="Chronoshift" width="900" height="252">
+        <p class="tag">Stranded sixty-six million years ago. Survive every era of history and find the way home.</p>
+        <div class="chips">
+          <span class="chip live">Era 1 in development</span>
+          <span class="chip">Unreal Engine 5</span>
+          <span class="chip">Third-person survival</span>
+        </div>
+        <div class="chips">
+          <a class="btn" href="#trailer">Watch the trailer</a>
+          <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">YouTube channel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="tally" aria-label="Development so far">
+      <div><b>38</b><span>days of development (16 Sep to 23 Oct 2026)</span></div>
+      <div><b>348</b><span>builds committed to the project</span></div>
+      <div><b>17</b><span>prehistoric species in Era 1</span></div>
+      <div><b>5 + 3</b><span>power-ups and creature morphs</span></div>
+      <div><b>1 / 13</b><span>eras built, twelve to come</span></div>
+    </div>
+  </div>
+
+  <section id="trailer">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Cinematic trailer · 1:46</span>
+        <h2>They say time only moves one way</h2>
+      </div>
+      <div class="trailer">
+        <video controls preload="metadata" poster="img/cover.jpg" playsinline>
+          <source src="media/trailer.mp4" type="video/mp4">
+        </video>
+        <div class="side">
+          <p class="vo">“Sixty-six million years ago. A world ruled by giants… and you, the smallest thing alive in it.”</p>
+          <p class="lede">Rendered in-engine with Movie Render Queue from real gameplay of Era 1: the jungle, the swamp, the lava fields and Rex Prime's arena. Every power-up, morph and era appears on screen as the narrator names it.</p>
+          <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">Watch in HD on YouTube</a>
+          <p class="credits">Music: Gregor Quendel, Free Cinematic Trailer Music (CC-BY 4.0). Narration: ElevenLabs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="powers" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Power-ups</span>
+        <h2>The past has its gifts</h2>
+        <p class="lede">Glowing pickups hidden through the level. Each one changes how the hero looks as well as how he fights, so you can read a buff at a glance.</p>
+      </div>
+      <div class="powers">
+        <article class="power"><img src="img/fury.jpg" alt="The hero burning with an orange fury glow, spear raised" loading="lazy"><div><span class="key" style="--c:#ff8a3d">Fury</span><h3>Blood on fire</h3><p>A molten glow over body and weapon, and every blow lands harder.</p></div></article>
+        <article class="power"><img src="img/adrenaline.jpg" alt="The hero sprinting wrapped in blue lightning" loading="lazy"><div><span class="key" style="--c:#86d6ff">Adrenaline</span><h3>Faster than lightning</h3><p>Electric skin, sparks at every footfall and a burst of speed.</p></div></article>
+        <article class="power"><img src="img/armour.jpg" alt="The hero turned to polished bronze" loading="lazy"><div><span class="key" style="--c:#e0b35c">Armour</span><h3>Living bronze</h3><p>Turns the hero to a bronze statue that shrugs off bites and claws.</p></div></article>
+        <article class="power"><img src="img/shadow.jpg" alt="The hero translucent and shimmering beside raptors that cannot see him" loading="lazy"><div><span class="key" style="--c:#9fd7d0">Shadow</span><h3>Hide from every eye</h3><p>A glassy shimmer the predators look straight through.</p></div></article>
+        <article class="power"><img src="img/regen.jpg" alt="The hero glowing green as his wounds heal" loading="lazy"><div><span class="key" style="--c:#6fe08a">Regeneration</span><h3>Heal what should kill</h3><p>A green glow that restores health over time, even mid-fight.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="morph">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Morph</span>
+        <h2>Find the amber. Become the beast.</h2>
+        <p class="lede">Amber pickups let the hero take the form of a dinosaur, each with its own moves.</p>
+      </div>
+      <div class="morph">
+        <figure><img src="img/morph_trike.jpg" alt="The hero morphed into a triceratops" loading="lazy"><figcaption><b>Triceratops</b><span>Charge and stomp</span></figcaption></figure>
+        <figure><img src="img/morph_raptor.jpg" alt="The hero morphed into a raptor, running across the riverbed" loading="lazy"><figcaption><b>Raptor</b><span>Pounce and slash</span></figcaption></figure>
+        <figure><img src="img/morph_ptera.jpg" alt="The hero morphed into a pteranodon, gliding over the hills" loading="lazy"><figcaption><b>Pteranodon</b><span>Take to the skies</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="log" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Dev log</span>
+        <h2>How Era 1 came together</h2>
+        <p class="lede">Taken from the project's build history, week by week since the first commit.</p>
+      </div>
+      <div class="log">
+        <article class="entry now">
+          <time datetime="2026-10-23">19 – 23 Oct</time>
+          <div>
+            <h3>Powers, morphs and the first trailers</h3>
+            <ul>
+              <li>New looks for Fury, Adrenaline, Armour, Shadow and Regeneration, and glowing pickups</li>
+              <li>Swamp dangers: sinking mud, tar, geysers and a rockfall trap</li>
+              <li>Dinosaurs got more attack moves; the bola got hold-to-aim</li>
+              <li>Melee now turns the hero to the nearest enemy, and the target lights up</li>
+              <li>Two trailers rendered in-engine, plus the cover art</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-10-12">12 – 16 Oct</time>
+          <div>
+            <h3>Rex Prime, rebuilt</h3>
+            <ul>
+              <li>A new tyrannosaur with seven animations: idle, walk, run, roar, bite, hit and death</li>
+              <li>Twelve new sounds, a heavy walk cycle and a head that tracks the player</li>
+              <li>Volcano eruption, a dusk sky and an overhauled boss arena</li>
+              <li>A settings menu with resolution and quality options</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-10-04">4 – 9 Oct</time>
+          <div>
+            <h3>A living world</h3>
+            <ul>
+              <li>Ferns, reeds and cycads move in the wind</li>
+              <li>The hero wades through the swamp instead of walking on water</li>
+              <li>Three key pieces are needed to wake the portal</li>
+              <li>Environment meshes optimised from 168 MB to 14 MB</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-09-29">29 Sep – 2 Oct</time>
+          <div>
+            <h3>Flyers and the Temporal Log</h3>
+            <ul>
+              <li>New species: Psittacosaurus and Archaeoceratops</li>
+              <li>Flying reptiles that bank, pitch, land and feed</li>
+              <li>The Temporal Log: a bestiary that fills in as you discover each creature</li>
+              <li>Richer colour across the level, and the first sound pass</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-09-22">22 – 27 Sep</time>
+          <div>
+            <h3>Dangers and the boss</h3>
+            <ul>
+              <li>Lava rivers, steam vents, burning damage and thorn thickets</li>
+              <li>Hit animations for every dinosaur, six new jungle species and a Spinosaurus</li>
+              <li>Rex Prime gets his arena; campfires and torches light the way</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-09-18">18 – 21 Sep</time>
+          <div>
+            <h3>Building the Dinosaur Era</h3>
+            <ul>
+              <li>A sculpted landscape with seven zones: jungle trail, meadow, swamp, canyon, ash fields, lava plains and the arena</li>
+              <li>Animated dinosaurs, and a brontosaurus herd in the meadow</li>
+              <li>The Era 1 hero replaces the stand-in mannequin</li>
+              <li>Spear and club in hand, plus crouch-stealth that shrinks detection to 45%</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-09-16">16 Sep</time>
+          <div>
+            <h3>Day one</h3>
+            <ul><li>First commit of the Era 1 project</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Gallery</span>
+        <h2>From the game</h2>
+        <p class="lede">In-engine captures from the current build. Select any image to see it larger.</p>
+      </div>
+      <div class="gallery">
+        <button class="wide" data-cap="Lava plains under the rock arch"><img src="img/lava.jpg" alt="Lava plains seen through a rock arch" loading="lazy"></button>
+        <button data-cap="A brachiosaur in the morning fog"><img src="img/shot_brachio.jpg" alt="The hero facing a brachiosaur in fog" loading="lazy"></button>
+        <button data-cap="The grazing meadow"><img src="img/herd.jpg" alt="Long-necked dinosaurs among cycads" loading="lazy"></button>
+        <button data-cap="Jungle trail"><img src="img/shot_jungle.jpg" alt="The hero on a jungle trail beside a hadrosaur" loading="lazy"></button>
+        <button data-cap="Crouched in the clearing"><img src="img/stealth.jpg" alt="The hero crouching to stay hidden" loading="lazy"></button>
+        <button data-cap="Rex Prime's arena"><img src="img/shot_rex_arena.jpg" alt="Rex Prime looming over the hero beside the portal" loading="lazy"></button>
+        <button data-cap="Pteranodons over the dead forest"><img src="img/shot_ptero.jpg" alt="A pteranodon swooping at the hero" loading="lazy"></button>
+        <button class="wide" data-cap="The portal wakes"><img src="img/portal.jpg" alt="The stone portal ring glowing in the dark" loading="lazy"></button>
+        <button data-cap="Fern floor"><img src="img/ferns.jpg" alt="Sunlit ferns under the canopy" loading="lazy"></button>
+        <button data-cap="The volcano"><img src="img/shot_volcano.jpg" alt="The hero facing a smoking volcano" loading="lazy"></button>
+        <button data-cap="Rex Prime in the volcano"><img src="img/rex.jpg" alt="Rex Prime stalking the hero in the red volcano light" loading="lazy"></button>
+        <button data-cap="The portal chamber"><img src="img/shot_portal.jpg" alt="The hero in front of the portal chamber" loading="lazy"></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="eras" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">The eras</span>
+        <h2>Thirteen layers of history</h2>
+        <p class="lede">Each era is a self-contained world with its own creatures, dangers and key. Dig down from the newest layer to the oldest.</p>
+      </div>
+      <div class="strata">
+        <div class="layer" style="--l:#3a2f4d"><span class="no">13</span><b>The Future</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#2f3440"><span class="no">12</span><b>Modern</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#3a3a33"><span class="no">11</span><b>World War II</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#3d3a30"><span class="no">10</span><b>World War I</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#3a3029"><span class="no">09</span><b>Industrial</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#33362b"><span class="no">08</span><b>Medieval</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#2c3540"><span class="no">07</span><b>Vikings</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#2b3a2f"><span class="no">06</span><b>Maya</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#432c28"><span class="no">05</span><b>Rome</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#40362a"><span class="no">04</span><b>Bronze Age</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#463a24"><span class="no">03</span><b>Ancient Egypt</b><span class="st">Planned</span></div>
+        <div class="layer" style="--l:#2b3b45"><span class="no">02</span><b>Ice Age</b><span class="st">Planned</span></div>
+        <div class="layer cur" style="--l:#4a2a1a"><span class="no">01</span><b>Prehistoric · the Dinosaur Era</b><span class="st">In development</span></div>
+      </div>
+      <p class="roadmap-note">Era 1 is playable end to end: the jungle, swamp, canyon and lava plains, Rex Prime, and the portal home.</p>
+    </div>
+  </section>
+
+  <section id="follow">
+    <div class="wrap follow">
+      <div class="plate"><img src="img/consolepcgaming.png" alt="Console &amp; PC Gaming" width="820" height="233"></div>
+      <div class="sec-head" style="margin:0">
+        <span class="label">Follow the build</span>
+        <h2>Console &amp; PC Gaming</h2>
+        <p class="lede">Trailers, dev updates and gameplay as each era comes together.</p>
+        <div class="links">
+          <a href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener"><b>YouTube</b><span>@ConsolePCGaming</span></a>
+          <a href="https://x.com/ConsolePCGaming" target="_blank" rel="noopener"><b>X</b><span>@ConsolePCGaming</span></a>
+          <a href="https://www.tiktok.com/@consolepcgaming" target="_blank" rel="noopener"><b>TikTok</b><span>@consolepcgaming</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="studio" src="img/ityelabs.jpg" alt="ITYELABS" width="720" height="720">
+    <div class="who">
+      <strong>A game by ITYELABS</strong>
+      <span>Chronoshift is in development. Everything shown is from the current build and may change.</span>
+      <span>© 2026 Veeto Ltd. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<dialog id="lb" aria-label="Image viewer">
+  <img id="lb-img" src="" alt="">
+  <div class="bar"><span id="lb-cap"></span><button id="lb-close" type="button">Close</button></div>
+</dialog>
+
+<script>
+(function () {
+  var lb = document.getElementById("lb"), img = document.getElementById("lb-img"), cap = document.getElementById("lb-cap");
+  document.querySelectorAll(".gallery button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var i = b.querySelector("img");
+      img.src = i.src; img.alt = i.alt; cap.textContent = b.dataset.cap || "";
+      if (lb.showModal) lb.showModal(); else lb.setAttribute("open", "");
+    });
+  });
+  document.getElementById("lb-close").addEventListener("click", function () { lb.close(); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+})();
+</script>
+
+</body>
+</html>
