@@ -4,15 +4,15 @@
 <title>Chronoshift - a game by ITYELABS</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Chronoshift is a third-person survival adventure through Earth's past. Watch the cinematic trailer and follow the development of Era 1, the Dinosaur Era.">
+<meta name="description" content="Chronoshift is a third-person action-survival adventure through Earth's past. Watch the new cinematic trailer and follow development: Era 1, the Dinosaur Era, is playable and the Ice Age is under way.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Chronoshift - a game by ITYELABS">
-<meta property="og:description" content="Stranded sixty-six million years ago. Survive every era of history and find the way home.">
-<meta property="og:image" content="https://veetoltd.github.io/chronoshift/img/cover.jpg">
+<meta property="og:description" content="Stranded sixty-six million years ago. Survive every era of history and find the way home. New cinematic trailer out now.">
+<meta property="og:image" content="https://veetoltd.github.io/chronoshift/img/cover_cinematic.jpg">
 <meta property="og:url" content="https://veetoltd.github.io/chronoshift/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@ConsolePCGaming">
-<meta name="twitter:image" content="https://veetoltd.github.io/chronoshift/img/cover.jpg">
+<meta name="twitter:image" content="https://veetoltd.github.io/chronoshift/img/cover_cinematic.jpg">
 <link rel="icon" type="image/png" href="img/favicon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,6 +94,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .vo { border-left: 2px solid var(--bronze); padding-left: 16px; font-family: var(--f-display); font-size: 1.15rem; color: var(--bone); }
 .credits { font-size: 0.9rem; color: var(--dust); }
 @media (max-width: 860px) { .trailer { grid-template-columns: 1fr; } }
+.ainote { border: 1px solid rgba(134,214,255,0.45); color: var(--portal); background: rgba(134,214,255,0.06); padding: 10px 12px; font: 600 0.82rem/1.4 var(--f-label); letter-spacing: 0.08em; text-transform: uppercase; }
+.trailer + .trailer { margin-top: clamp(36px, 6vw, 64px); padding-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--seam); }
+.trailer.small { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+@media (max-width: 860px) { .trailer.small { grid-template-columns: 1fr; } }
+.new { display: inline-block; margin-left: 8px; padding: 3px 7px; background: var(--ember); color: var(--basalt); font: 700 0.7rem/1 var(--f-label); letter-spacing: 0.14em; vertical-align: 2px; }
 
 /* powers */
 .band { background: var(--ash); border-top: 1px solid var(--seam); border-bottom: 1px solid var(--seam); }
@@ -183,6 +188,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     <nav aria-label="Sections">
       <a href="#trailer">Trailer</a>
       <a href="#powers" class="opt">Powers</a>
+      <a href="#iceage">Ice Age</a>
       <a href="#log">Dev log</a>
       <a href="#gallery" class="opt">Gallery</a>
       <a href="#eras">Eras</a>
@@ -199,12 +205,12 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <img class="wordmark" src="img/wordmark.png" alt="Chronoshift" width="900" height="252">
         <p class="tag">Stranded sixty-six million years ago. Survive every era of history and find the way home.</p>
         <div class="chips">
-          <span class="chip live">Era 1 in development</span>
+          <span class="chip live">Era 1 playable · Ice Age in development</span>
           <span class="chip">Unreal Engine 5</span>
-          <span class="chip">Third-person survival</span>
+          <span class="chip">Third-person action-survival</span>
         </div>
         <div class="chips">
-          <a class="btn" href="#trailer">Watch the trailer</a>
+          <a class="btn" href="#trailer">Watch the new trailer</a>
           <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">YouTube channel</a>
         </div>
       </div>
@@ -213,28 +219,40 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 
   <div class="wrap">
     <div class="tally" aria-label="Development so far">
-      <div><b>38</b><span>days of development (16 Sep to 23 Oct 2026)</span></div>
-      <div><b>348</b><span>builds committed to the project</span></div>
-      <div><b>17</b><span>prehistoric species in Era 1</span></div>
+      <div><b>52</b><span>days of development (16 Sep to 6 Nov 2026)</span></div>
+      <div><b>388</b><span>builds committed to the project</span></div>
+      <div><b>21</b><span>creature species, from Compsognathus to the dire wolf</span></div>
       <div><b>5 + 3</b><span>power-ups and creature morphs</span></div>
-      <div><b>1 / 13</b><span>eras built, twelve to come</span></div>
+      <div><b>2 / 13</b><span>eras under way: the Dinosaur Era and the Ice Age</span></div>
     </div>
   </div>
 
   <section id="trailer">
     <div class="wrap">
       <div class="sec-head">
-        <span class="label">Cinematic trailer · 1:46</span>
-        <h2>They say time only moves one way</h2>
+        <span class="label">Cinematic trailer · 1:42 <span class="new">New</span></span>
+        <h2>They said time only moves one way</h2>
       </div>
       <div class="trailer">
+        <video controls preload="metadata" poster="img/cover_cinematic.jpg" playsinline>
+          <source src="media/trailer_cinematic.mp4" type="video/mp4">
+        </video>
+        <div class="side">
+          <p class="vo">“They said time only moves one way… They were wrong.”</p>
+          <p class="lede">One experiment. One breakthrough. One portal that should never have opened. The new trailer follows the hero from his lab to the age of dinosaurs: the weapons, the power-ups, the morphs, Rex Prime, and the eras still to come.</p>
+          <p class="ainote">Cinematic trailer made with AI-generated video. Not in-game footage.</p>
+          <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">More on YouTube</a>
+          <p class="credits">Music and narration: ElevenLabs.</p>
+        </div>
+      </div>
+      <div class="trailer small">
         <video controls preload="metadata" poster="img/cover.jpg" playsinline>
           <source src="media/trailer.mp4" type="video/mp4">
         </video>
         <div class="side">
+          <span class="label">Gameplay trailer · 1:46</span>
           <p class="vo">“Sixty-six million years ago. A world ruled by giants… and you, the smallest thing alive in it.”</p>
-          <p class="lede">Rendered in-engine with Movie Render Queue from real gameplay of Era 1: the jungle, the swamp, the lava fields and Rex Prime's arena. Every power-up, morph and era appears on screen as the narrator names it.</p>
-          <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">Watch in HD on YouTube</a>
+          <p class="lede">Rendered in-engine with Movie Render Queue from real gameplay of Era 1: the jungle, the swamp, the lava fields and Rex Prime's arena.</p>
           <p class="credits">Music: Gregor Quendel, Free Cinematic Trailer Music (CC-BY 4.0). Narration: ElevenLabs.</p>
         </div>
       </div>
@@ -273,15 +291,90 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     </div>
   </section>
 
-  <section id="log" class="band">
+  <section id="iceage" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Era 2 · in development <span class="new">New</span></span>
+        <h2>The first jump through time</h2>
+        <p class="lede">Walk into the portal at the end of the Dinosaur Era and a cinematic carries you through the time tunnel into the frozen taiga of the Ice Age, with a new fur outfit for the hero. The snow takes your boot prints, gusts of wind shake powder off the spruces, and something is hunting in the trees.</p>
+      </div>
+      <div class="morph">
+        <figure><img src="img/ice_arrive.jpg" alt="The hero in his Ice Age furs arriving on a snowy forest trail" loading="lazy"><figcaption><b>Arrival</b><span>The taiga, after the portal</span></figcaption></figure>
+        <figure><img src="img/ice_gust.jpg" alt="Wind blowing powder snow off spruce trees beside the hero" loading="lazy"><figcaption><b>Living snow</b><span>Wind, falling powder, boot prints</span></figcaption></figure>
+        <figure><img src="img/ice_wolves.jpg" alt="A dire wolf pack closing in on the hero on the snowy trail" loading="lazy"><figcaption><b>The dire wolf pack</b><span>The Ice Age's first hunters</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="log">
     <div class="wrap">
       <div class="sec-head">
         <span class="label">Dev log</span>
-        <h2>How Era 1 came together</h2>
+        <h2>How Chronoshift is coming together</h2>
         <p class="lede">Taken from the project's build history, week by week since the first commit.</p>
       </div>
       <div class="log">
         <article class="entry now">
+          <time datetime="2026-11-06">6 Nov</time>
+          <div>
+            <h3>Ice Age wolves and a new trailer</h3>
+            <ul>
+              <li>The first Ice Age enemy: a dire wolf pack, with 15 animations from a stalking crouch to a galloping lunge</li>
+              <li>28 new wolf sounds: lone howls, a distant pack chorus, snarls, bites and paws in the snow</li>
+              <li>A new cinematic trailer, from the hero's lab to the age of dinosaurs and the eras beyond</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-11-04">4 – 5 Nov</time>
+          <div>
+            <h3>Into the Ice Age</h3>
+            <ul>
+              <li>The portal works: walk in, ride the time tunnel, arrive in the Ice Age</li>
+              <li>The hero's outfit changes with every era, starting with hides and furs</li>
+              <li>A snowy taiga with wind-swayed spruces, falling powder, boot prints, kicked-up snow and footstep crunch</li>
+              <li>The volcano cave rebuilt, with a wall-crawling giant scorpion and three gas vents: scalding jets, sulphur clouds and choking fog</li>
+              <li>Three new Temporal Log entries</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-11-02">2 – 3 Nov</time>
+          <div>
+            <h3>Matching the concept art</h3>
+            <ul>
+              <li>The jungle edge rebuilt to the concept painting: skyline volcano, smoke plume, god rays and valley mist</li>
+              <li>The volcano canyon rebuilt with a live eruption system and a lava bridge</li>
+              <li>The original dinosaur skins brought back, plus creature and prop fixes</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-10-27">27 – 29 Oct</time>
+          <div>
+            <h3>New dangers and a second boss</h3>
+            <ul>
+              <li>A jungle gorge, and four new jungle hazards: the Living Log, Tiger-Jaws, steam vents and rubble slides</li>
+              <li>The Constrictor Vine, a braided liana that snares the hero, and Arthropleura, a giant millipede ambusher</li>
+              <li>A rebuilt volcanic end level: lava bridge, slab arena and an eruption that builds through the fight</li>
+              <li>A Pachycephalosaurus end boss, with a tyrannosaur prowling the ridge above</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <time datetime="2026-10-24">24 – 26 Oct</time>
+          <div>
+            <h3>Smarter, louder dinosaurs</h3>
+            <ul>
+              <li>Raptor pack hunting, and 236 new enemy animations</li>
+              <li>Full animation sets for the Triceratops, the Parasaurolophus and the flying reptiles</li>
+              <li>A unique ElevenLabs sound set for all 15 dinosaur species</li>
+              <li>Dinosaurs walk to water to drink, and plants bend as they pass</li>
+              <li>A reworked meadow, a cliff-and-river valley, a coastal ridge, and a stone-framed HUD</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
           <time datetime="2026-10-23">19 – 23 Oct</time>
           <div>
             <h3>Powers, morphs and the first trailers</h3>
@@ -364,7 +457,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     </div>
   </section>
 
-  <section id="gallery">
+  <section id="gallery" class="band">
     <div class="wrap">
       <div class="sec-head">
         <span class="label">Gallery</span>
@@ -372,6 +465,15 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <p class="lede">In-engine captures from the current build. Select any image to see it larger.</p>
       </div>
       <div class="gallery">
+        <button class="wide" data-cap="The jungle edge, with the volcano on the skyline"><img src="img/g_jungle_volcano.jpg" alt="The hero at the jungle edge looking toward a smoking volcano" loading="lazy"></button>
+        <button data-cap="The dire wolf pack in the Ice Age taiga"><img src="img/ice_wolves.jpg" alt="A dire wolf beside the hero on a snowy trail" loading="lazy"></button>
+        <button data-cap="Jungle trail"><img src="img/g_jungle_trail.jpg" alt="A shaded jungle trail under twisted trees" loading="lazy"></button>
+        <button data-cap="The cliff-and-river valley"><img src="img/g_valley.jpg" alt="A river winding under a tall cliff, with long-necked dinosaurs grazing" loading="lazy"></button>
+        <button data-cap="The lava bridge"><img src="img/g_lava_bridge.jpg" alt="The hero facing an erupting volcano across a lava canyon" loading="lazy"></button>
+        <button data-cap="Inside the volcano cave"><img src="img/g_cave.jpg" alt="The hero in a cave lit by a lava river" loading="lazy"></button>
+        <button class="wide" data-cap="The volcanic arena and the portal"><img src="img/g_arena.jpg" alt="The hero on the cracked slab floor of the volcanic arena, with the portal ring behind" loading="lazy"></button>
+        <button data-cap="Ice Age arrival"><img src="img/ice_arrive.jpg" alt="The hero in furs on the snowy taiga trail" loading="lazy"></button>
+        <button data-cap="Wind in the taiga"><img src="img/ice_gust.jpg" alt="Snow blowing off spruce trees" loading="lazy"></button>
         <button class="wide" data-cap="Lava plains under the rock arch"><img src="img/lava.jpg" alt="Lava plains seen through a rock arch" loading="lazy"></button>
         <button data-cap="A brachiosaur in the morning fog"><img src="img/shot_brachio.jpg" alt="The hero facing a brachiosaur in fog" loading="lazy"></button>
         <button data-cap="The grazing meadow"><img src="img/herd.jpg" alt="Long-necked dinosaurs among cycads" loading="lazy"></button>
@@ -388,7 +490,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     </div>
   </section>
 
-  <section id="eras" class="band">
+  <section id="eras">
     <div class="wrap">
       <div class="sec-head">
         <span class="label">The eras</span>
@@ -407,10 +509,10 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <div class="layer" style="--l:#432c28"><span class="no">05</span><b>Rome</b><span class="st">Planned</span></div>
         <div class="layer" style="--l:#40362a"><span class="no">04</span><b>Bronze Age</b><span class="st">Planned</span></div>
         <div class="layer" style="--l:#463a24"><span class="no">03</span><b>Ancient Egypt</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#2b3b45"><span class="no">02</span><b>Ice Age</b><span class="st">Planned</span></div>
-        <div class="layer cur" style="--l:#4a2a1a"><span class="no">01</span><b>Prehistoric · the Dinosaur Era</b><span class="st">In development</span></div>
+        <div class="layer cur" style="--l:#2b3b45"><span class="no">02</span><b>Ice Age</b><span class="st">In development</span></div>
+        <div class="layer cur" style="--l:#4a2a1a"><span class="no">01</span><b>Prehistoric · the Dinosaur Era</b><span class="st">Playable · polishing</span></div>
       </div>
-      <p class="roadmap-note">Era 1 is playable end to end: the jungle, swamp, canyon and lava plains, Rex Prime, and the portal home.</p>
+      <p class="roadmap-note">Era 1 is playable end to end: the jungle, swamp, canyon, lava plains and volcano cave, two bosses, and the portal. The portal now carries you into the Ice Age, where the first section of frozen taiga and its wolf pack are in.</p>
     </div>
   </section>
 
@@ -436,7 +538,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     <img class="studio" src="img/ityelabs.jpg" alt="ITYELABS" width="720" height="720">
     <div class="who">
       <strong>A game by ITYELABS</strong>
-      <span>Chronoshift is in development. Everything shown is from the current build and may change.</span>
+      <span>Chronoshift is in development. Gameplay images are from the current build and may change. The cinematic trailer uses AI-generated video and is not in-game footage.</span>
       <span>© 2026 Veeto Ltd. All rights reserved.</span>
     </div>
   </div>
