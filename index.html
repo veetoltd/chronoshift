@@ -89,7 +89,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* trailer */
 .trailer { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: start; }
-.trailer video { width: 100%; aspect-ratio: 16 / 9; max-width: 100%; background: #000; display: block; border: 1px solid var(--seam); }
+.trailer video, .trailer iframe { width: 100%; aspect-ratio: 16 / 9; max-width: 100%; background: #000; display: block; border: 1px solid var(--seam); }
 .trailer .side { display: grid; gap: 18px; min-width: 0; }
 .vo { border-left: 2px solid var(--bronze); padding-left: 16px; font-family: var(--f-display); font-size: 1.15rem; color: var(--bone); }
 .credits { font-size: 0.9rem; color: var(--dust); }
@@ -254,6 +254,14 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
           <p class="vo">“Sixty-six million years ago. A world ruled by giants… and you, the smallest thing alive in it.”</p>
           <p class="lede">Rendered in-engine with Movie Render Queue from real gameplay of Era 1: the jungle, the swamp, the lava fields and Rex Prime's arena.</p>
           <p class="credits">Music: Gregor Quendel, Free Cinematic Trailer Music (CC-BY 4.0). Narration: ElevenLabs.</p>
+        </div>
+      </div>
+      <div class="trailer small" id="song">
+        <iframe src="https://www.youtube-nocookie.com/embed/lXwFMECKmgM" title="Cross the Ages, a song inspired by Chronoshift" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="side">
+          <span class="label">Song · Cross the Ages <span class="new">New</span></span>
+          <p class="lede">A song about the game: a man thrown back in time and stranded sixty-six million years ago. He has to survive every era of history and find the way home.</p>
+          <a class="btn ghost" href="https://youtu.be/lXwFMECKmgM" target="_blank" rel="noopener">Watch on YouTube</a>
         </div>
       </div>
     </div>
