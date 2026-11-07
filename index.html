@@ -63,9 +63,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* hero */
 .hero { position: relative; padding: 0; overflow: hidden; border-bottom: 1px solid var(--seam); }
-.hero img.bg { width: 100%; height: clamp(440px, 62vw, 760px); object-fit: cover; object-position: 50% 40%; display: block; }
-.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,16,13,0) 35%, rgba(21,16,13,0.55) 62%, var(--basalt) 100%), linear-gradient(90deg, rgba(21,16,13,0.65) 0%, rgba(21,16,13,0) 55%); }
-.hero .copy { position: absolute; inset: auto 0 0 0; z-index: 2; padding-block: 0 clamp(28px, 5vw, 56px); }
+.hero { background: #05070d; }
+.hero img.bg { width: 100%; max-width: 1800px; height: auto; aspect-ratio: 1800 / 982; object-fit: cover; display: block; margin-inline: auto; }
+.hero::after { content: none; }
+.hero .copy { position: relative; z-index: 2; padding-block: clamp(20px, 3vw, 36px) clamp(28px, 5vw, 56px); background: linear-gradient(180deg, #05070d 0%, var(--basalt) 100%); }
 .hero .copy .wrap { display: grid; gap: 18px; }
 .hero .wordmark { width: min(560px, 86%); height: auto; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6)); }
 .hero .tag { font-family: var(--f-display); font-size: clamp(1.15rem, 2.4vw, 1.6rem); color: var(--bone); max-width: 30ch; text-wrap: balance; }
@@ -200,10 +201,9 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 
 <main id="top">
   <section class="hero" aria-label="Chronoshift">
-    <img class="bg" src="img/hero.jpg" alt="The hero stands under a rock arch, looking out over lava fields toward the volcano while a pteranodon flies overhead" width="1600" height="900">
+    <img class="bg" src="img/key_art.jpg" alt="Chronoshift: the hero sprints out of a shattered clock face, a time portal behind him, castle towers and a future city on either side" width="1800" height="982">
     <div class="copy">
       <div class="wrap">
-        <img class="wordmark" src="img/wordmark.png" alt="Chronoshift" width="900" height="252">
         <p class="tag">Stranded sixty-six million years ago. Survive every era of history and find the way home.</p>
         <div class="chips">
           <span class="chip live">Era 1 playable · Ice Age in development</span>
