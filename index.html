@@ -196,6 +196,27 @@ footer .who { display: grid; gap: 6px; color: var(--dust); font-size: 0.95rem; }
 footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); }
 .veeto { width: 150px; height: 84px; border: 1px dashed var(--seam); display: grid; place-items: center; text-align: center; font: 600 0.75rem/1.3 var(--f-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); }
 @media (max-width: 680px) { footer .wrap { grid-template-columns: 1fr; justify-items: start; } }
+
+/* era panels */
+.era { border-bottom: 1px solid rgba(0,0,0,0.35); }
+.era > summary { list-style: none; cursor: pointer; border-bottom: 0; }
+.era > summary::-webkit-details-marker { display: none; }
+.era > summary:focus-visible { outline: 2px solid var(--portal); outline-offset: -2px; }
+.era .open { font-style: normal; margin-left: 12px; padding: 4px 8px; border: 1px solid var(--ember); color: var(--bone); letter-spacing: 0.12em; }
+.era[open] .open { background: var(--ember); color: #15100d; }
+.era[open] .open::after { content: " ▴"; }
+.era:not([open]) .open::after { content: " ▾"; }
+.era-body { padding: clamp(18px, 3vw, 32px); background: rgba(0,0,0,0.25); display: grid; gap: 18px; }
+.era-intro { margin: 0; max-width: 820px; color: var(--dust); font-size: 1.05rem; }
+.progress { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.progress h4, .era-sub { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.16em; text-transform: uppercase; color: var(--bronze); margin: 0 0 10px; }
+.era-sub { margin: 14px 0 0; }
+.progress ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; color: var(--dust); }
+.progress li { padding-left: 24px; position: relative; }
+.progress .done li::before { content: "✓"; position: absolute; left: 0; color: #6fe08a; font-weight: 700; }
+.progress .todo li::before { content: "◇"; position: absolute; left: 2px; color: var(--ember); }
+.era-body .art-head { margin-top: 18px; }
+@media (max-width: 760px) { .progress { grid-template-columns: 1fr; } .era .open { display: inline-block; margin: 6px 0 0; } }
 </style>
 </head>
 <body>
@@ -206,10 +227,9 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
       <a href="#trailer">Trailer</a>
       <a href="#song">Song</a>
       <a href="#powers" class="opt">Powers</a>
-      <a href="#iceage">Ice Age</a>
-      <a href="#log">Dev log</a>
-      <a href="#gallery" class="opt">Gallery</a>
       <a href="#eras">Eras</a>
+      <a href="#era-1" class="opt">Dinosaur Era</a>
+      <a href="#era-2">Ice Age</a>
       <a href="#follow">Follow</a>
     </nav>
   </div>
@@ -340,258 +360,15 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     </div>
   </section>
 
-  <section id="iceage" class="band">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Era 2 · in development <span class="new">New</span></span>
-        <h2>The first jump through time</h2>
-        <p class="lede">Walk into the portal at the end of the Dinosaur Era and a cinematic carries you through the time tunnel into the Ice Age, with a new fur outfit for the hero. The frozen world now stretches 1.1 km: spruce taiga, a frozen lake, a mammoth steppe, rock ridges, hot springs and a glacier. There is no path. You find your way by landmarks, and the cold is an enemy of its own.</p>
-      </div>
-      <div class="morph">
-        <figure><img src="img/ice_arrive.jpg" alt="The hero in his Ice Age furs arriving on a snowy forest trail" loading="lazy"><figcaption><b>Arrival</b><span>The taiga, after the portal</span></figcaption></figure>
-        <figure><img src="img/ice_gust.jpg" alt="Wind blowing powder snow off spruce trees beside the hero" loading="lazy"><figcaption><b>Living snow</b><span>Wind, falling powder, boot prints</span></figcaption></figure>
-        <figure><img src="img/ice_wolves.jpg" alt="A dire wolf pack closing in on the hero on the snowy trail" loading="lazy"><figcaption><b>The dire wolf pack</b><span>The Ice Age's first hunters</span></figcaption></figure>
-      </div>
-      <div class="morph">
-        <figure><img src="img/ice_campfire.jpg" alt="The hero beside a stone-ringed campfire in the snowy spruce forest, sunbeams through the trees" loading="lazy"><figcaption><b>Keep warm</b><span>A warmth meter drains in the cold; campfires refill it</span></figcaption></figure>
-        <figure><img src="img/ice_thinice.jpg" alt="The hero on a frozen lake beside a patch of thin ice webbed with cracks" loading="lazy"><figcaption><b>Thin ice</b><span>Slide on the lake, and never stand still on the cracks</span></figcaption></figure>
-        <figure><img src="img/ice_falcon.jpg" alt="A peregrine falcon flying over the misty taiga" loading="lazy"><figcaption><b>Become the falcon</b><span>Climb to the eyrie and take to the air</span></figcaption></figure>
-      </div>
-      <div class="art-head">
-        <span class="label">Artwork</span>
-        <h3>From concept to game</h3>
-        <p>Every Ice Age area starts as concept art and a hand-drawn map, and the level is built to match them, side by side. These are the taiga trail paintings the forest was built from, clear and in a blizzard, and the map of the Ice Age as it stands today.</p>
-      </div>
-      <div class="artrow">
-        <figure><img src="img/ice_concept_clear.jpg" alt="Concept art: the hero on a trampled snow trail between tall snowy spruces, sunbeams falling through the forest" loading="lazy"><figcaption><b>The taiga trail</b>Concept art, clear morning</figcaption></figure>
-        <figure><img src="img/ice_concept_blizzard.jpg" alt="Concept art: the same snowy forest trail in a driving blizzard, the hero hunched against the wind" loading="lazy"><figcaption><b>Blizzard</b>Concept art, the storm rolling in</figcaption></figure>
-      </div>
-      <figure class="mapfig"><img src="img/ice_map.jpg" alt="Map of the Ice Age level: arrival forest, hunters' camp, frozen lake, mammoth steppe and village site in the west; sabre-tooth rocks, hot springs, blizzard pass, ice cave cliff, Neanderthal shelter, glacier, Denisovan camp and the boss bowl in the east" loading="lazy"><figcaption><b>The Ice Age map</b>1.1 km by 250 m, west half on top. Thirteen landmarks, from the arrival forest to the boss bowl.</figcaption></figure>
-    </div>
-  </section>
 
-  <section id="log">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Dev log</span>
-        <h2>How Chronoshift is coming together</h2>
-        <p class="lede">Taken from the project's build history, week by week since the first commit.</p>
-      </div>
-      <div class="log">
-        <article class="entry now">
-          <time datetime="2026-11-09">8 to 9 Nov</time>
-          <div>
-            <h3>The Ice Age grows: warmth, thin ice and the falcon</h3>
-            <ul>
-              <li>The Ice Age map grows to 1.1 km by 250 m: a frozen lake, a mammoth steppe, rock ridges and passes, hot springs, a glacier and snowy mountains on the skyline</li>
-              <li>Survival in the cold: a warmth meter that drains faster in a blizzard, refilled at campfires and hot pools, with frostbite damage when it runs out</li>
-              <li>Ice physics on the frozen lake: slide and skid on the ice, and thin patches crack and give way if you stand still or land hard</li>
-              <li>The falcon's eyrie: reach the nest and you can turn into a peregrine falcon, with flapping, gliding, banking turns and a tucked high-speed dive</li>
-              <li>Clearer air: lighter everyday snow and fog, so you can see across the lake to the mountains, with the real whiteouts saved for blizzards</li>
-              <li>The first pieces of the boss arena: a ring of braziers around the rim that you light with your torch</li>
-              <li>A full settings menu (DLSS, frame generation, Reflex, headphone audio and volumes), an in-game How to Play guide, and a new Windows installer for testers</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-11-07">7 Nov</time>
-          <div>
-            <h3>A blizzard, real physics and a title screen</h3>
-            <ul>
-              <li>The taiga made photoreal: frosted spruces, a trampled snow trail with rocks and deadwood, softer winter light</li>
-              <li>The first snowstorm: driving snow, gusting wind and howling audio that slows the hero down</li>
-              <li>Creatures react to hits, wolf tails swing as they run, and the hero braces when armour stops a bite</li>
-              <li>Footprints and paw tracks press into the snow and slowly fill back in</li>
-              <li>Deadwood logs splinter when you swing at them, and young spruces bend as you push through</li>
-              <li>A title screen with the new logo art and our song, <a href="#song">Cross the Ages</a></li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-11-06">6 Nov</time>
-          <div>
-            <h3>Ice Age wolves and a new trailer</h3>
-            <ul>
-              <li>The first Ice Age enemy: a dire wolf pack, with 15 animations from a stalking crouch to a galloping lunge</li>
-              <li>28 new wolf sounds: lone howls, a distant pack chorus, snarls, bites and paws in the snow</li>
-              <li>A new cinematic trailer, from the hero's lab to the age of dinosaurs and the eras beyond</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-11-04">4 – 5 Nov</time>
-          <div>
-            <h3>Into the Ice Age</h3>
-            <ul>
-              <li>The portal works: walk in, ride the time tunnel, arrive in the Ice Age</li>
-              <li>The hero's outfit changes with every era, starting with hides and furs</li>
-              <li>A snowy taiga with wind-swayed spruces, falling powder, boot prints, kicked-up snow and footstep crunch</li>
-              <li>The volcano cave rebuilt, with a wall-crawling giant scorpion and three gas vents: scalding jets, sulphur clouds and choking fog</li>
-              <li>Three new Temporal Log entries</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-11-02">2 – 3 Nov</time>
-          <div>
-            <h3>Matching the concept art</h3>
-            <ul>
-              <li>The jungle edge rebuilt to the concept painting: skyline volcano, smoke plume, god rays and valley mist</li>
-              <li>The volcano canyon rebuilt with a live eruption system and a lava bridge</li>
-              <li>The original dinosaur skins brought back, plus creature and prop fixes</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-10-27">27 – 29 Oct</time>
-          <div>
-            <h3>New dangers and a second boss</h3>
-            <ul>
-              <li>A jungle gorge, and four new jungle hazards: the Living Log, Tiger-Jaws, steam vents and rubble slides</li>
-              <li>The Constrictor Vine, a braided liana that snares the hero, and Arthropleura, a giant millipede ambusher</li>
-              <li>A rebuilt volcanic end level: lava bridge, slab arena and an eruption that builds through the fight</li>
-              <li>A Pachycephalosaurus end boss, with a tyrannosaur prowling the ridge above</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-10-24">24 – 26 Oct</time>
-          <div>
-            <h3>Smarter, louder dinosaurs</h3>
-            <ul>
-              <li>Raptor pack hunting, and 236 new enemy animations</li>
-              <li>Full animation sets for the Triceratops, the Parasaurolophus and the flying reptiles</li>
-              <li>A unique ElevenLabs sound set for all 15 dinosaur species</li>
-              <li>Dinosaurs walk to water to drink, and plants bend as they pass</li>
-              <li>A reworked meadow, a cliff-and-river valley, a coastal ridge, and a stone-framed HUD</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-10-23">19 – 23 Oct</time>
-          <div>
-            <h3>Powers, morphs and the first trailers</h3>
-            <ul>
-              <li>New looks for Fury, Adrenaline, Armour, Shadow and Regeneration, and glowing pickups</li>
-              <li>Swamp dangers: sinking mud, tar, geysers and a rockfall trap</li>
-              <li>Dinosaurs got more attack moves; the bola got hold-to-aim</li>
-              <li>Melee now turns the hero to the nearest enemy, and the target lights up</li>
-              <li>Two trailers rendered in-engine, plus the cover art</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-10-12">12 – 16 Oct</time>
-          <div>
-            <h3>Rex Prime, rebuilt</h3>
-            <ul>
-              <li>A new tyrannosaur with seven animations: idle, walk, run, roar, bite, hit and death</li>
-              <li>Twelve new sounds, a heavy walk cycle and a head that tracks the player</li>
-              <li>Volcano eruption, a dusk sky and an overhauled boss arena</li>
-              <li>A settings menu with resolution and quality options</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-10-04">4 – 9 Oct</time>
-          <div>
-            <h3>A living world</h3>
-            <ul>
-              <li>Ferns, reeds and cycads move in the wind</li>
-              <li>The hero wades through the swamp instead of walking on water</li>
-              <li>Three key pieces are needed to wake the portal</li>
-              <li>Environment meshes optimised from 168 MB to 14 MB</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-09-29">29 Sep – 2 Oct</time>
-          <div>
-            <h3>Flyers and the Temporal Log</h3>
-            <ul>
-              <li>New species: Psittacosaurus and Archaeoceratops</li>
-              <li>Flying reptiles that bank, pitch, land and feed</li>
-              <li>The Temporal Log: a bestiary that fills in as you discover each creature</li>
-              <li>Richer colour across the level, and the first sound pass</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-09-22">22 – 27 Sep</time>
-          <div>
-            <h3>Dangers and the boss</h3>
-            <ul>
-              <li>Lava rivers, steam vents, burning damage and thorn thickets</li>
-              <li>Hit animations for every dinosaur, six new jungle species and a Spinosaurus</li>
-              <li>Rex Prime gets his arena; campfires and torches light the way</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-09-18">18 – 21 Sep</time>
-          <div>
-            <h3>Building the Dinosaur Era</h3>
-            <ul>
-              <li>A sculpted landscape with seven zones: jungle trail, meadow, swamp, canyon, ash fields, lava plains and the arena</li>
-              <li>Animated dinosaurs, and a brontosaurus herd in the meadow</li>
-              <li>The Era 1 hero replaces the stand-in mannequin</li>
-              <li>Spear and club in hand, plus crouch-stealth that shrinks detection to 45%</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <time datetime="2026-09-16">16 Sep</time>
-          <div>
-            <h3>Day one</h3>
-            <ul><li>First commit of the Era 1 project</li></ul>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
 
-  <section id="gallery" class="band">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Gallery</span>
-        <h2>From the game</h2>
-        <p class="lede">In-engine captures from the current build. Select any image to see it larger.</p>
-      </div>
-      <div class="gallery">
-        <button class="wide" data-cap="The jungle edge, with the volcano on the skyline"><img src="img/g_jungle_volcano.jpg" alt="The hero at the jungle edge looking toward a smoking volcano" loading="lazy"></button>
-        <button class="wide" data-cap="The frozen lake, with the far shore and mountains"><img src="img/ice_lake.jpg" alt="The hero on the frozen lake looking toward a spruce shoreline and snowy mountains" loading="lazy"></button>
-        <button data-cap="A campfire in the arrival forest"><img src="img/ice_campfire.jpg" alt="The hero beside a campfire in the snowy forest" loading="lazy"></button>
-        <button data-cap="Thin ice on the frozen lake"><img src="img/ice_thinice.jpg" alt="Cracked thin ice on the frozen lake" loading="lazy"></button>
-        <button data-cap="The dire wolf pack in the Ice Age taiga"><img src="img/ice_wolves.jpg" alt="A dire wolf beside the hero on a snowy trail" loading="lazy"></button>
-        <button data-cap="Jungle trail"><img src="img/g_jungle_trail.jpg" alt="A shaded jungle trail under twisted trees" loading="lazy"></button>
-        <button data-cap="The cliff-and-river valley"><img src="img/g_valley.jpg" alt="A river winding under a tall cliff, with long-necked dinosaurs grazing" loading="lazy"></button>
-        <button data-cap="The lava bridge"><img src="img/g_lava_bridge.jpg" alt="The hero facing an erupting volcano across a lava canyon" loading="lazy"></button>
-        <button data-cap="Inside the volcano cave"><img src="img/g_cave.jpg" alt="The hero in a cave lit by a lava river" loading="lazy"></button>
-        <button class="wide" data-cap="The volcanic arena and the portal"><img src="img/g_arena.jpg" alt="The hero on the cracked slab floor of the volcanic arena, with the portal ring behind" loading="lazy"></button>
-        <button data-cap="Ice Age arrival"><img src="img/ice_arrive.jpg" alt="The hero in furs on the snowy taiga trail" loading="lazy"></button>
-        <button data-cap="Wind in the taiga"><img src="img/ice_gust.jpg" alt="Snow blowing off spruce trees" loading="lazy"></button>
-        <button class="wide" data-cap="Lava plains under the rock arch"><img src="img/lava.jpg" alt="Lava plains seen through a rock arch" loading="lazy"></button>
-        <button data-cap="A brachiosaur in the morning fog"><img src="img/shot_brachio.jpg" alt="The hero facing a brachiosaur in fog" loading="lazy"></button>
-        <button data-cap="The grazing meadow"><img src="img/herd.jpg" alt="Long-necked dinosaurs among cycads" loading="lazy"></button>
-        <button data-cap="Jungle trail"><img src="img/shot_jungle.jpg" alt="The hero on a jungle trail beside a hadrosaur" loading="lazy"></button>
-        <button data-cap="Crouched in the clearing"><img src="img/stealth.jpg" alt="The hero crouching to stay hidden" loading="lazy"></button>
-        <button data-cap="Rex Prime's arena"><img src="img/shot_rex_arena.jpg" alt="Rex Prime looming over the hero beside the portal" loading="lazy"></button>
-        <button data-cap="Pteranodons over the dead forest"><img src="img/shot_ptero.jpg" alt="A pteranodon swooping at the hero" loading="lazy"></button>
-        <button class="wide" data-cap="The portal wakes"><img src="img/portal.jpg" alt="The stone portal ring glowing in the dark" loading="lazy"></button>
-        <button data-cap="Fern floor"><img src="img/ferns.jpg" alt="Sunlit ferns under the canopy" loading="lazy"></button>
-        <button data-cap="The volcano"><img src="img/shot_volcano.jpg" alt="The hero facing a smoking volcano" loading="lazy"></button>
-        <button data-cap="Rex Prime in the volcano"><img src="img/rex.jpg" alt="Rex Prime stalking the hero in the red volcano light" loading="lazy"></button>
-        <button data-cap="The portal chamber"><img src="img/shot_portal.jpg" alt="The hero in front of the portal chamber" loading="lazy"></button>
-      </div>
-    </div>
-  </section>
 
   <section id="eras">
     <div class="wrap">
       <div class="sec-head">
         <span class="label">The eras</span>
         <h2>Thirteen layers of history</h2>
-        <p class="lede">Each era is a self-contained world with its own creatures, dangers and key. Dig down from the newest layer to the oldest.</p>
+        <p class="lede">Each era is a self-contained world with its own creatures, dangers and key. Select an era that is under way to see its progress, screenshots and development log.</p>
       </div>
       <div class="strata">
         <div class="layer" style="--l:#3a2f4d"><span class="no">13</span><b>The Future</b><span class="st">Planned</span></div>
@@ -605,8 +382,278 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <div class="layer" style="--l:#432c28"><span class="no">05</span><b>Rome</b><span class="st">Planned</span></div>
         <div class="layer" style="--l:#463a24"><span class="no">04</span><b>Ancient Egypt</b><span class="st">Planned</span></div>
         <div class="layer" style="--l:#40362a"><span class="no">03</span><b>Bronze Age</b><span class="st">Next</span></div>
-        <div class="layer cur" style="--l:#2b3b45"><span class="no">02</span><b>Ice Age</b><span class="st">In development</span></div>
-        <div class="layer cur" style="--l:#4a2a1a"><span class="no">01</span><b>Prehistoric · the Dinosaur Era</b><span class="st">Playable · polishing</span></div>
+        <details class="era" id="era-2">
+          <summary class="layer cur" style="--l:#2b3b45"><span class="no">02</span><b>Ice Age</b><span class="st">In development <i class="open">View progress</i></span></summary>
+          <div class="era-body">
+            <p class="era-intro">Walk into the portal at the end of the Dinosaur Era and a cinematic carries you through the time tunnel into the Ice Age, with a new fur outfit for the hero. The frozen world stretches 1.1 km: spruce taiga, a frozen lake, a mammoth steppe, rock ridges, hot springs and a glacier. There is no path. You find your way by landmarks, and the cold is an enemy of its own.</p>
+            <div class="progress">
+              <div><h4>Built</h4><ul class="done">
+                <li>The 1.1 km frozen landscape, lake, ridges, glacier and mountain skyline</li>
+                <li>Photoreal taiga, snowstorms, wind and snow that takes your footprints</li>
+                <li>The dire wolf pack</li>
+                <li>Warmth and campfires, ice physics and thin ice</li>
+                <li>The falcon eyrie, and flying as a peregrine falcon</li>
+              </ul></div>
+              <div><h4>Next</h4><ul class="todo">
+                <li>The glacier titan boss and its arena</li>
+                <li>An avalanche chase down the glacier</li>
+                <li>Mammoths, a sabre-tooth, and the ice cave's frozen creatures</li>
+                <li>The village, and Neanderthal and Denisovan camps</li>
+                <li>Blizzard waves that sweep across the whole map</li>
+              </ul></div>
+            </div>
+            <h4 class="era-sub">Screenshots</h4>
+            <div class="morph">
+              <figure><img src="img/ice_arrive.jpg" alt="The hero in his Ice Age furs arriving on a snowy forest trail" loading="lazy"><figcaption><b>Arrival</b><span>The taiga, after the portal</span></figcaption></figure>
+              <figure><img src="img/ice_gust.jpg" alt="Wind blowing powder snow off spruce trees beside the hero" loading="lazy"><figcaption><b>Living snow</b><span>Wind, falling powder, boot prints</span></figcaption></figure>
+              <figure><img src="img/ice_wolves.jpg" alt="A dire wolf pack closing in on the hero on the snowy trail" loading="lazy"><figcaption><b>The dire wolf pack</b><span>The Ice Age's first hunters</span></figcaption></figure>
+            </div>
+            <div class="morph">
+              <figure><img src="img/ice_campfire.jpg" alt="The hero beside a stone-ringed campfire in the snowy spruce forest, sunbeams through the trees" loading="lazy"><figcaption><b>Keep warm</b><span>A warmth meter drains in the cold; campfires refill it</span></figcaption></figure>
+              <figure><img src="img/ice_thinice.jpg" alt="The hero on a frozen lake beside a patch of thin ice webbed with cracks" loading="lazy"><figcaption><b>Thin ice</b><span>Slide on the lake, and never stand still on the cracks</span></figcaption></figure>
+              <figure><img src="img/ice_falcon.jpg" alt="A peregrine falcon flying over the misty taiga" loading="lazy"><figcaption><b>Become the falcon</b><span>Climb to the eyrie and take to the air</span></figcaption></figure>
+            </div>
+            <div class="art-head">
+              <span class="label">Artwork</span>
+              <h3>From concept to game</h3>
+              <p>Every Ice Age area starts as concept art and a hand-drawn map, and the level is built to match them, side by side. These are the taiga trail paintings the forest was built from, clear and in a blizzard, and the map of the Ice Age as it stands today.</p>
+            </div>
+            <div class="artrow">
+              <figure><img src="img/ice_concept_clear.jpg" alt="Concept art: the hero on a trampled snow trail between tall snowy spruces, sunbeams falling through the forest" loading="lazy"><figcaption><b>The taiga trail</b>Concept art, clear morning</figcaption></figure>
+              <figure><img src="img/ice_concept_blizzard.jpg" alt="Concept art: the same snowy forest trail in a driving blizzard, the hero hunched against the wind" loading="lazy"><figcaption><b>Blizzard</b>Concept art, the storm rolling in</figcaption></figure>
+            </div>
+            <figure class="mapfig"><img src="img/ice_map.jpg" alt="Map of the Ice Age level: arrival forest, hunters' camp, frozen lake, mammoth steppe and village site in the west; sabre-tooth rocks, hot springs, blizzard pass, ice cave cliff, Neanderthal shelter, glacier, Denisovan camp and the boss bowl in the east" loading="lazy"><figcaption><b>The Ice Age map</b>1.1 km by 250 m, west half on top. Thirteen landmarks, from the arrival forest to the boss bowl.</figcaption></figure>
+    
+            <h4 class="era-sub">The frozen lake</h4>
+            <div class="gallery">
+              <button class="wide" data-cap="The frozen lake, with the far shore and mountains"><img src="img/ice_lake.jpg" alt="The hero on the frozen lake looking toward a spruce shoreline and snowy mountains" loading="lazy"></button>
+            </div>
+            <h4 class="era-sub">Development log</h4>
+            <div class="log">
+              <article class="entry">
+                <time datetime="2026-11-09">8 to 9 Nov</time>
+                <div>
+                  <h3>The Ice Age grows: warmth, thin ice and the falcon</h3>
+                  <ul>
+                    <li>The Ice Age map grows to 1.1 km by 250 m: a frozen lake, a mammoth steppe, rock ridges and passes, hot springs, a glacier and snowy mountains on the skyline</li>
+                    <li>Survival in the cold: a warmth meter that drains faster in a blizzard, refilled at campfires and hot pools, with frostbite damage when it runs out</li>
+                    <li>Ice physics on the frozen lake: slide and skid on the ice, and thin patches crack and give way if you stand still or land hard</li>
+                    <li>The falcon's eyrie: reach the nest and you can turn into a peregrine falcon, with flapping, gliding, banking turns and a tucked high-speed dive</li>
+                    <li>Clearer air: lighter everyday snow and fog, so you can see across the lake to the mountains, with the real whiteouts saved for blizzards</li>
+                    <li>The first pieces of the boss arena: a ring of braziers around the rim that you light with your torch</li>
+                    <li>A full settings menu (DLSS, frame generation, Reflex, headphone audio and volumes), an in-game How to Play guide, and a new Windows installer for testers</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-11-07">7 Nov</time>
+                <div>
+                  <h3>A blizzard, real physics and a title screen</h3>
+                  <ul>
+                    <li>The taiga made photoreal: frosted spruces, a trampled snow trail with rocks and deadwood, softer winter light</li>
+                    <li>The first snowstorm: driving snow, gusting wind and howling audio that slows the hero down</li>
+                    <li>Creatures react to hits, wolf tails swing as they run, and the hero braces when armour stops a bite</li>
+                    <li>Footprints and paw tracks press into the snow and slowly fill back in</li>
+                    <li>Deadwood logs splinter when you swing at them, and young spruces bend as you push through</li>
+                    <li>A title screen with the new logo art and our song, <a href="#song">Cross the Ages</a></li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-11-06">6 Nov</time>
+                <div>
+                  <h3>Ice Age wolves and a new trailer</h3>
+                  <ul>
+                    <li>The first Ice Age enemy: a dire wolf pack, with 15 animations from a stalking crouch to a galloping lunge</li>
+                    <li>28 new wolf sounds: lone howls, a distant pack chorus, snarls, bites and paws in the snow</li>
+                    <li>A new cinematic trailer, from the hero's lab to the age of dinosaurs and the eras beyond</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-11-04">4 – 5 Nov</time>
+                <div>
+                  <h3>Into the Ice Age</h3>
+                  <ul>
+                    <li>Arrive through the portal and the time tunnel into the Ice Age</li>
+                    <li>The hero's outfit changes with every era, starting with hides and furs</li>
+                    <li>A snowy taiga with wind-swayed spruces, falling powder, boot prints, kicked-up snow and footstep crunch</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </details>
+        <details class="era" id="era-1">
+          <summary class="layer cur" style="--l:#4a2a1a"><span class="no">01</span><b>Prehistoric · the Dinosaur Era</b><span class="st">Playable · polishing <i class="open">View progress</i></span></summary>
+          <div class="era-body">
+            <p class="era-intro">The Dinosaur Era is playable end to end. Start on a jungle trail and work through the meadow, the swamp, the canyon and the lava plains to the volcano, two bosses and the portal out of time.</p>
+            <div class="progress">
+              <div><h4>Built</h4><ul class="done">
+                <li>Seven zones: jungle trail, meadow, swamp, canyon, ash fields, lava plains and the volcano</li>
+                <li>15 dinosaur species, each with its own animations and sound set</li>
+                <li>Raptor packs that hunt together, flyers that bank, land and feed</li>
+                <li>Two bosses: Rex Prime and a Pachycephalosaurus, in a volcanic arena that erupts as you fight</li>
+                <li>Hazards: lava, tar, sinking mud, geysers, rockfalls, snaring vines and ambush predators</li>
+                <li>Five powers, three animal morphs and the Temporal Log bestiary</li>
+                <li>The volcano cave, and the portal to the Ice Age</li>
+              </ul></div>
+              <div><h4>Now</h4><ul class="todo">
+                <li>Polishing: performance, balance and the last visual fixes</li>
+              </ul></div>
+            </div>
+            <h4 class="era-sub">Screenshots</h4>
+            <div class="gallery">
+              <button class="wide" data-cap="The jungle edge, with the volcano on the skyline"><img src="img/g_jungle_volcano.jpg" alt="The hero at the jungle edge looking toward a smoking volcano" loading="lazy"></button>
+              <button data-cap="Jungle trail"><img src="img/g_jungle_trail.jpg" alt="A shaded jungle trail under twisted trees" loading="lazy"></button>
+              <button data-cap="The cliff-and-river valley"><img src="img/g_valley.jpg" alt="A river winding under a tall cliff, with long-necked dinosaurs grazing" loading="lazy"></button>
+              <button data-cap="The lava bridge"><img src="img/g_lava_bridge.jpg" alt="The hero facing an erupting volcano across a lava canyon" loading="lazy"></button>
+              <button data-cap="Inside the volcano cave"><img src="img/g_cave.jpg" alt="The hero in a cave lit by a lava river" loading="lazy"></button>
+              <button class="wide" data-cap="The volcanic arena and the portal"><img src="img/g_arena.jpg" alt="The hero on the cracked slab floor of the volcanic arena, with the portal ring behind" loading="lazy"></button>
+              <button class="wide" data-cap="Lava plains under the rock arch"><img src="img/lava.jpg" alt="Lava plains seen through a rock arch" loading="lazy"></button>
+              <button data-cap="A brachiosaur in the morning fog"><img src="img/shot_brachio.jpg" alt="The hero facing a brachiosaur in fog" loading="lazy"></button>
+              <button data-cap="The grazing meadow"><img src="img/herd.jpg" alt="Long-necked dinosaurs among cycads" loading="lazy"></button>
+              <button data-cap="Jungle trail"><img src="img/shot_jungle.jpg" alt="The hero on a jungle trail beside a hadrosaur" loading="lazy"></button>
+              <button data-cap="Crouched in the clearing"><img src="img/stealth.jpg" alt="The hero crouching to stay hidden" loading="lazy"></button>
+              <button data-cap="Rex Prime's arena"><img src="img/shot_rex_arena.jpg" alt="Rex Prime looming over the hero beside the portal" loading="lazy"></button>
+              <button data-cap="Pteranodons over the dead forest"><img src="img/shot_ptero.jpg" alt="A pteranodon swooping at the hero" loading="lazy"></button>
+              <button class="wide" data-cap="The portal wakes"><img src="img/portal.jpg" alt="The stone portal ring glowing in the dark" loading="lazy"></button>
+              <button data-cap="Fern floor"><img src="img/ferns.jpg" alt="Sunlit ferns under the canopy" loading="lazy"></button>
+              <button data-cap="The volcano"><img src="img/shot_volcano.jpg" alt="The hero facing a smoking volcano" loading="lazy"></button>
+              <button data-cap="Rex Prime in the volcano"><img src="img/rex.jpg" alt="Rex Prime stalking the hero in the red volcano light" loading="lazy"></button>
+              <button data-cap="The portal chamber"><img src="img/shot_portal.jpg" alt="The hero in front of the portal chamber" loading="lazy"></button>
+            </div>
+            <h4 class="era-sub">Development log</h4>
+            <div class="log">
+              <article class="entry">
+                <time datetime="2026-11-04">4 – 5 Nov</time>
+                <div>
+                  <h3>The volcano cave and the way out</h3>
+                  <ul>
+                    <li>The volcano cave rebuilt, with a wall-crawling giant scorpion and three gas vents: scalding jets, sulphur clouds and choking fog</li>
+                    <li>Three new Temporal Log entries</li>
+                    <li>The portal works: walk in at the end of the era and the time tunnel carries you to the Ice Age</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-11-02">2 – 3 Nov</time>
+                <div>
+                  <h3>Matching the concept art</h3>
+                  <ul>
+                    <li>The jungle edge rebuilt to the concept painting: skyline volcano, smoke plume, god rays and valley mist</li>
+                    <li>The volcano canyon rebuilt with a live eruption system and a lava bridge</li>
+                    <li>The original dinosaur skins brought back, plus creature and prop fixes</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-10-27">27 – 29 Oct</time>
+                <div>
+                  <h3>New dangers and a second boss</h3>
+                  <ul>
+                    <li>A jungle gorge, and four new jungle hazards: the Living Log, Tiger-Jaws, steam vents and rubble slides</li>
+                    <li>The Constrictor Vine, a braided liana that snares the hero, and Arthropleura, a giant millipede ambusher</li>
+                    <li>A rebuilt volcanic end level: lava bridge, slab arena and an eruption that builds through the fight</li>
+                    <li>A Pachycephalosaurus end boss, with a tyrannosaur prowling the ridge above</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-10-24">24 – 26 Oct</time>
+                <div>
+                  <h3>Smarter, louder dinosaurs</h3>
+                  <ul>
+                    <li>Raptor pack hunting, and 236 new enemy animations</li>
+                    <li>Full animation sets for the Triceratops, the Parasaurolophus and the flying reptiles</li>
+                    <li>A unique ElevenLabs sound set for all 15 dinosaur species</li>
+                    <li>Dinosaurs walk to water to drink, and plants bend as they pass</li>
+                    <li>A reworked meadow, a cliff-and-river valley, a coastal ridge, and a stone-framed HUD</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-10-23">19 – 23 Oct</time>
+                <div>
+                  <h3>Powers, morphs and the first trailers</h3>
+                  <ul>
+                    <li>New looks for Fury, Adrenaline, Armour, Shadow and Regeneration, and glowing pickups</li>
+                    <li>Swamp dangers: sinking mud, tar, geysers and a rockfall trap</li>
+                    <li>Dinosaurs got more attack moves; the bola got hold-to-aim</li>
+                    <li>Melee now turns the hero to the nearest enemy, and the target lights up</li>
+                    <li>Two trailers rendered in-engine, plus the cover art</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-10-12">12 – 16 Oct</time>
+                <div>
+                  <h3>Rex Prime, rebuilt</h3>
+                  <ul>
+                    <li>A new tyrannosaur with seven animations: idle, walk, run, roar, bite, hit and death</li>
+                    <li>Twelve new sounds, a heavy walk cycle and a head that tracks the player</li>
+                    <li>Volcano eruption, a dusk sky and an overhauled boss arena</li>
+                    <li>A settings menu with resolution and quality options</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-10-04">4 – 9 Oct</time>
+                <div>
+                  <h3>A living world</h3>
+                  <ul>
+                    <li>Ferns, reeds and cycads move in the wind</li>
+                    <li>The hero wades through the swamp instead of walking on water</li>
+                    <li>Three key pieces are needed to wake the portal</li>
+                    <li>Environment meshes optimised from 168 MB to 14 MB</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-09-29">29 Sep – 2 Oct</time>
+                <div>
+                  <h3>Flyers and the Temporal Log</h3>
+                  <ul>
+                    <li>New species: Psittacosaurus and Archaeoceratops</li>
+                    <li>Flying reptiles that bank, pitch, land and feed</li>
+                    <li>The Temporal Log: a bestiary that fills in as you discover each creature</li>
+                    <li>Richer colour across the level, and the first sound pass</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-09-22">22 – 27 Sep</time>
+                <div>
+                  <h3>Dangers and the boss</h3>
+                  <ul>
+                    <li>Lava rivers, steam vents, burning damage and thorn thickets</li>
+                    <li>Hit animations for every dinosaur, six new jungle species and a Spinosaurus</li>
+                    <li>Rex Prime gets his arena; campfires and torches light the way</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-09-18">18 – 21 Sep</time>
+                <div>
+                  <h3>Building the Dinosaur Era</h3>
+                  <ul>
+                    <li>A sculpted landscape with seven zones: jungle trail, meadow, swamp, canyon, ash fields, lava plains and the arena</li>
+                    <li>Animated dinosaurs, and a brontosaurus herd in the meadow</li>
+                    <li>The Era 1 hero replaces the stand-in mannequin</li>
+                    <li>Spear and club in hand, plus crouch-stealth that shrinks detection to 45%</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="entry">
+                <time datetime="2026-09-16">16 Sep</time>
+                <div>
+                  <h3>Day one</h3>
+                  <ul><li>First commit of the Era 1 project</li></ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </details>
       </div>
       <p class="roadmap-note">Era 1 is playable end to end: the jungle, swamp, canyon, lava plains and volcano cave, two bosses, and the portal. The portal now carries you into the Ice Age, a 1.1 km frozen world with its wolf pack, warmth and thin-ice survival, and the falcon. The Bronze Age comes next.</p>
     </div>
@@ -657,6 +704,12 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
   });
   document.getElementById("lb-close").addEventListener("click", function () { lb.close(); });
   lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+
+  function openEra() {
+    var h = location.hash && document.getElementById(location.hash.slice(1));
+    if (h && h.tagName === "DETAILS") { h.open = true; setTimeout(function () { h.scrollIntoView({ block: "start" }); }, 30); }
+  }
+  window.addEventListener("hashchange", openEra); openEra();
 })();
 </script>
 
