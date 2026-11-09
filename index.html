@@ -198,6 +198,8 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 @media (max-width: 680px) { footer .wrap { grid-template-columns: 1fr; justify-items: start; } }
 
 /* era panels */
+.era.planned .era-body { padding: 14px 18px; }
+.era.planned .open { border-color: rgba(241,232,216,0.35); color: rgba(241,232,216,0.75); }
 .era { border-bottom: 1px solid rgba(0,0,0,0.35); }
 .era > summary { list-style: none; cursor: pointer; border-bottom: 0; }
 .era > summary::-webkit-details-marker { display: none; }
@@ -206,7 +208,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 .era[open] .open { background: var(--ember); color: #15100d; }
 .era[open] .open::after { content: " ▴"; }
 .era:not([open]) .open::after { content: " ▾"; }
-.era-body { padding: clamp(18px, 3vw, 32px); background: rgba(0,0,0,0.25); display: grid; gap: 18px; }
+.era-body { scroll-margin-top: 90px; padding: clamp(18px, 3vw, 32px); background: rgba(0,0,0,0.25); display: grid; gap: 18px; }
 .era-intro { margin: 0; max-width: 820px; color: var(--dust); font-size: 1.05rem; }
 .progress { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .progress h4, .era-sub { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.16em; text-transform: uppercase; color: var(--bronze); margin: 0 0 10px; }
@@ -368,20 +370,53 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
       <div class="sec-head">
         <span class="label">The eras</span>
         <h2>Thirteen layers of history</h2>
-        <p class="lede">Each era is a self-contained world with its own creatures, dangers and key. Select an era that is under way to see its progress, screenshots and development log.</p>
+        <p class="lede">Each era is a self-contained world with its own creatures, dangers and key. Select any era to open it: the Dinosaur Era and the Ice Age show their progress, screenshots and development log.</p>
       </div>
       <div class="strata">
-        <div class="layer" style="--l:#3a2f4d"><span class="no">13</span><b>The Future</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#2f3440"><span class="no">12</span><b>Modern</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#3a3a33"><span class="no">11</span><b>World War II</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#3d3a30"><span class="no">10</span><b>World War I</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#3a3029"><span class="no">09</span><b>Industrial</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#33362b"><span class="no">08</span><b>Medieval</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#2c3540"><span class="no">07</span><b>Vikings</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#2b3a2f"><span class="no">06</span><b>Maya</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#432c28"><span class="no">05</span><b>Rome</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#463a24"><span class="no">04</span><b>Ancient Egypt</b><span class="st">Planned</span></div>
-        <div class="layer" style="--l:#40362a"><span class="no">03</span><b>Bronze Age</b><span class="st">Next</span></div>
+        <details class="era planned" id="era-13">
+          <summary class="layer" style="--l:#3a2f4d"><span class="no">13</span><b>The Future</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">The far future, and the last jump. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-12">
+          <summary class="layer" style="--l:#2f3440"><span class="no">12</span><b>Modern</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">The modern world. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-11">
+          <summary class="layer" style="--l:#3a3a33"><span class="no">11</span><b>World War II</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">The Second World War. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-10">
+          <summary class="layer" style="--l:#3d3a30"><span class="no">10</span><b>World War I</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">The trenches of the First World War. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-9">
+          <summary class="layer" style="--l:#3a3029"><span class="no">09</span><b>Industrial</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">Steam, iron and the first factories. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-8">
+          <summary class="layer" style="--l:#33362b"><span class="no">08</span><b>Medieval</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">Castles, sieges and plague. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-7">
+          <summary class="layer" style="--l:#2c3540"><span class="no">07</span><b>Vikings</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">Longships and raids across the northern seas. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-6">
+          <summary class="layer" style="--l:#2b3a2f"><span class="no">06</span><b>Maya</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">Jungle cities and stepped pyramids of the Maya. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-5">
+          <summary class="layer" style="--l:#432c28"><span class="no">05</span><b>Rome</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">The legions and arenas of Rome. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-4">
+          <summary class="layer" style="--l:#463a24"><span class="no">04</span><b>Ancient Egypt</b><span class="st">Planned <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">The Nile and the pyramid builders of Ancient Egypt. Planned. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
+        <details class="era planned" id="era-3">
+          <summary class="layer" style="--l:#40362a"><span class="no">03</span><b>Bronze Age</b><span class="st">Next <i class="open">Details</i></span></summary>
+          <div class="era-body"><p class="era-intro">Bronze tools, the first cities and chariots. This is the next era after the Ice Age. Screenshots and a development log will appear here once work on this era starts.</p></div>
+        </details>
         <details class="era" id="era-2">
           <summary class="layer cur" style="--l:#2b3b45"><span class="no">02</span><b>Ice Age</b><span class="st">In development <i class="open">View progress</i></span></summary>
           <div class="era-body">
@@ -710,6 +745,11 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     if (h && h.tagName === "DETAILS") { h.open = true; setTimeout(function () { h.scrollIntoView({ block: "start" }); }, 30); }
   }
   window.addEventListener("hashchange", openEra); openEra();
+  document.querySelectorAll("details.era").forEach(function (d) {
+    d.addEventListener("toggle", function () {
+      if (d.open) { var b = d.querySelector(".era-body"); if (b) setTimeout(function () { b.scrollIntoView({ behavior: "smooth", block: "start" }); }, 40); }
+    });
+  });
 })();
 </script>
 
