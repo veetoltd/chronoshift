@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chronoshift Devlog | Week-by-Week Development Diary</title>
+<link rel="canonical" href="https://veetoltd.github.io/chronoshift/devlog/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="description" content="The Chronoshift devlog: every week of building a time-travel dinosaur and Ice Age adventure in Unreal Engine 5, as text, screenshots and audio, with a timeline of the whole build.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chronoshift Devlog - nine weeks of building a game">
+<meta property="og:description" content="Read or listen to every Chronoshift devlog episode, with screenshots and a timeline of 414 changes across two eras.">
+<meta property="og:image" content="https://veetoltd.github.io/chronoshift/img/cover.jpg">
+<meta property="og:url" content="https://veetoltd.github.io/chronoshift/devlog/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ConsolePCGaming">
+<meta name="twitter:image" content="https://veetoltd.github.io/chronoshift/img/cover.jpg">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+html, body { margin: 0; } img { max-width: 100%; }
+/* Layout: a dig site through time - full-bleed hero, then the dev log as dated strata, the eras as stacked rock layers.
+   One committed look (volcanic dusk from Era 1), dark in both host themes. */
+:root {
+  --basalt: #15100d;      /* page ground */
+  --ash: #211a16;         /* raised surfaces */
+  --seam: #3a2e26;        /* rules, borders */
+  --bone: #f1e8d8;        /* text */
+  --dust: #b1a491;        /* secondary text */
+  --ember: #ec7a2c;       /* accent: lava */
+  --bronze: #d9aa52;      /* headings accent: the logo's gold */
+  --portal: #86d6ff;      /* status: in development */
+  --f-display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --f-body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  --f-label: "Barlow Condensed", "Arial Narrow", "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+body { background: var(--basalt); color: var(--bone); font: 400 1.0625rem/1.65 var(--f-body); }
+a { color: var(--bronze); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--portal); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 700; line-height: 1.1; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.9rem, 4.2vw, 3rem); color: var(--bone); }
+p { margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.label { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ember); }
+.lede { color: var(--dust); max-width: 62ch; font-size: 1.125rem; }
+section { padding-block: clamp(56px, 9vw, 112px); }
+.sec-head { display: grid; gap: 14px; margin-bottom: clamp(28px, 4vw, 48px); }
+
+/* header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(21,16,13,0.92); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: rgba(21,16,13,0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--seam); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
+.top img { height: 34px; width: auto; display: block; }
+.top nav { display: flex; gap: clamp(12px, 2.4vw, 28px); flex-wrap: wrap; justify-content: flex-end; }
+.top nav a { font: 600 0.85rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dust); text-decoration: none; }
+.top nav a:hover { color: var(--bone); }
+@media (max-width: 640px) { .top nav a.opt { display: none; } }
+
+/* footer */
+footer { border-top: 1px solid var(--seam); padding-block: 40px 56px; }
+footer .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center; }
+footer .studio { width: 116px; height: 116px; display: block; }
+footer .who { display: grid; gap: 6px; color: var(--dust); font-size: 0.95rem; }
+footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); }
+.veeto { width: 150px; height: 84px; border: 1px dashed var(--seam); display: grid; place-items: center; text-align: center; font: 600 0.75rem/1.3 var(--f-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); }
+@media (max-width: 680px) { footer .wrap { grid-template-columns: 1fr; justify-items: start; } }
+
+
+.chip { font: 600 0.78rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; padding: 8px 12px; border: 1px solid var(--seam); background: rgba(33,26,22,0.8); color: var(--dust); }
+.chip.live { color: var(--portal); border-color: rgba(134,214,255,0.45); }
+.chip.live::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--portal); margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 10px var(--portal); animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.35; } }
+.intro { padding-block: clamp(40px, 7vw, 84px) clamp(28px, 4vw, 48px); border-bottom: 1px solid var(--seam); }
+.intro h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); color: var(--bone); }
+.intro .wrap { display: grid; gap: 16px; }
+.tally { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); border-top: 1px solid var(--seam); border-bottom: 1px solid var(--seam); margin-top: 10px; }
+.tally div { padding: 18px 16px; border-right: 1px solid var(--seam); display: grid; gap: 6px; }
+.tally div:last-child { border-right: 0; }
+.tally b { font: 700 clamp(1.7rem, 3.4vw, 2.4rem)/1 var(--f-display); color: var(--bronze); font-variant-numeric: tabular-nums; }
+.tally span { font: 500 0.95rem/1.3 var(--f-label); letter-spacing: 0.06em; color: var(--dust); }
+@media (max-width: 640px) { .tally div { border-right: 0; border-bottom: 1px solid var(--seam); } .tally div:last-child { border-bottom: 0; } }
+.chart { position: relative; border: 1px solid var(--seam); background: var(--ash); padding: 18px 18px 8px; }
+.chart .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; font: 500 0.95rem/1.2 var(--f-label); letter-spacing: 0.04em; color: var(--dust); margin-bottom: 6px; }
+.chart .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; }
+.chart .legend .mk { width: 14px; height: 14px; border-radius: 50%; background: var(--basalt); border: 2px solid var(--bronze); }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tl { display: block; width: 100%; min-width: 760px; height: auto; font-family: var(--f-label); }
+.tl .grid { stroke: var(--seam); stroke-width: 1; }
+.tl .base { stroke: #6b5a4c; stroke-width: 1; }
+.tl .wk { stroke: var(--seam); stroke-dasharray: 2 4; }
+.tl .ax { fill: var(--dust); font-size: 12px; font-variant-numeric: tabular-nums; }
+.tl .wl { fill: var(--bone); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.tl a:hover .wl, .tl a:focus .wl { fill: var(--bronze); }
+.tl .wd { fill: var(--dust); font-size: 11px; }
+.tl .ml { stroke: rgba(217,170,82,0.5); stroke-width: 1; }
+.tl .ms circle { fill: var(--basalt); stroke: var(--bronze); stroke-width: 2; }
+.tl .ms text { fill: var(--bone); font-size: 11px; font-weight: 700; }
+.tl a:hover .ms circle, .tl a:focus .ms circle { fill: var(--bronze); }
+.tl a:hover .ms text, .tl a:focus .ms text { fill: var(--basalt); }
+.tl .hit { fill: transparent; }
+.tl .hit.on { fill: rgba(241,232,216,0.06); }
+.tip { position: absolute; pointer-events: none; background: var(--basalt); border: 1px solid var(--seam); color: var(--bone); padding: 7px 10px; font: 500 0.9rem/1.3 var(--f-label); letter-spacing: 0.03em; white-space: nowrap; transform: translate(-50%, calc(-100% - 10px)); opacity: 0; transition: opacity 0.08s; z-index: 3; }
+.tip.on { opacity: 1; }
+.mlist { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px 22px; }
+.mlist li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.mlist b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--bronze); font: 700 0.75rem/1 var(--f-label); color: var(--bone); }
+.mlist span { color: var(--dust); font-size: 0.95rem; }
+.mlist time { color: var(--bronze); font: 600 0.85rem/1 var(--f-label); letter-spacing: 0.08em; text-transform: uppercase; margin-right: 6px; }
+.mlist a { color: inherit; text-decoration: none; } .mlist a:hover span { color: var(--bone); }
+details.table { margin-top: 16px; } details.table summary { cursor: pointer; font: 600 0.85rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dust); }
+table { border-collapse: collapse; margin-top: 12px; width: 100%; max-width: 640px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--seam); font-size: 0.95rem; } th { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); }
+td.num { text-align: right; } th.num { text-align: right; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.card { display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--bone); border: 1px solid var(--seam); background: var(--ash); }
+.card:hover { border-color: var(--ember); }
+.card img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.card div { padding: 12px 14px 16px; display: grid; gap: 6px; align-content: start; }
+.card .label { font-size: 0.75rem; }
+.card b { font: 700 1.08rem/1.25 var(--f-display); }
+.card span { font-size: 0.9rem; color: var(--dust); }
+.latest { display: inline-block; margin-left: 8px; padding: 3px 7px; background: var(--ember); color: var(--basalt); font: 700 0.68rem/1 var(--f-label); letter-spacing: 0.14em; vertical-align: 1px; }
+.ep { border-top: 1px solid var(--seam); scroll-margin-top: 70px; }
+.ep-head { display: grid; gap: 12px; max-width: 860px; margin-bottom: 28px; }
+.ep-head h2 { font-size: clamp(1.7rem, 3.8vw, 2.6rem); }
+.ep-head .meta { display: flex; flex-wrap: wrap; gap: 10px; }
+.ep-head .tease { color: var(--dust); font-size: 1.08rem; max-width: 70ch; }
+.player { display: grid; gap: 8px; border: 1px solid var(--seam); background: var(--ash); padding: 14px 16px; max-width: 720px; }
+.player b { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.16em; text-transform: uppercase; color: var(--bronze); }
+.player audio { width: 100%; display: block; }
+.player small { color: var(--dust); font-size: 0.85rem; }
+.part { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(18px, 3vw, 36px); padding: 26px 0; border-top: 1px solid rgba(58,46,38,0.6); align-items: start; }
+.part.noimg { grid-template-columns: minmax(0, 1fr); }
+.part .txt { display: grid; gap: 12px; max-width: 68ch; }
+.part h3 { font-size: 1.3rem; color: var(--bone); }
+.part p { color: var(--dust); }
+.part.speaking h3 { color: var(--ember); }
+.part.speaking p { color: var(--bone); }
+.listen { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font: 600 0.78rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; background: transparent; color: var(--bone); border: 1px solid var(--seam); padding: 8px 12px; cursor: pointer; }
+.listen:hover { border-color: var(--ember); }
+.listen::before { content: ""; width: 0; height: 0; border-left: 8px solid var(--ember); border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+.listen .t { color: var(--dust); font-variant-numeric: tabular-nums; }
+.shots { display: grid; gap: 10px; }
+.shots.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.shots.two figure:first-child { grid-column: span 2; }
+.shots figure { margin: 0; border: 1px solid var(--seam); background: var(--basalt); }
+.shots button { all: unset; cursor: zoom-in; display: block; }
+.shots button:focus-visible { outline: 2px solid var(--portal); outline-offset: 2px; }
+.shots img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.shots figcaption { padding: 8px 12px 10px; font-size: 0.88rem; color: var(--dust); }
+@media (max-width: 820px) { .part { grid-template-columns: 1fr; } }
+.note { color: var(--dust); font-size: 0.9rem; margin-top: 8px; }
+.back { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dust); text-decoration: none; }
+.back:hover { color: var(--bone); }
+dialog { border: 1px solid var(--seam); background: var(--basalt); color: var(--bone); padding: 0; max-width: min(1400px, 94vw); }
+dialog::backdrop { background: rgba(8,6,5,0.88); }
+dialog img { display: block; max-width: 100%; max-height: 82vh; }
+dialog .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px; font-size: 0.95rem; color: var(--dust); }
+dialog button { font: 600 0.8rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; background: transparent; color: var(--bone); border: 1px solid var(--seam); padding: 9px 12px; cursor: pointer; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a href="../" aria-label="Chronoshift home"><img src="../img/wordmark.png" alt="Chronoshift" width="200" height="56"></a>
+    <nav aria-label="Sections">
+      <a href="../">Home</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#episodes">Episodes</a>
+      <a href="#ep-9" class="opt">Latest</a>
+      <a href="../#follow" class="opt">Follow</a>
+    </nav>
+  </div>
+</header>
+<main id="top">
+  <section class="intro">
+    <div class="wrap">
+      <span class="label">Devlog · Behind the scenes</span>
+      <h1>Building Chronoshift, week by week</h1>
+      <p class="lede">Chronoshift is a third-person time-travel adventure in Unreal Engine 5, built by one developer working with a team of AI tools. Every week gets an episode. Read each one here, look through the screenshots or press play and listen.</p>
+      <div class="tally">
+        <div><b>414</b><span>changes to the project</span></div>
+        <div><b>9</b><span>weeks of development</span></div>
+        <div><b>2</b><span>eras built so far</span></div>
+        <div><b>9</b><span>devlog episodes</span></div>
+      </div>
+    </div>
+  </section>
+  <section id="timeline">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">Development timeline</span><h2>Sixteen September to today</h2>
+        <p class="lede">Every bar is one day of work, and its height is the number of changes saved to the project that day. The numbered markers are the big moments. Select a week to jump to its episode.</p></div>
+      <div class="chart" id="chart">
+        <div class="legend"><span><i style="background:#dd6b20"></i>Dinosaur Era</span><span><i style="background:#2f9be6"></i>Ice Age</span><span><i class="mk"></i>Milestone</span></div>
+        <div class="scroll"><svg class="tl" viewBox="0 0 1100 326" role="img" aria-labelledby="tl-t tl-d">
+<title id="tl-t">Changes per day, 16 September to 13 November 2026</title><desc id="tl-d">Bar chart of daily changes to the Chronoshift project, coloured by era, with numbered milestones. A table version follows.</desc>
+<line class="grid" x1="40" x2="1088" y1="280.0" y2="280.0"/><text class="ax" x="32" y="284.0" text-anchor="end">0</text>
+<line class="grid" x1="40" x2="1088" y1="220.0" y2="220.0"/><text class="ax" x="32" y="224.0" text-anchor="end">10</text>
+<line class="grid" x1="40" x2="1088" y1="160.0" y2="160.0"/><text class="ax" x="32" y="164.0" text-anchor="end">20</text>
+<line class="grid" x1="40" x2="1088" y1="100.0" y2="100.0"/><text class="ax" x="32" y="104.0" text-anchor="end">30</text>
+<a href="#ep-1"><text class="wl" x="98.2" y="304" text-anchor="middle">Week 1</text></a>
+<text class="wd" x="98.2" y="320" text-anchor="middle">16 – 20 Sep</text>
+<line class="wk" x1="156.4" x2="156.4" y1="64" y2="310"/>
+<a href="#ep-2"><text class="wl" x="214.7" y="304" text-anchor="middle">Week 2</text></a>
+<text class="wd" x="214.7" y="320" text-anchor="middle">21 – 27 Sep</text>
+<line class="wk" x1="272.9" x2="272.9" y1="64" y2="310"/>
+<a href="#ep-3"><text class="wl" x="331.1" y="304" text-anchor="middle">Week 3</text></a>
+<text class="wd" x="331.1" y="320" text-anchor="middle">28 Sep – 4 Oct</text>
+<line class="wk" x1="389.3" x2="389.3" y1="64" y2="310"/>
+<a href="#ep-4"><text class="wl" x="447.6" y="304" text-anchor="middle">Week 4</text></a>
+<text class="wd" x="447.6" y="320" text-anchor="middle">5 – 11 Oct</text>
+<line class="wk" x1="505.8" x2="505.8" y1="64" y2="310"/>
+<a href="#ep-5"><text class="wl" x="564.0" y="304" text-anchor="middle">Week 5</text></a>
+<text class="wd" x="564.0" y="320" text-anchor="middle">12 – 18 Oct</text>
+<line class="wk" x1="622.2" x2="622.2" y1="64" y2="310"/>
+<a href="#ep-6"><text class="wl" x="680.4" y="304" text-anchor="middle">Week 6</text></a>
+<text class="wd" x="680.4" y="320" text-anchor="middle">19 – 25 Oct</text>
+<line class="wk" x1="738.7" x2="738.7" y1="64" y2="310"/>
+<a href="#ep-7"><text class="wl" x="796.9" y="304" text-anchor="middle">Week 7</text></a>
+<text class="wd" x="796.9" y="320" text-anchor="middle">26 Oct – 1 Nov</text>
+<line class="wk" x1="855.1" x2="855.1" y1="64" y2="310"/>
+<a href="#ep-8"><text class="wl" x="913.3" y="304" text-anchor="middle">Week 8</text></a>
+<text class="wd" x="913.3" y="320" text-anchor="middle">2 – 8 Nov</text>
+<line class="wk" x1="971.6" x2="971.6" y1="64" y2="310"/>
+<a href="#ep-9"><text class="wl" x="1029.8" y="304" text-anchor="middle">Week 9</text></a>
+<text class="wd" x="1029.8" y="320" text-anchor="middle">9 – 13 Nov</text>
+<path fill="#dd6b20" d="M76.3 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#dd6b20" d="M109.5 280.0v-158.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v158.0z"/>
+<path fill="#dd6b20" d="M126.2 280.0v-44.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v44.0z"/>
+<path fill="#dd6b20" d="M142.8 280.0v-20.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v20.0z"/>
+<path fill="#dd6b20" d="M159.4 280.0v-176.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v176.0z"/>
+<path fill="#dd6b20" d="M176.1 280.0v-44.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v44.0z"/>
+<path fill="#dd6b20" d="M192.7 280.0v-116.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v116.0z"/>
+<path fill="#dd6b20" d="M209.3 280.0v-140.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v140.0z"/>
+<path fill="#dd6b20" d="M226.0 280.0v-146.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v146.0z"/>
+<path fill="#dd6b20" d="M242.6 280.0v-20.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v20.0z"/>
+<path fill="#dd6b20" d="M259.2 280.0v-44.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v44.0z"/>
+<path fill="#dd6b20" d="M292.5 280.0v-44.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v44.0z"/>
+<path fill="#dd6b20" d="M309.2 280.0v-188.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v188.0z"/>
+<path fill="#dd6b20" d="M325.8 280.0v-74.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v74.0z"/>
+<path fill="#dd6b20" d="M342.4 280.0v-80.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v80.0z"/>
+<path fill="#dd6b20" d="M375.7 280.0v-14.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v14.0z"/>
+<path fill="#dd6b20" d="M392.3 280.0v-56.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v56.0z"/>
+<path fill="#dd6b20" d="M409.0 280.0v-74.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v74.0z"/>
+<path fill="#dd6b20" d="M425.6 280.0v-8.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v8.0z"/>
+<path fill="#dd6b20" d="M442.2 280.0v-116.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v116.0z"/>
+<path fill="#dd6b20" d="M458.9 280.0v-50.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v50.0z"/>
+<path fill="#dd6b20" d="M508.8 280.0v-68.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v68.0z"/>
+<path fill="#dd6b20" d="M525.4 280.0v-50.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v50.0z"/>
+<path fill="#dd6b20" d="M542.0 280.0v-62.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v62.0z"/>
+<path fill="#dd6b20" d="M558.7 280.0v-104.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v104.0z"/>
+<path fill="#dd6b20" d="M575.3 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#dd6b20" d="M591.9 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#dd6b20" d="M625.2 280.0v-44.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v44.0z"/>
+<path fill="#dd6b20" d="M641.9 280.0v-14.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v14.0z"/>
+<path fill="#dd6b20" d="M658.5 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#dd6b20" d="M691.8 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#dd6b20" d="M708.4 280.0v-8.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v8.0z"/>
+<path fill="#dd6b20" d="M725.0 280.0v-44.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v44.0z"/>
+<path fill="#dd6b20" d="M741.7 280.0v-14.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v14.0z"/>
+<path fill="#dd6b20" d="M758.3 280.0v-56.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v56.0z"/>
+<path fill="#dd6b20" d="M774.9 280.0v-20.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v20.0z"/>
+<path fill="#dd6b20" d="M791.6 280.0v-8.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v8.0z"/>
+<path fill="#dd6b20" d="M858.1 280.0v-32.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v32.0z"/>
+<path fill="#dd6b20" d="M874.7 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#2f9be6" d="M908.0 280.0v-20.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v20.0z"/>
+<path fill="#2f9be6" d="M924.6 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#2f9be6" d="M941.3 280.0v-20.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v20.0z"/>
+<path fill="#2f9be6" d="M957.9 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#2f9be6" d="M974.5 280.0v-2.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v2.0z"/>
+<path fill="#2f9be6" d="M1007.8 280.0v-8.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v8.0z"/>
+<path fill="#2f9be6" d="M1024.5 280.0v-62.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v62.0z"/>
+<path fill="#2f9be6" d="M1041.1 280.0v-32.0a4.0 4.0 0 0 1 4.0 -4.0h2.6a4.0 4.0 0 0 1 4.0 4.0v32.0z"/>
+<line class="base" x1="40" x2="1088" y1="280" y2="280"/>
+<line class="ml" x1="81.6" x2="81.6" y1="32" y2="271.0"/>
+<a href="#ep-1" aria-label="Milestone 1: First save of the project"><g class="ms" data-tip="16 Sep · First save of the project"><circle cx="81.6" cy="22" r="10"/><text x="81.6" y="26" text-anchor="middle">1</text></g></a>
+<line class="ml" x1="114.9" x2="114.9" y1="58" y2="115.0"/>
+<a href="#ep-1" aria-label="Milestone 2: A 1 km world and seven dinosaurs in a day"><g class="ms" data-tip="18 Sep · A 1 km world and seven dinosaurs in a day"><circle cx="114.9" cy="48" r="10"/><text x="114.9" y="52" text-anchor="middle">2</text></g></a>
+<line class="ml" x1="164.8" x2="164.8" y1="32" y2="97.0"/>
+<a href="#ep-2" aria-label="Milestone 3: Timeshift is renamed Chronoshift"><g class="ms" data-tip="21 Sep · Timeshift is renamed Chronoshift"><circle cx="164.8" cy="22" r="10"/><text x="164.8" y="26" text-anchor="middle">3</text></g></a>
+<line class="ml" x1="214.7" x2="214.7" y1="32" y2="133.0"/>
+<a href="#ep-2" aria-label="Milestone 4: The first trailer"><g class="ms" data-tip="24 Sep · The first trailer"><circle cx="214.7" cy="22" r="10"/><text x="214.7" y="26" text-anchor="middle">4</text></g></a>
+<line class="ml" x1="297.8" x2="297.8" y1="32" y2="229.0"/>
+<a href="#ep-3" aria-label="Milestone 5: The bestiary"><g class="ms" data-tip="29 Sep · The bestiary"><circle cx="297.8" cy="22" r="10"/><text x="297.8" y="26" text-anchor="middle">5</text></g></a>
+<line class="ml" x1="314.5" x2="314.5" y1="58" y2="85.0"/>
+<a href="#ep-3" aria-label="Milestone 6: The jungle gets sound"><g class="ms" data-tip="30 Sep · The jungle gets sound"><circle cx="314.5" cy="48" r="10"/><text x="314.5" y="52" text-anchor="middle">6</text></g></a>
+<line class="ml" x1="447.6" x2="447.6" y1="32" y2="157.0"/>
+<a href="#ep-4" aria-label="Milestone 7: The first T-rex is deleted"><g class="ms" data-tip="8 Oct · The first T-rex is deleted"><circle cx="447.6" cy="22" r="10"/><text x="447.6" y="26" text-anchor="middle">7</text></g></a>
+<line class="ml" x1="564.0" x2="564.0" y1="32" y2="169.0"/>
+<a href="#ep-5" aria-label="Milestone 8: Rex Prime becomes the boss"><g class="ms" data-tip="15 Oct · Rex Prime becomes the boss"><circle cx="564.0" cy="22" r="10"/><text x="564.0" y="26" text-anchor="middle">8</text></g></a>
+<line class="ml" x1="713.7" x2="713.7" y1="32" y2="265.0"/>
+<a href="#ep-6" aria-label="Milestone 9: Raptors hunt as a pack"><g class="ms" data-tip="24 Oct · Raptors hunt as a pack"><circle cx="713.7" cy="22" r="10"/><text x="713.7" y="26" text-anchor="middle">9</text></g></a>
+<line class="ml" x1="763.6" x2="763.6" y1="32" y2="217.0"/>
+<a href="#ep-7" aria-label="Milestone 10: The jungle gorge"><g class="ms" data-tip="27 Oct · The jungle gorge"><circle cx="763.6" cy="22" r="10"/><text x="763.6" y="26" text-anchor="middle">10</text></g></a>
+<line class="ml" x1="780.3" x2="780.3" y1="58" y2="253.0"/>
+<a href="#ep-7" aria-label="Milestone 11: New boss: Pachycephalosaurus"><g class="ms" data-tip="28 Oct · New boss: Pachycephalosaurus"><circle cx="780.3" cy="48" r="10"/><text x="780.3" y="52" text-anchor="middle">11</text></g></a>
+<line class="ml" x1="913.3" x2="913.3" y1="32" y2="253.0"/>
+<a href="#ep-8" aria-label="Milestone 12: Through the portal to the Ice Age"><g class="ms" data-tip="5 Nov · Through the portal to the Ice Age"><circle cx="913.3" cy="22" r="10"/><text x="913.3" y="26" text-anchor="middle">12</text></g></a>
+<line class="ml" x1="946.6" x2="946.6" y1="58" y2="253.0"/>
+<a href="#ep-8" aria-label="Milestone 13: Title screen"><g class="ms" data-tip="7 Nov · Title screen"><circle cx="946.6" cy="48" r="10"/><text x="946.6" y="52" text-anchor="middle">13</text></g></a>
+<line class="ml" x1="1029.8" x2="1029.8" y1="32" y2="211.0"/>
+<a href="#ep-9" aria-label="Milestone 14: Breaking lake ice"><g class="ms" data-tip="12 Nov · Breaking lake ice"><circle cx="1029.8" cy="22" r="10"/><text x="1029.8" y="26" text-anchor="middle">14</text></g></a>
+<rect class="hit" x="40.0" y="62" width="16.6" height="218" data-tip="Mon 14 Sep · no changes · Week 1" data-x="48.3" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="56.6" y="62" width="16.6" height="218" data-tip="Tue 15 Sep · no changes · Week 1" data-x="65.0" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="73.3" y="62" width="16.6" height="218" data-tip="Wed 16 Sep · 1 change · Week 1" data-x="81.6" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="89.9" y="62" width="16.6" height="218" data-tip="Thu 17 Sep · no changes · Week 1" data-x="98.2" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="106.5" y="62" width="16.6" height="218" data-tip="Fri 18 Sep · 27 changes · Week 1" data-x="114.9" data-y="118.0" tabindex="-1"/>
+<rect class="hit" x="123.2" y="62" width="16.6" height="218" data-tip="Sat 19 Sep · 8 changes · Week 1" data-x="131.5" data-y="232.0" tabindex="-1"/>
+<rect class="hit" x="139.8" y="62" width="16.6" height="218" data-tip="Sun 20 Sep · 4 changes · Week 1" data-x="148.1" data-y="256.0" tabindex="-1"/>
+<rect class="hit" x="156.4" y="62" width="16.6" height="218" data-tip="Mon 21 Sep · 30 changes · Week 2" data-x="164.8" data-y="100.0" tabindex="-1"/>
+<rect class="hit" x="173.1" y="62" width="16.6" height="218" data-tip="Tue 22 Sep · 8 changes · Week 2" data-x="181.4" data-y="232.0" tabindex="-1"/>
+<rect class="hit" x="189.7" y="62" width="16.6" height="218" data-tip="Wed 23 Sep · 20 changes · Week 2" data-x="198.0" data-y="160.0" tabindex="-1"/>
+<rect class="hit" x="206.3" y="62" width="16.6" height="218" data-tip="Thu 24 Sep · 24 changes · Week 2" data-x="214.7" data-y="136.0" tabindex="-1"/>
+<rect class="hit" x="223.0" y="62" width="16.6" height="218" data-tip="Fri 25 Sep · 25 changes · Week 2" data-x="231.3" data-y="130.0" tabindex="-1"/>
+<rect class="hit" x="239.6" y="62" width="16.6" height="218" data-tip="Sat 26 Sep · 4 changes · Week 2" data-x="247.9" data-y="256.0" tabindex="-1"/>
+<rect class="hit" x="256.3" y="62" width="16.6" height="218" data-tip="Sun 27 Sep · 8 changes · Week 2" data-x="264.6" data-y="232.0" tabindex="-1"/>
+<rect class="hit" x="272.9" y="62" width="16.6" height="218" data-tip="Mon 28 Sep · no changes · Week 3" data-x="281.2" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="289.5" y="62" width="16.6" height="218" data-tip="Tue 29 Sep · 8 changes · Week 3" data-x="297.8" data-y="232.0" tabindex="-1"/>
+<rect class="hit" x="306.2" y="62" width="16.6" height="218" data-tip="Wed 30 Sep · 32 changes · Week 3" data-x="314.5" data-y="88.0" tabindex="-1"/>
+<rect class="hit" x="322.8" y="62" width="16.6" height="218" data-tip="Thu 1 Oct · 13 changes · Week 3" data-x="331.1" data-y="202.0" tabindex="-1"/>
+<rect class="hit" x="339.4" y="62" width="16.6" height="218" data-tip="Fri 2 Oct · 14 changes · Week 3" data-x="347.7" data-y="196.0" tabindex="-1"/>
+<rect class="hit" x="356.1" y="62" width="16.6" height="218" data-tip="Sat 3 Oct · no changes · Week 3" data-x="364.4" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="372.7" y="62" width="16.6" height="218" data-tip="Sun 4 Oct · 3 changes · Week 3" data-x="381.0" data-y="262.0" tabindex="-1"/>
+<rect class="hit" x="389.3" y="62" width="16.6" height="218" data-tip="Mon 5 Oct · 10 changes · Week 4" data-x="397.7" data-y="220.0" tabindex="-1"/>
+<rect class="hit" x="406.0" y="62" width="16.6" height="218" data-tip="Tue 6 Oct · 13 changes · Week 4" data-x="414.3" data-y="202.0" tabindex="-1"/>
+<rect class="hit" x="422.6" y="62" width="16.6" height="218" data-tip="Wed 7 Oct · 2 changes · Week 4" data-x="430.9" data-y="268.0" tabindex="-1"/>
+<rect class="hit" x="439.2" y="62" width="16.6" height="218" data-tip="Thu 8 Oct · 20 changes · Week 4" data-x="447.6" data-y="160.0" tabindex="-1"/>
+<rect class="hit" x="455.9" y="62" width="16.6" height="218" data-tip="Fri 9 Oct · 9 changes · Week 4" data-x="464.2" data-y="226.0" tabindex="-1"/>
+<rect class="hit" x="472.5" y="62" width="16.6" height="218" data-tip="Sat 10 Oct · no changes · Week 4" data-x="480.8" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="489.1" y="62" width="16.6" height="218" data-tip="Sun 11 Oct · no changes · Week 4" data-x="497.5" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="505.8" y="62" width="16.6" height="218" data-tip="Mon 12 Oct · 12 changes · Week 5" data-x="514.1" data-y="208.0" tabindex="-1"/>
+<rect class="hit" x="522.4" y="62" width="16.6" height="218" data-tip="Tue 13 Oct · 9 changes · Week 5" data-x="530.7" data-y="226.0" tabindex="-1"/>
+<rect class="hit" x="539.0" y="62" width="16.6" height="218" data-tip="Wed 14 Oct · 11 changes · Week 5" data-x="547.4" data-y="214.0" tabindex="-1"/>
+<rect class="hit" x="555.7" y="62" width="16.6" height="218" data-tip="Thu 15 Oct · 18 changes · Week 5" data-x="564.0" data-y="172.0" tabindex="-1"/>
+<rect class="hit" x="572.3" y="62" width="16.6" height="218" data-tip="Fri 16 Oct · 1 change · Week 5" data-x="580.6" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="589.0" y="62" width="16.6" height="218" data-tip="Sat 17 Oct · 1 change · Week 5" data-x="597.3" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="605.6" y="62" width="16.6" height="218" data-tip="Sun 18 Oct · no changes · Week 5" data-x="613.9" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="622.2" y="62" width="16.6" height="218" data-tip="Mon 19 Oct · 8 changes · Week 6" data-x="630.5" data-y="232.0" tabindex="-1"/>
+<rect class="hit" x="638.9" y="62" width="16.6" height="218" data-tip="Tue 20 Oct · 3 changes · Week 6" data-x="647.2" data-y="262.0" tabindex="-1"/>
+<rect class="hit" x="655.5" y="62" width="16.6" height="218" data-tip="Wed 21 Oct · 1 change · Week 6" data-x="663.8" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="672.1" y="62" width="16.6" height="218" data-tip="Thu 22 Oct · no changes · Week 6" data-x="680.4" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="688.8" y="62" width="16.6" height="218" data-tip="Fri 23 Oct · 1 change · Week 6" data-x="697.1" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="705.4" y="62" width="16.6" height="218" data-tip="Sat 24 Oct · 2 changes · Week 6" data-x="713.7" data-y="268.0" tabindex="-1"/>
+<rect class="hit" x="722.0" y="62" width="16.6" height="218" data-tip="Sun 25 Oct · 8 changes · Week 6" data-x="730.3" data-y="232.0" tabindex="-1"/>
+<rect class="hit" x="738.7" y="62" width="16.6" height="218" data-tip="Mon 26 Oct · 3 changes · Week 7" data-x="747.0" data-y="262.0" tabindex="-1"/>
+<rect class="hit" x="755.3" y="62" width="16.6" height="218" data-tip="Tue 27 Oct · 10 changes · Week 7" data-x="763.6" data-y="220.0" tabindex="-1"/>
+<rect class="hit" x="771.9" y="62" width="16.6" height="218" data-tip="Wed 28 Oct · 4 changes · Week 7" data-x="780.3" data-y="256.0" tabindex="-1"/>
+<rect class="hit" x="788.6" y="62" width="16.6" height="218" data-tip="Thu 29 Oct · 2 changes · Week 7" data-x="796.9" data-y="268.0" tabindex="-1"/>
+<rect class="hit" x="805.2" y="62" width="16.6" height="218" data-tip="Fri 30 Oct · no changes · Week 7" data-x="813.5" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="821.8" y="62" width="16.6" height="218" data-tip="Sat 31 Oct · no changes · Week 7" data-x="830.2" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="838.5" y="62" width="16.6" height="218" data-tip="Sun 1 Nov · no changes · Week 7" data-x="846.8" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="855.1" y="62" width="16.6" height="218" data-tip="Mon 2 Nov · 6 changes · Week 8" data-x="863.4" data-y="244.0" tabindex="-1"/>
+<rect class="hit" x="871.7" y="62" width="16.6" height="218" data-tip="Tue 3 Nov · 1 change · Week 8" data-x="880.1" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="888.4" y="62" width="16.6" height="218" data-tip="Wed 4 Nov · no changes · Week 8" data-x="896.7" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="905.0" y="62" width="16.6" height="218" data-tip="Thu 5 Nov · 4 changes · Week 8" data-x="913.3" data-y="256.0" tabindex="-1"/>
+<rect class="hit" x="921.7" y="62" width="16.6" height="218" data-tip="Fri 6 Nov · 1 change · Week 8" data-x="930.0" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="938.3" y="62" width="16.6" height="218" data-tip="Sat 7 Nov · 4 changes · Week 8" data-x="946.6" data-y="256.0" tabindex="-1"/>
+<rect class="hit" x="954.9" y="62" width="16.6" height="218" data-tip="Sun 8 Nov · 1 change · Week 8" data-x="963.2" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="971.6" y="62" width="16.6" height="218" data-tip="Mon 9 Nov · 1 change · Week 9" data-x="979.9" data-y="274.0" tabindex="-1"/>
+<rect class="hit" x="988.2" y="62" width="16.6" height="218" data-tip="Tue 10 Nov · no changes · Week 9" data-x="996.5" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="1004.8" y="62" width="16.6" height="218" data-tip="Wed 11 Nov · 2 changes · Week 9" data-x="1013.1" data-y="268.0" tabindex="-1"/>
+<rect class="hit" x="1021.5" y="62" width="16.6" height="218" data-tip="Thu 12 Nov · 11 changes · Week 9" data-x="1029.8" data-y="214.0" tabindex="-1"/>
+<rect class="hit" x="1038.1" y="62" width="16.6" height="218" data-tip="Fri 13 Nov · 6 changes · Week 9" data-x="1046.4" data-y="244.0" tabindex="-1"/>
+<rect class="hit" x="1054.7" y="62" width="16.6" height="218" data-tip="Sat 14 Nov · no changes · Week 9" data-x="1063.0" data-y="280.0" tabindex="-1"/>
+<rect class="hit" x="1071.4" y="62" width="16.6" height="218" data-tip="Sun 15 Nov · no changes · Week 9" data-x="1079.7" data-y="280.0" tabindex="-1"/>
+</svg></div>
+        <div class="tip" id="tip" role="status" aria-live="polite"></div>
+      </div>
+      <ol class="mlist"><li><b>1</b><a href="#ep-1"><time>16 Sep</time><span>First save of the project</span></a></li><li><b>2</b><a href="#ep-1"><time>18 Sep</time><span>A 1 km world and seven dinosaurs in a day</span></a></li><li><b>3</b><a href="#ep-2"><time>21 Sep</time><span>Timeshift is renamed Chronoshift</span></a></li><li><b>4</b><a href="#ep-2"><time>24 Sep</time><span>The first trailer</span></a></li><li><b>5</b><a href="#ep-3"><time>29 Sep</time><span>The bestiary</span></a></li><li><b>6</b><a href="#ep-3"><time>30 Sep</time><span>The jungle gets sound</span></a></li><li><b>7</b><a href="#ep-4"><time>8 Oct</time><span>The first T-rex is deleted</span></a></li><li><b>8</b><a href="#ep-5"><time>15 Oct</time><span>Rex Prime becomes the boss</span></a></li><li><b>9</b><a href="#ep-6"><time>24 Oct</time><span>Raptors hunt as a pack</span></a></li><li><b>10</b><a href="#ep-7"><time>27 Oct</time><span>The jungle gorge</span></a></li><li><b>11</b><a href="#ep-7"><time>28 Oct</time><span>New boss: Pachycephalosaurus</span></a></li><li><b>12</b><a href="#ep-8"><time>5 Nov</time><span>Through the portal to the Ice Age</span></a></li><li><b>13</b><a href="#ep-8"><time>7 Nov</time><span>Title screen</span></a></li><li><b>14</b><a href="#ep-9"><time>12 Nov</time><span>Breaking lake ice</span></a></li></ol>
+      <details class="table"><summary>Show the weeks as a table</summary>
+        <table><thead><tr><th>Week</th><th>Dates</th><th class="num">Changes</th><th>Episode</th></tr></thead><tbody><tr><td><a href="#ep-1">Week 1</a></td><td>16 – 20 Sep 2026</td><td class="num">40</td><td>Building a Time-Travel Dinosaur Game in Unreal Engine 5</td></tr><tr><td><a href="#ep-2">Week 2</a></td><td>21 – 27 Sep 2026</td><td class="num">119</td><td>It Took 10+ Tries to Put a Club in His Hand</td></tr><tr><td><a href="#ep-3">Week 3</a></td><td>28 Sep – 4 Oct 2026</td><td class="num">70</td><td>Our Flying Dinosaurs Wouldn&#x27;t Fly (So We Rebuilt Them)</td></tr><tr><td><a href="#ep-4">Week 4</a></td><td>5 – 11 Oct 2026</td><td class="num">54</td><td>We Deleted Our T-Rex</td></tr><tr><td><a href="#ep-5">Week 5</a></td><td>12 – 18 Oct 2026</td><td class="num">52</td><td>Three T-Rexes in One Week</td></tr><tr><td><a href="#ep-6">Week 6</a></td><td>19 – 25 Oct 2026</td><td class="num">23</td><td>Raptor Packs, Swamp Traps &amp; Turning Into a Dinosaur</td></tr><tr><td><a href="#ep-7">Week 7</a></td><td>26 Oct – 1 Nov 2026</td><td class="num">19</td><td>A Vine That Eats You + A Brand-New Volcano Boss</td></tr><tr><td><a href="#ep-8">Week 8</a></td><td>2 – 8 Nov 2026</td><td class="num">17</td><td>Our Game Just Time-Travelled to the Ice Age</td></tr><tr><td><a href="#ep-9">Week 9</a></td><td>9 – 13 Nov 2026</td><td class="num">20</td><td>Fall Through the Ice &amp; Swim to Survive</td></tr><tr><td><b>Total</b></td><td></td><td class="num"><b>414</b></td><td></td></tr></tbody></table>
+      </details>
+    </div>
+  </section>
+  <section id="episodes" class="band" style="background:var(--ash);border-top:1px solid var(--seam);border-bottom:1px solid var(--seam)">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">Episodes</span><h2>Nine weeks, nine episodes</h2></div>
+      <div class="cards"><a class="card" href="#ep-1"><img src="img/ep01_s07_0.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #1</span><b>Building a Time-Travel Dinosaur Game in Unreal Engine 5</b><span>Week 1 · 16 – 20 Sep · 5:53</span></div></a><a class="card" href="#ep-2"><img src="img/ep02_s02_1.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #2</span><b>It Took 10+ Tries to Put a Club in His Hand</b><span>Week 2 · 21 – 27 Sep · 5:58</span></div></a><a class="card" href="#ep-3"><img src="img/ep03_s01_0.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #3</span><b>Our Flying Dinosaurs Wouldn&#x27;t Fly (So We Rebuilt Them)</b><span>Week 3 · 28 Sep – 4 Oct · 3:55</span></div></a><a class="card" href="#ep-4"><img src="img/ep04_s01_0.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #4</span><b>We Deleted Our T-Rex</b><span>Week 4 · 5 – 11 Oct · 3:50</span></div></a><a class="card" href="#ep-5"><img src="img/ep05_s01_0.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #5</span><b>Three T-Rexes in One Week</b><span>Week 5 · 12 – 18 Oct · 3:24</span></div></a><a class="card" href="#ep-6"><img src="../img/fury.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #6</span><b>Raptor Packs, Swamp Traps &amp; Turning Into a Dinosaur</b><span>Week 6 · 19 – 25 Oct · 2:55</span></div></a><a class="card" href="#ep-7"><img src="../img/morph_ptera.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #7</span><b>A Vine That Eats You + A Brand-New Volcano Boss</b><span>Week 7 · 26 Oct – 1 Nov · 3:10</span></div></a><a class="card" href="#ep-8"><img src="../img/shot_volcano.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #8</span><b>Our Game Just Time-Travelled to the Ice Age</b><span>Week 8 · 2 – 8 Nov · 2:54</span></div></a><a class="card" href="#ep-9"><img src="img/ep09_s04_1.jpg" alt="" loading="lazy" width="1200" height="675"><div><span class="label">Devlog #9<span class="latest">Latest</span></span><b>Fall Through the Ice &amp; Swim to Survive</b><span>Week 9 · 9 – 13 Nov · 2:53</span></div></a></div>
+    </div>
+  </section>
+  <article class="ep" id="ep-1"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #1 · Week 1 · 16 – 20 Sep 2026</span><h2>Building a Time-Travel Dinosaur Game in Unreal Engine 5</h2>
+      <div class="meta"><span class="chip">40 changes</span><span class="chip">5:53 listen</span></div>
+      <p class="tease">One empty project. One week. A one-kilometre dinosaur world, seven species, a stampeding Brontosaurus herd — and a hero. This is how Chronoshift began.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep01.m4a"></audio><small>Narration is an AI voice (ElevenLabs). Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Eight weeks ago, this game did not exist. No dinosaurs. No snow. No hero. Just an empty project and a very big idea.</p><p>This is the story of how it&#x27;s being built — one week at a time.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep01_s01_0.jpg" alt="Chronoshift devlog 1: Cold open" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="../img/shot_rex_arena.jpg" alt="Chronoshift devlog 1: Cold open" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="19.50"><div class="txt"><h3>What is Chronoshift?</h3><p>Chronoshift is a third-person, time-travelling adventure. You play a lone explorer who is pulled through time by a mysterious brass gauntlet — and every jump drops him into a different era of history.</p><p>It starts in the age of the dinosaurs. Jungle, swamp, tar pits, lava fields — and creatures that very much want to eat you.</p><p>From there, the journey runs right through history — the Ice Age, the Bronze Age, Ancient Egypt, Rome, the Maya, the Vikings, the Middle Ages, the Industrial Revolution, both World Wars, the modern day — and on into the future. Each era has its own world, its own weapons, its own monsters, and its own boss.</p><p>Your tools change with the times. Flint spears and bone clubs. Stone hammers and atlatls. Survival is about reading the land, not just swinging a weapon — stealth in the long grass, fire against the cold, and knowing when to run.</p><button class="listen" type="button" data-t="19.50">Listen <span class="t">0:19</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="../img/key_art.jpg" alt="Chronoshift devlog 1: What is Chronoshift?" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap="The Dinosaur Era"><img src="../img/shot_jungle.jpg" alt="The Dinosaur Era" loading="lazy" width="1200" height="675"></button><figcaption>The Dinosaur Era</figcaption></figure></div></div>
+    <div class="part" data-t="89.70"><div class="txt"><h3>Who&#x27;s making it</h3><p>Chronoshift is being made by the Console and PC Gaming channel, together with ITYELABS, the game development studio. Both are part of Veeto Ltd.</p><p>If you&#x27;re new here — Console and PC Gaming is a gaming channel. And this series is something a little different: a behind-the-scenes look at building a game, week by week, warts and all.</p><p>You can find the channel at youtube.com/@ConsolePCGaming, and the studio&#x27;s home on the web at veetoltd.github.io.</p><button class="listen" type="button" data-t="89.70">Listen <span class="t">1:29</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="../img/cover.jpg" alt="Chronoshift devlog 1: Who&#x27;s making it" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="128.10"><div class="txt"><h3>How it&#x27;s being built</h3><p>The game runs on Unreal Engine 5. And it&#x27;s being built in a very modern way: one developer, working alongside a team of AI tools.</p><p>Claude does a lot of the heavy lifting inside the editor and the code. Meshy and Tripo turn concept art into 3D models. Blender rigs them. ElevenLabs gives the creatures their roars. And Gemini, Grok and ChatGPT help with concept art, design documents and the website.</p><p>Every week, we&#x27;ll show you what was built, what was planned — and, just as honestly, what got thrown out.</p><button class="listen" type="button" data-t="128.10">Listen <span class="t">2:08</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="../img/g_valley.jpg" alt="Chronoshift devlog 1: How it&#x27;s being built" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap="Concept art → 3D model"><img src="img/ep01_s04_2.jpg" alt="Concept art → 3D model" loading="lazy" width="1200" height="675"></button><figcaption>Concept art → 3D model</figcaption></figure></div></div>
+    <div class="part noimg" data-t="167.83"><div class="txt"><h3>Week 1 — Wednesday: the empty project</h3><p>Week one began on Wednesday the sixteenth of September, with a single save: the first backup of a project still called &quot;Timeshift&quot;.</p><p>Then came Friday. And Friday was busy.</p><button class="listen" type="button" data-t="167.83">Listen <span class="t">2:47</span></button></div></div>
+    <div class="part" data-t="182.83"><div class="txt"><h3>Friday: a world in a day</h3><p>In a single day, the blocky test ground was replaced with a real landscape, and the first zone was planted with dense, procedurally scattered jungle.</p><p>Then, zone by zone, the world got dressed. A narrow jungle trail. A misty tar pit. A raptor hunting ground. A cliff face where rocks come down. A river you cross on a jam of mossy logs, and a far bank of scorched ash.</p><p>And at the very end: a boss arena ringed with glowing lava, basalt spires — and a portal ring, waiting.</p><p>By the evening, the whole thing had outgrown its first map. Era One was rebuilt on a one-kilometre landscape with seventeen zones — meadow, swamp marsh, nesting grounds, canyon pass, ash forest and lava fields.</p><p>And the world got its first residents. Seven dinosaur types were generated with Meshy, rigged and animated — and before midnight, they were walking around in the game.</p><button class="listen" type="button" data-t="182.83">Listen <span class="t">3:02</span></button></div><div class="shots"><figure><button type="button" data-cap="Arrival Pad"><img src="img/ep01_s06_0.jpg" alt="Arrival Pad" loading="lazy" width="1200" height="675"></button><figcaption>Arrival Pad</figcaption></figure><figure><button type="button" data-cap="The jungle trail"><img src="img/ep01_s06_1.jpg" alt="The jungle trail" loading="lazy" width="1200" height="675"></button><figcaption>The jungle trail</figcaption></figure></div></div>
+    <div class="part" data-t="249.93"><div class="txt"><h3>Saturday: the herd</h3><p>Saturday was all about one place: the Grazing Meadow.</p><p>The first version looked a bit too much like an English park, so the oak trees came out and palm-like cycads went in, opening it up into a Jurassic savanna.</p><p>Then came the Brontosaurus herd — huge, slow, wandering animals with proper collision. And then, of course, we made them stampede. Step into the trigger and the herd charges — and anything in its path gets trampled. Including you.</p><p>The rest of the new zones were filled with enemies, each species picking its own model and its own stats automatically.</p><button class="listen" type="button" data-t="249.93">Listen <span class="t">4:09</span></button></div><div class="shots"><figure><button type="button" data-cap="The Grazing Meadow"><img src="img/ep01_s07_0.jpg" alt="The Grazing Meadow" loading="lazy" width="1200" height="675"></button><figcaption>The Grazing Meadow</figcaption></figure><figure><button type="button" data-cap="The Brontosaurus herd"><img src="../img/herd.jpg" alt="The Brontosaurus herd" loading="lazy" width="1200" height="675"></button><figcaption>The Brontosaurus herd</figcaption></figure></div></div>
+    <div class="part" data-t="294.30"><div class="txt"><h3>Sunday: a hero arrives</h3><p>On Sunday, the grey test mannequin finally stepped aside, and the real Era One hero took his place — the explorer with the red scarf.</p><p>The placeholder cylinder weapons were replaced with real models, and glowing weapon pickups were scattered across the era.</p><button class="listen" type="button" data-t="294.30">Listen <span class="t">4:54</span></button></div><div class="shots"><figure><button type="button" data-cap="The Era One hero"><img src="img/ep01_s08_0.jpg" alt="The Era One hero" loading="lazy" width="1200" height="675"></button><figcaption>The Era One hero</figcaption></figure><figure><button type="button" data-cap=""><img src="../img/hero.jpg" alt="Chronoshift devlog 1: Sunday: a hero arrives" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part noimg" data-t="314.40"><div class="txt"><h3>What was planned — and what got cut</h3><p>The plan for week one also included running water through the meadow. Spoiler: that idea would be built, torn out, built again and torn out again — and you&#x27;ll see exactly why in episode two.</p><button class="listen" type="button" data-t="314.40">Listen <span class="t">5:14</span></button></div></div>
+    <div class="part noimg" data-t="330.87"><div class="txt"><h3>Outro</h3><p>Week one: forty changes, a one-kilometre world, seventeen zones, seven species of dinosaur, and a hero.</p><p>Next week — weapons, stealth, and a spear that really did not want to sit in his hand.</p><p>I&#x27;m your narrator — thanks for watching, and we&#x27;ll see you in week two.</p><button class="listen" type="button" data-t="330.87">Listen <span class="t">5:30</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+  <article class="ep" id="ep-2"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #2 · Week 2 · 21 – 27 Sep 2026</span><h2>It Took 10+ Tries to Put a Club in His Hand</h2>
+      <div class="meta"><span class="chip">119 changes</span><span class="chip">5:58 listen</span></div>
+      <p class="tease">119 changes in a single week — the busiest week of the whole project. The game gets its name, the hero learns to fight back, and the dinosaurs finally get brains.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep02.m4a"></audio><small>Narration is an AI voice (ElevenLabs). Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Last week, Chronoshift went from an empty project to a one-kilometre world full of dinosaurs. This week, the hero had to learn how to fight back.</p><p>Week two: a hundred and nineteen changes — the busiest week of the whole project so far.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep02_s01_1.jpg" alt="Chronoshift devlog 2: Cold open" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="img/ep02_s01_2.jpg" alt="Chronoshift devlog 2: Cold open" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="20.67"><div class="txt"><h3>Monday: a name, and a club that would not sit still</h3><p>Monday started with a name. At two minutes to nine, the project called Timeshift officially became Chronoshift.</p><p>Then came the weapons, and a problem that sounds simple: putting a club in a man&#x27;s hand. The first attempt hung it at his side, head down. The next held it upright by his shoulder. Then like a hammer. Then by the wrong end. It took more than ten attempts, a rebuilt fist, and freshly measured grip bones before the weapons finally sat inside his closed hand.</p><p>The spear got a new head — black, knapped flint, lashed to a plain wooden shaft — and, after a few versions, a proper two-handed underarm thrust. The bone club got its own overhead swing.</p><button class="listen" type="button" data-t="20.67">Listen <span class="t">0:20</span></button></div><div class="shots"><figure><button type="button" data-cap="The hero, week 2"><img src="img/ep02_s02_1.jpg" alt="The hero, week 2" loading="lazy" width="1200" height="675"></button><figcaption>The hero, week 2</figcaption></figure><figure><button type="button" data-cap="Flint spear and bone club"><img src="img/ep02_s02_3.jpg" alt="Flint spear and bone club" loading="lazy" width="1200" height="675"></button><figcaption>Flint spear and bone club</figcaption></figure></div></div>
+    <div class="part" data-t="74.67"><div class="txt"><h3>Monday: stealth</h3><p>Monday also brought stealth. Press C and the hero crouches — and while he stays low, enemies only notice him at forty-five percent of their normal range.</p><p>The first crouch was a deep squat, with legs fighting the foot-placement system, so it was swapped for a sneaking walk from Mixamo. Suddenly, the long grass became somewhere to hide.</p><button class="listen" type="button" data-t="74.67">Listen <span class="t">1:14</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="../img/stealth.jpg" alt="Chronoshift devlog 2: Monday: stealth" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap="Somewhere to hide"><img src="img/ep02_s03_2.jpg" alt="Somewhere to hide" loading="lazy" width="1200" height="675"></button><figcaption>Somewhere to hide</figcaption></figure></div></div>
+    <div class="part noimg" data-t="101.47"><div class="txt"><h3>Tuesday: the stream that would not stay</h3><p>Last episode promised the story of the meadow stream. Here it is.</p><p>On Tuesday, all the water came out of Era One. A little over an hour later, the meadow stream was rebuilt to match the reference art. Forty minutes after that, it was removed again. The plan had changed.</p><p>Not all the water went, though. The swamp got a flooded pond, with a giant ribcage and a clutch of glowing eggs. And that evening, the volcanic zone got its rivers — of lava.</p><button class="listen" type="button" data-t="101.47">Listen <span class="t">1:41</span></button></div></div>
+    <div class="part" data-t="136.00"><div class="txt"><h3>Wednesday: fire and green</h3><p>Wednesday was about making places feel alive. The lava fields got steam, burning damage along the rivers, a volcano on the skyline, and pterosaurs circling overhead.</p><p>The meadow got six new jungle plants, generated with Meshy — horsetails, ginkgo shrubs and tree ferns among them — and the blue mushrooms were quietly dropped.</p><p>Every dinosaur got hit animations, so they react when you strike them. And the boss, Rex Prime, finally got a body, with animations driven by the fight.</p><button class="listen" type="button" data-t="136.00">Listen <span class="t">2:15</span></button></div><div class="shots"><figure><button type="button" data-cap="Lava fields, 23 September"><img src="img/ep02_s05_0.jpg" alt="Lava fields, 23 September" loading="lazy" width="1200" height="675"></button><figcaption>Lava fields, 23 September</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep02_s05_1.jpg" alt="Chronoshift devlog 2: Wednesday: fire and green" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="174.83"><div class="txt"><h3>Thursday: a step back, and a first trailer</h3><p>Thursday began with a step back. Wednesday&#x27;s reshaping of the meadow ground, and its new trees, had gone too far — so both were reverted, and the planting was redone in layers instead.</p><p>Then came the very first Chronoshift trailer, cut from game footage, with a narration describing the game.</p><p>The hero got power-ups: armour as a real system, shown under the health bar, plus health pickups. And along the way, a few hazards turned out never to have been hooked up at all. They hurt now.</p><button class="listen" type="button" data-t="174.83">Listen <span class="t">2:54</span></button></div><div class="shots"><figure><button type="button" data-cap="The meadow, replanted in layers"><img src="img/ep02_s06_1.jpg" alt="The meadow, replanted in layers" loading="lazy" width="1200" height="675"></button><figcaption>The meadow, replanted in layers</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep02_s06_3.jpg" alt="Chronoshift devlog 2: Thursday: a step back, and a first trailer" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="212.07"><div class="txt"><h3>Friday: the enemies get brains</h3><p>On Friday, the enemies got brains. Instead of standing still until they spotted you, every creature now had something to do — grazing, roaming, patrolling. The pterosaurs stopped hovering in your face and started circling overhead.</p><p>And six new species arrived: Spinosaurus, Stegosaurus, Parasaurolophus, Ankylosaurus, Dimorphodon, and the small, feathered Kulindadromeus.</p><p>The hero answered with a kick for small enemies, an adrenaline power-up, and a torch — with real flame and flickering light. Fire hazards now keep burning you after you step out of them, and thorn thickets joined the list of things that hurt.</p><button class="listen" type="button" data-t="212.07">Listen <span class="t">3:32</span></button></div><div class="shots"><figure><button type="button" data-cap="Enemies with something to do"><img src="img/ep02_s07_0.jpg" alt="Enemies with something to do" loading="lazy" width="1200" height="675"></button><figcaption>Enemies with something to do</figcaption></figure><figure><button type="button" data-cap="Pterosaurs circle overhead"><img src="../img/shot_ptero.jpg" alt="Pterosaurs circle overhead" loading="lazy" width="1200" height="675"></button><figcaption>Pterosaurs circle overhead</figcaption></figure></div></div>
+    <div class="part" data-t="261.07"><div class="txt"><h3>The weekend: small things, big difference</h3><p>The weekend was for the small things that make a big difference. Campfires beside each torch. A floating health bar over enemies. Dinosaurs that no longer walk through each other.</p><p>Throwing stones got an aim mode — hold to aim, release to throw — and the stone itself stopped being a grey prototyping cylinder. Weapons moved onto the keys one, two and three.</p><p>And Rex Prime, it turned out, had been standing sixty-five centimetres above the ground the whole time.</p><button class="listen" type="button" data-t="261.07">Listen <span class="t">4:21</span></button></div><div class="shots"><figure><button type="button" data-cap="Saturday 26 September"><img src="img/ep02_s08_0.jpg" alt="Saturday 26 September" loading="lazy" width="1200" height="675"></button><figcaption>Saturday 26 September</figcaption></figure></div></div>
+    <div class="part noimg" data-t="299.47"><div class="txt"><h3>What got cut</h3><p>So, what got cut this week? The meadow stream — twice. The blue mushrooms. The dark monkey-puzzle trees. Ten of the twelve egg nests. A river creature called the River Ambusher, replaced by a Spinosaurus — for now. And a whole day of ground sculpting.</p><p>None of it is wasted. It&#x27;s how you find out what the game should look like.</p><button class="listen" type="button" data-t="299.47">Listen <span class="t">4:59</span></button></div></div>
+    <div class="part noimg" data-t="326.13"><div class="txt"><h3>Outro</h3><p>Week two: a hundred and nineteen changes, six new species of dinosaur, three weapons, a torch — and a game with a name.</p><p>Next week: a bestiary that records every creature you meet, flying dinosaurs that refuse to fly, and the first sounds of the jungle.</p><p>Chronoshift is made by Console and PC Gaming and ITYELABS. Thanks for watching — see you in week three.</p><button class="listen" type="button" data-t="326.13">Listen <span class="t">5:26</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+  <article class="ep" id="ep-3"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #3 · Week 3 · 28 Sep – 4 Oct 2026</span><h2>Our Flying Dinosaurs Wouldn&#x27;t Fly (So We Rebuilt Them)</h2>
+      <div class="meta"><span class="chip">70 changes</span><span class="chip">3:55 listen</span></div>
+      <p class="tease">The flying dinosaurs wouldn&#x27;t fly — so they were deleted and rebuilt from scratch. Now eleven of them bank, dive and land to feed over the jungle. Plus: the game finally makes a sound.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep03.m4a"></audio><small>Narration is an AI voice (ElevenLabs). Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Week two gave the hero weapons and the dinosaurs some brains. Week three was about knowing what you&#x27;re up against — and about one very stubborn sunbeam.</p><p>Seventy changes, and Wednesday alone accounted for thirty-two of them.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep03_s01_0.jpg" alt="Chronoshift devlog 3: Cold open" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="img/ep03_s01_1.jpg" alt="Chronoshift devlog 3: Cold open" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="20.27"><div class="txt"><h3>Tuesday: the bestiary</h3><p>Tuesday brought two new species: the small, parrot-beaked Psittacosaurus, and Caudipteryx, a feathered runner about the size of a turkey.</p><p>And with the cast growing fast, the game needed a way to keep track. Press J, and a bestiary opens — every creature in the era, with a slowly turning 3D model. Fourteen turnarounds were rendered for it that same day.</p><p>Two egg consumables were added too, hidden through the jungle and the nesting grounds.</p><button class="listen" type="button" data-t="20.27">Listen <span class="t">0:20</span></button></div><div class="shots"><figure><button type="button" data-cap="Caudipteryx"><img src="img/ep03_s02_1.jpg" alt="Caudipteryx" loading="lazy" width="1200" height="675"></button><figcaption>Caudipteryx</figcaption></figure><figure><button type="button" data-cap="30 September"><img src="img/ep03_s02_3.jpg" alt="30 September" loading="lazy" width="1200" height="675"></button><figcaption>30 September</figcaption></figure></div></div>
+    <div class="part" data-t="54.40"><div class="txt"><h3>Wednesday: chasing the sun</h3><p>Wednesday started in the Canyon Pass. It got light shafts, a darker grade, and a cobbled floor worth walking down. Then it was too dark, so it was brightened. Then brightened again. Then the white glow at the canyon mouth had to go.</p><p>After several attempts, the real culprit turned up: the sun itself was in the wrong place. A few more passes after that, the canyon was warm, golden, and readable.</p><button class="listen" type="button" data-t="54.40">Listen <span class="t">0:54</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep03_s03_2.jpg" alt="Chronoshift devlog 3: Wednesday: chasing the sun" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="87.50"><div class="txt"><h3>Wednesday: the jungle finds its voice</h3><p>Wednesday was also the day the game stopped being silent. Footsteps change with the ground under you. Weapons swish. The torch crackles. And the dinosaurs call, growl and cry out in pain when they&#x27;re hit.</p><p>The River Ambusher — cut last week — came back as a real creature, three and a half metres long. And Archaeoceratops joined the bestiary.</p><button class="listen" type="button" data-t="87.50">Listen <span class="t">1:27</span></button></div><div class="shots"><figure><button type="button" data-cap="The River Ambusher returns"><img src="img/ep03_s04_1.jpg" alt="The River Ambusher returns" loading="lazy" width="1200" height="675"></button><figcaption>The River Ambusher returns</figcaption></figure><figure><button type="button" data-cap="Archaeoceratops"><img src="img/ep03_s04_2.jpg" alt="Archaeoceratops" loading="lazy" width="1200" height="675"></button><figcaption>Archaeoceratops</figcaption></figure></div></div>
+    <div class="part" data-t="115.80"><div class="txt"><h3>Flyers that would not fly</h3><p>Then came the flying dinosaurs. Flight animations were authored in Blender, sounds were wired up… and they didn&#x27;t fly. By Thursday morning, they were removed altogether.</p><p>Their replacements were built properly from scratch: Pteranodon and Tupandactylus, each with eleven animations. Eleven of them now soar over Era One — banking, diving, and landing to feed.</p><p>The dinosaurs also got real, physically based materials, so skin finally looks like skin.</p><button class="listen" type="button" data-t="115.80">Listen <span class="t">1:55</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep03_s05_3.jpg" alt="Chronoshift devlog 3: Flyers that would not fly" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap="Real PBR skin"><img src="img/ep03_s05_4.jpg" alt="Real PBR skin" loading="lazy" width="1200" height="675"></button><figcaption>Real PBR skin</figcaption></figure></div></div>
+    <div class="part" data-t="152.67"><div class="txt"><h3>Friday: the Temporal Log</h3><p>Friday started with a sling and a bola, given proper models and weapon slots — and within a few hours, both had been removed completely. They didn&#x27;t feel right yet.</p><p>The afternoon went into rebuilding the bestiary as the Chronoshift Temporal Log: a brass-framed journal with gears, clock faces and gauges, clickable tabs, and creatures that only appear once you&#x27;ve discovered them — saved between sessions.</p><button class="listen" type="button" data-t="152.67">Listen <span class="t">2:32</span></button></div><div class="shots"><figure><button type="button" data-cap="Sling and bola — removed for now"><img src="img/ep03_s06_0.jpg" alt="Sling and bola — removed for now" loading="lazy" width="1200" height="675"></button><figcaption>Sling and bola — removed for now</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep03_s06_2.jpg" alt="Chronoshift devlog 3: Friday: the Temporal Log" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="183.27"><div class="txt"><h3>The weekend</h3><p>Sunday was quiet: the first copy for the trailer and the forums, and wind blowing through the ferns, reeds and cycads. Enjoy that wind while it lasts.</p><button class="listen" type="button" data-t="183.27">Listen <span class="t">3:03</span></button></div><div class="shots"><figure><button type="button" data-cap="Wind in the ferns (for now)"><img src="../img/ferns.jpg" alt="Wind in the ferns (for now)" loading="lazy" width="1200" height="675"></button><figcaption>Wind in the ferns (for now)</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep03_s07_1.jpg" alt="Chronoshift devlog 3: The weekend" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part noimg" data-t="196.93"><div class="txt"><h3>What got cut</h3><p>Cut this week: the first flying dinosaurs. The sling and the bola — for now. And several versions of a canyon that was lit by a sun in the wrong place.</p><button class="listen" type="button" data-t="196.93">Listen <span class="t">3:16</span></button></div></div>
+    <div class="part noimg" data-t="210.03"><div class="txt"><h3>Outro</h3><p>Week three: seventy changes, five new species, eleven flyers, a bestiary, and a game you can finally hear.</p><p>Next week: a tyrannosaur gets a jaw, a voice and a mouth — and is then deleted.</p><p>Chronoshift is made by Console and PC Gaming and ITYELABS. Thanks for watching — see you in week four.</p><button class="listen" type="button" data-t="210.03">Listen <span class="t">3:30</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+  <article class="ep" id="ep-4"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #4 · Week 4 · 5 – 11 Oct 2026</span><h2>We Deleted Our T-Rex</h2>
+      <div class="meta"><span class="chip">54 changes</span><span class="chip">3:50 listen</span></div>
+      <p class="tease">He got a jaw, a voice, a mouth and a bite. By Thursday afternoon, the T-rex was gone. This is the story of why we deleted our boss — and kept only his brain.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep04.m4a"></audio><small>Narration is an AI voice (ElevenLabs). Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Week four was supposed to be the week of the tyrannosaur. He got a jaw, a voice, a mouth and a bite. And by Thursday afternoon, he was gone.</p><p>Fifty-four changes. Here&#x27;s what happened.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep04_s01_0.jpg" alt="Chronoshift devlog 4: Cold open" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="img/ep04_s01_1.jpg" alt="Chronoshift devlog 4: Cold open" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="15.73"><div class="txt"><h3>Monday: new skins and smarter herds</h3><p>Monday started with a fresh coat of paint: eleven creature species were retextured, and the tyrannosaur was given muted earth tones.</p><p>The herds got smarter too. Prey animals now run when danger comes close — and they warn each other, so one startled animal can send a whole herd moving.</p><p>And last week&#x27;s wind in the foliage? It came out on Monday. It just didn&#x27;t look right.</p><button class="listen" type="button" data-t="15.73">Listen <span class="t">0:15</span></button></div><div class="shots"><figure><button type="button" data-cap="Retextured"><img src="img/ep04_s02_1.jpg" alt="Retextured" loading="lazy" width="1200" height="675"></button><figcaption>Retextured</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep04_s02_2.jpg" alt="Chronoshift devlog 4: Monday: new skins and smarter herds" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="44.67"><div class="txt"><h3>Tuesday: wading in</h3><p>On Tuesday, the hero stopped walking on water. He now wades through the swamp, which was deepened from ankle-deep to wade-deep, with a broken-up, natural shoreline.</p><p>The boss got a tell before he strikes, better spacing, and a second attack. And deep inside the enemy logic, one thousand one hundred and thirty-five orphaned nodes were deleted in one go.</p><p>The bestiary rows were rebuilt to read at a glance, colour-coded by what each creature eats.</p><button class="listen" type="button" data-t="44.67">Listen <span class="t">0:44</span></button></div><div class="shots"><figure><button type="button" data-cap="Wade-deep swamp"><img src="img/ep04_s03_0.jpg" alt="Wade-deep swamp" loading="lazy" width="1200" height="675"></button><figcaption>Wade-deep swamp</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep04_s03_1.jpg" alt="Chronoshift devlog 4: Tuesday: wading in" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="80.57"><div class="txt"><h3>Thursday: the mouth</h3><p>Thursday was the tyrannosaur&#x27;s big day. His mouth interior looked too much like a tongue, so it was reshaped, then dropped. His model turned out to be two thousand seven hundred and seventeen loose pieces, so it was welded into one surface. Holes in his throat were closed. He got a voice.</p><p>Then the bugs. He restarted his animation every frame while turning. He walked his collision right over the player — so a fix went in to push you clear if he ever swallowed you. His rest pose was open-mouthed. And when that was fixed, his jaw was locked shut, so he couldn&#x27;t bite at all.</p><button class="listen" type="button" data-t="80.57">Listen <span class="t">1:20</span></button></div><div class="shots"><figure><button type="button" data-cap="8 October"><img src="img/ep04_s04_0.jpg" alt="8 October" loading="lazy" width="1200" height="675"></button><figcaption>8 October</figcaption></figure></div></div>
+    <div class="part noimg" data-t="125.50"><div class="txt"><h3>Thursday afternoon: delete</h3><p>At the end of all that, the decision was made: delete the tyrannosaur&#x27;s art, and keep only his brain. It was time to start again with a better model.</p><p>The brain — the fight logic, the tells, the attacks — was kept, ready for a better body. You&#x27;ll see that body next week. And the one after it.</p><button class="listen" type="button" data-t="125.50">Listen <span class="t">2:05</span></button></div></div>
+    <div class="part" data-t="150.17"><div class="txt"><h3>Friday: the portal and the diet</h3><p>Meanwhile, a clearing deep in the jungle was dressed with moss and damp, rust-brown earth. And the portal at the end of the era now needs three key pieces before it will open.</p><p>Friday ended with a big tidy-up. The project moved its largest files into Git LFS, and twenty-two oversized environment meshes went on a diet — from about six hundred and seventy megabytes down to forty-two. One jungle treeline alone went from eighty-seven megabytes to under three.</p><button class="listen" type="button" data-t="150.17">Listen <span class="t">2:30</span></button></div><div class="shots"><figure><button type="button" data-cap="The jungle clearing"><img src="img/ep04_s06_0.jpg" alt="The jungle clearing" loading="lazy" width="1200" height="675"></button><figcaption>The jungle clearing</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep04_s06_1.jpg" alt="Chronoshift devlog 4: Friday: the portal and the diet" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part noimg" data-t="188.47"><div class="txt"><h3>What got cut</h3><p>Cut this week: the tyrannosaur&#x27;s body. The wind in the foliage. A mouth that looked like a tongue. And over a thousand pieces of dead logic nobody was using.</p><button class="listen" type="button" data-t="188.47">Listen <span class="t">3:08</span></button></div></div>
+    <div class="part noimg" data-t="202.80"><div class="txt"><h3>Outro</h3><p>Week four: fifty-four changes, eleven retextured species, one welded tyrannosaur, deleted — and a project that&#x27;s six hundred megabytes lighter.</p><p>Next week: the T-rex comes back — three new versions in a single week.</p><p>Chronoshift is made by Console and PC Gaming and ITYELABS. Thanks for watching — see you in week five.</p><button class="listen" type="button" data-t="202.80">Listen <span class="t">3:22</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+  <article class="ep" id="ep-5"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #5 · Week 5 · 12 – 18 Oct 2026</span><h2>Three T-Rexes in One Week</h2>
+      <div class="meta"><span class="chip">52 changes</span><span class="chip">3:24 listen</span></div>
+      <p class="tease">Last week the T-rex was deleted. This week he came back — in three different bodies. One spawned upside down underground. One got 28 animations. And one became the boss.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep05.m4a"></audio><small>Narration is an AI voice (ElevenLabs). Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Last week, the tyrannosaur was deleted. This week, he came back — in three different bodies.</p><p>Fifty-two changes, and almost all of them had teeth.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep05_s01_0.jpg" alt="Chronoshift devlog 5: Cold open" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="../img/rex.jpg" alt="Chronoshift devlog 5: Cold open" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="13.73"><div class="txt"><h3>Monday: rex number one</h3><p>On Monday, a brand-new T-rex was built: new mesh, new rig, six animations. And then the fun began.</p><p>He was invisible — because he had spawned upside down and buried underground. He had a hole in his belly. He shuffled. And even after he died, he could still stomp you, and a bite he had queued up could still kill you.</p><p>His skin and eyes were matched to a reference photo — measured, not guessed.</p><button class="listen" type="button" data-t="13.73">Listen <span class="t">0:13</span></button></div><div class="shots"><figure><button type="button" data-cap="A brand-new rex"><img src="img/ep05_s02_0.jpg" alt="A brand-new rex" loading="lazy" width="1200" height="675"></button><figcaption>A brand-new rex</figcaption></figure></div></div>
+    <div class="part" data-t="44.33"><div class="txt"><h3>Tuesday and Wednesday: twenty-eight clips</h3><p>By Wednesday, he had twenty-eight animations: alert, lunge, stomp, turns, two proper deaths, and four new attacks — plus twelve new sounds, ending in a long bellowing death roar.</p><p>One mystery got solved along the way: killing the rex sent you back to the start. It wasn&#x27;t the rex at all. It was falling ash.</p><p>Then every clip was planted on the ground, and his walk was locked to his feet, so he stopped floating and sliding. And then, on Wednesday, he was taken out of the arena again, to clear it for a rebuild.</p><button class="listen" type="button" data-t="44.33">Listen <span class="t">0:44</span></button></div><div class="shots"><figure><button type="button" data-cap="Falling ash"><img src="img/ep05_s03_1.jpg" alt="Falling ash" loading="lazy" width="1200" height="675"></button><figcaption>Falling ash</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep05_s03_2.jpg" alt="Chronoshift devlog 5: Tuesday and Wednesday: twenty-eight clips" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part noimg" data-t="86.93"><div class="txt"><h3>Thursday: rex two and rex three</h3><p>On Thursday, a second rex, also generated with Meshy, was rigged with a first walk cycle — and parked.</p><p>A third, generated with Tripo and rigged in Blender with a moving tail and jaw, got seven animations and went straight into the game as the boss, Rex Prime. He follows you with his head, his footsteps land with his feet, and he charges at six metres a second.</p><p>Combat got some weight too: a short hit-stop, smooth knockback — and a hurt camera shake that was removed the same day, because it just felt bad.</p><button class="listen" type="button" data-t="86.93">Listen <span class="t">1:26</span></button></div></div>
+    <div class="part" data-t="128.13"><div class="txt"><h3>Friday: the volcano</h3><p>Friday brought the big set piece: a volcano eruption under a dusk sky, an overhauled boss arena, and resolution options in the settings.</p><p>On Saturday, the eruption was removed again, to be redone properly.</p><button class="listen" type="button" data-t="128.13">Listen <span class="t">2:08</span></button></div><div class="shots"><figure><button type="button" data-cap="16 October"><img src="img/ep05_s05_0.jpg" alt="16 October" loading="lazy" width="1200" height="675"></button><figcaption>16 October</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep05_s05_1.jpg" alt="Chronoshift devlog 5: Friday: the volcano" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="144.33"><div class="txt"><h3>Also this week</h3><p>In between the rexes: seven hundred and forty-six props in one jungle clearing were stood upright, and nearly ninety floating ones were dropped back onto the ground. The lighting got a filmic grade. And the hero can now aim and throw stones.</p><button class="listen" type="button" data-t="144.33">Listen <span class="t">2:24</span></button></div><div class="shots"><figure><button type="button" data-cap="Throwable stones"><img src="img/ep05_s06_1.jpg" alt="Throwable stones" loading="lazy" width="1200" height="675"></button><figcaption>Throwable stones</figcaption></figure></div></div>
+    <div class="part noimg" data-t="165.27"><div class="txt"><h3>What got cut</h3><p>Cut this week: the first rebuilt rex. The second one, parked. A camera shake. And a volcano eruption that will be back.</p><button class="listen" type="button" data-t="165.27">Listen <span class="t">2:45</span></button></div></div>
+    <div class="part noimg" data-t="175.83"><div class="txt"><h3>Outro</h3><p>Week five: fifty-two changes, three tyrannosaurs, twenty-eight animations for just one of them, and a boss who finally fights back.</p><p>Next week: swamp hazards, morphing into a dinosaur, and a raptor pack that hunts together.</p><p>Chronoshift is made by Console and PC Gaming and ITYELABS. Thanks for watching — see you in week six.</p><button class="listen" type="button" data-t="175.83">Listen <span class="t">2:55</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+  <article class="ep" id="ep-6"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #6 · Week 6 · 19 – 25 Oct 2026</span><h2>Raptor Packs, Swamp Traps &amp; Turning Into a Dinosaur</h2>
+      <div class="meta"><span class="chip">23 changes</span><span class="chip">2:55 listen</span></div>
+      <p class="tease">Raptors that hunt as a pack. A power-up that turns you into a dinosaur. Sinking mud, tar pits and steam geysers. This is the week Chronoshift started to feel like a game.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep06.m4a"></audio><small>Narration is an AI voice (ElevenLabs). Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Week six had fewer changes than any week before it — twenty-three. But each one was enormous. This is the week the game started to feel like a game.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep06_s01_0.jpg" alt="Chronoshift devlog 6: Cold open" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="img/ep06_s01_1.jpg" alt="Chronoshift devlog 6: Cold open" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="14.47"><div class="txt"><h3>Monday: into the swamp</h3><p>Monday started with the basics. The hero now begins empty-handed, carries his weapons on his back, and reaches into a hip pouch to throw a stone.</p><p>Then the swamp got dangerous. Wading slows you down, with ripples, spray and sloshing sounds. And four hazards were added: sinking mud, a tar pit, timed steam geysers, and a rockfall trap.</p><button class="listen" type="button" data-t="14.47">Listen <span class="t">0:14</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep06_s02_0.jpg" alt="Chronoshift devlog 6: Monday: into the swamp" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="img/ep06_s02_1.jpg" alt="Chronoshift devlog 6: Monday: into the swamp" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="41.67"><div class="txt"><h3>Tuesday and Wednesday: power-ups</h3><p>On Tuesday, three new power-ups arrived. Fury. Regeneration. And Morph — which turns you into a dinosaur.</p><p>The dinosaurs got a variety of attacks, and on Wednesday, five more moves were added — shared by the enemies and by you, when you&#x27;re morphed.</p><p>By Friday, the power-ups had their own looks, the pickups were remade, the portal got its ring, and you could even morph into a flyer.</p><button class="listen" type="button" data-t="41.67">Listen <span class="t">0:41</span></button></div><div class="shots"><figure><button type="button" data-cap="Fury"><img src="../img/fury.jpg" alt="Fury" loading="lazy" width="1200" height="675"></button><figcaption>Fury</figcaption></figure><figure><button type="button" data-cap="Regeneration"><img src="../img/regen.jpg" alt="Regeneration" loading="lazy" width="1200" height="675"></button><figcaption>Regeneration</figcaption></figure></div></div>
+    <div class="part" data-t="72.67"><div class="txt"><h3>Saturday: the raptor pack</h3><p>Saturday was a monster. Raptors now hunt as a pack, working together to bring you down. Two hundred and thirty-six new enemy animations went in.</p><p>And the jungle came alive: plants bend as creatures push through them, leaves fall, birds scatter, footprints are left behind.</p><button class="listen" type="button" data-t="72.67">Listen <span class="t">1:12</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep06_s04_0.jpg" alt="Chronoshift devlog 6: Saturday: the raptor pack" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="img/ep06_s04_1.jpg" alt="Chronoshift devlog 6: Saturday: the raptor pack" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="95.97"><div class="txt"><h3>Sunday: every voice</h3><p>Sunday gave all fifteen species new voices, generated with ElevenLabs, and a dino inspector for checking every animation and sound.</p><p>The Triceratops got a full suite of twenty-four animations and smarter behaviour. The Parasaurolophus got its own set too. Dinosaurs now walk to the water to drink, and the meadow was relaid with a winding trail and open grazing lawns.</p><p>And that same week, two new trailers were cut — including the first cinematic one.</p><button class="listen" type="button" data-t="95.97">Listen <span class="t">1:35</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="../img/morph_trike.jpg" alt="Chronoshift devlog 6: Sunday: every voice" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="img/ep06_s05_2.jpg" alt="Chronoshift devlog 6: Sunday: every voice" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part noimg" data-t="133.67"><div class="txt"><h3>What got cut</h3><p>Very little got cut this week. Just a bad habit: dinosaurs walking on the spot. And a bola that kept snaring the player instead of the enemy.</p><button class="listen" type="button" data-t="133.67">Listen <span class="t">2:13</span></button></div></div>
+    <div class="part noimg" data-t="144.57"><div class="txt"><h3>Outro</h3><p>Week six: twenty-three changes, four swamp hazards, three power-ups, a raptor pack, two hundred and thirty-six new animations — and two trailers.</p><p>Next week: a jungle gorge built from concept art, a vine that eats you, and a new boss for the volcano.</p><p>Chronoshift is made by Console and PC Gaming and ITYELABS. Thanks for watching — see you in week seven.</p><button class="listen" type="button" data-t="144.57">Listen <span class="t">2:24</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+  <article class="ep" id="ep-7"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #7 · Week 7 · 26 Oct – 1 Nov 2026</span><h2>A Vine That Eats You + A Brand-New Volcano Boss</h2>
+      <div class="meta"><span class="chip">19 changes</span><span class="chip">3:10 listen</span></div>
+      <p class="tease">A vine that snares your legs. A giant millipede that ambushes from the undergrowth. And a new end boss with a very hard head. Week seven had one rule: if there&#x27;s concept art, build it like the concept art.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep07.m4a"></audio><small>Narration is an AI voice (ElevenLabs). Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Week seven was about one rule: if there&#x27;s concept art, build it like the concept art. Nineteen changes — a jungle gorge, a vine that eats you, and a brand-new boss.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep07_s01_0.jpg" alt="Chronoshift devlog 7: Cold open" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="img/ep07_s01_1.jpg" alt="Chronoshift devlog 7: Cold open" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="16.53"><div class="txt"><h3>Monday: new ground</h3><p>Monday pushed the world outward. The north hills were dressed, a cliff-and-river valley was cut along the meadow&#x27;s southern edge, and a strange pattern of diagonal stripes on the ground was finally tracked down and removed.</p><p>The hero got a stone-framed HUD with a panel for when you&#x27;re morphed, and the morphed Pteranodon learned to fly properly — without its wings crossing over in a dive.</p><button class="listen" type="button" data-t="16.53">Listen <span class="t">0:16</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep07_s02_1.jpg" alt="Chronoshift devlog 7: Monday: new ground" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap="The morphed Pteranodon flies"><img src="../img/morph_ptera.jpg" alt="The morphed Pteranodon flies" loading="lazy" width="1200" height="675"></button><figcaption>The morphed Pteranodon flies</figcaption></figure></div></div>
+    <div class="part" data-t="46.13"><div class="txt"><h3>Tuesday: the makeover that didn&#x27;t make it</h3><p>Tuesday morning, a coastal ridge went in south of the first path, with a stream, a rocky coastline and sea crags. Then the canyon got a full makeover with photo-scanned sandstone and desert plants.</p><p>It didn&#x27;t look like Chronoshift. Within hours, the whole makeover was reverted — and the canyon was rebuilt instead as a deep jungle gorge, matched shot for shot to the concept art.</p><button class="listen" type="button" data-t="46.13">Listen <span class="t">0:46</span></button></div><div class="shots"><figure><button type="button" data-cap="The jungle gorge"><img src="../img/g_jungle_trail.jpg" alt="The jungle gorge" loading="lazy" width="1200" height="675"></button><figcaption>The jungle gorge</figcaption></figure></div></div>
+    <div class="part" data-t="76.67"><div class="txt"><h3>Tuesday: things that want to eat you</h3><p>The gorge came with company. The Constrictor Vine lies in wait and snares your legs — and by Wednesday it had a braided, mossy look, a firefly glow, a knot you can strike, and a pink, clawed maw.</p><p>Arthropleura — a giant, armoured millipede — ambushes from the undergrowth. And four more jungle hazards were added: a living log, a set of tiger jaws, a steam vent, and rubble that slides down slopes.</p><button class="listen" type="button" data-t="76.67">Listen <span class="t">1:16</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep07_s04_0.jpg" alt="Chronoshift devlog 7: Tuesday: things that want to eat you" loading="lazy" width="1200" height="675"></button></figure><figure><button type="button" data-cap=""><img src="../img/g_jungle_volcano.jpg" alt="Chronoshift devlog 7: Tuesday: things that want to eat you" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="110.67"><div class="txt"><h3>Wednesday and Thursday: the volcano</h3><p>Then the end of the era was rebuilt to the concept art. A volcano arena of cracked slabs, spires and lava, under a burning sky. A thin rock bridge over a glowing canyon, with huge footprints pressed into it.</p><p>Those footprints belong to the new end boss: Pachycephalosaurus, the dome-headed charger. The fight has a trench, falling lava bombs, a T-rex on the ridge — and an eruption that builds as you go.</p><p>Thursday&#x27;s playtest added an entrance cinematic, a boss health bar and a new volcano.</p><button class="listen" type="button" data-t="110.67">Listen <span class="t">1:50</span></button></div><div class="shots"><figure><button type="button" data-cap="The volcano arena"><img src="../img/g_arena.jpg" alt="The volcano arena" loading="lazy" width="1200" height="675"></button><figcaption>The volcano arena</figcaption></figure><figure><button type="button" data-cap="The lava bridge"><img src="../img/g_lava_bridge.jpg" alt="The lava bridge" loading="lazy" width="1200" height="675"></button><figcaption>The lava bridge</figcaption></figure></div></div>
+    <div class="part noimg" data-t="150.87"><div class="txt"><h3>What got cut</h3><p>Cut this week: the canyon makeover, gone the same day. And a batch of rocks that had been settled onto the ground — which then had to be un-settled.</p><button class="listen" type="button" data-t="150.87">Listen <span class="t">2:30</span></button></div></div>
+    <div class="part noimg" data-t="162.97"><div class="txt"><h3>Outro</h3><p>Week seven: nineteen changes, a jungle gorge, a vine with a mouth, a giant millipede, and a new boss with a very hard head.</p><p>Next week: the dinosaur era closes its doors — and the Ice Age begins.</p><p>Chronoshift is made by Console and PC Gaming and ITYELABS. Thanks for watching — see you in week eight.</p><button class="listen" type="button" data-t="162.97">Listen <span class="t">2:42</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+  <article class="ep" id="ep-8"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #8 · Week 8 · 2 – 8 Nov 2026</span><h2>Our Game Just Time-Travelled to the Ice Age</h2>
+      <div class="meta"><span class="chip">17 changes</span><span class="chip">2:54 listen</span></div>
+      <p class="tease">Step through the portal and jump over sixty million years. This is the week Chronoshift travelled through time for the first time — from the dinosaur jungle into a frozen Ice Age taiga, with a dire wolf pack waiting.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep08.m4a"></audio><small>Narration is an AI voice (ElevenLabs). Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Week eight is the week Chronoshift travelled through time for the first time. Seventeen changes — and one of them was a whole new era.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div><div class="shots"><figure><button type="button" data-cap=""><img src="img/ep08_s01_0.jpg" alt="Chronoshift devlog 8: Cold open" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="12.60"><div class="txt"><h3>Monday and Tuesday: finishing the jungle</h3><p>Monday began with a step back: a more photo-real rebuild of the end level didn&#x27;t feel right, so it was reverted and the dinosaurs got their original skins back.</p><p>Then the jungle&#x27;s edge was matched to the concept art — a painted volcano on the skyline, a smoke plume, low sun and god rays through the trees.</p><p>On Tuesday, the volcano canyon was rebuilt to the concept as well, with a live eruption system.</p><button class="listen" type="button" data-t="12.60">Listen <span class="t">0:12</span></button></div><div class="shots"><figure><button type="button" data-cap="The jungle edge, matched to the concept"><img src="../img/shot_volcano.jpg" alt="The jungle edge, matched to the concept" loading="lazy" width="1200" height="675"></button><figcaption>The jungle edge, matched to the concept</figcaption></figure><figure><button type="button" data-cap=""><img src="img/ep08_s02_1.jpg" alt="Chronoshift devlog 8: Monday and Tuesday: finishing the jungle" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part" data-t="44.87"><div class="txt"><h3>Thursday: the cave, and the jump</h3><p>On Thursday, the volcano cave was rebuilt, and a new creature moved in: Pulmonoscorpius, a giant scorpion that crawls across the walls.</p><p>And then the big moment. The Dinosaur Era was closed for now, and the portal was opened. Step through, and a cinematic carries the hero through time — into a snowy taiga forest, wearing furs. Welcome to the Ice Age.</p><button class="listen" type="button" data-t="44.87">Listen <span class="t">0:44</span></button></div><div class="shots"><figure><button type="button" data-cap="The volcano cave"><img src="../img/g_cave.jpg" alt="The volcano cave" loading="lazy" width="1200" height="675"></button><figcaption>The volcano cave</figcaption></figure><figure><button type="button" data-cap="Pulmonoscorpius"><img src="img/ep08_s03_1.jpg" alt="Pulmonoscorpius" loading="lazy" width="1200" height="675"></button><figcaption>Pulmonoscorpius</figcaption></figure></div></div>
+    <div class="part" data-t="73.77"><div class="txt"><h3>Friday and Saturday: wolves and snow</h3><p>Friday gave the Ice Age its first predators: a dire wolf pack, with sixteen animations, twenty-eight sounds and pack behaviour. By Saturday they could gallop, follow an alpha, fear your torch, and go for your legs.</p><p>The snow got boot prints, kicked-up powder and soft ground. A first snowstorm was built. And creatures got physics: flinches, swinging tails, bending saplings and breakable logs.</p><button class="listen" type="button" data-t="73.77">Listen <span class="t">1:13</span></button></div><div class="shots"><figure><button type="button" data-cap="Dire wolf"><img src="img/ep08_s04_0.jpg" alt="Dire wolf" loading="lazy" width="1200" height="675"></button><figcaption>Dire wolf</figcaption></figure><figure><button type="button" data-cap=""><img src="../img/ice_wolves.jpg" alt="Chronoshift devlog 8: Friday and Saturday: wolves and snow" loading="lazy" width="1200" height="675"></button></figure></div></div>
+    <div class="part noimg" data-t="105.63"><div class="txt"><h3>The weekend: a front door</h3><p>And the game got a front door: a title screen, with its own music — Cross the Ages — and a switch to turn it off.</p><p>Sunday brought a new settings menu, with DLSS, frame generation, Reflex, headphone audio and volume sliders, a new installer, and a five-minute film built entirely from game footage.</p><button class="listen" type="button" data-t="105.63">Listen <span class="t">1:45</span></button></div></div>
+    <div class="part noimg" data-t="128.93"><div class="txt"><h3>What got cut</h3><p>Cut this week: the photo-real end level. Creature foot placement, switched off because the wolves slid around on folded legs. And, for now, the Dinosaur Era itself — closed while the Ice Age gets built.</p><button class="listen" type="button" data-t="128.93">Listen <span class="t">2:08</span></button></div></div>
+    <div class="part noimg" data-t="146.77"><div class="txt"><h3>Outro</h3><p>Week eight: seventeen changes, a giant scorpion, a wolf pack, a title screen, a film — and a jump of over sixty million years.</p><p>Next week: a frozen lake you can fall through, a giant sloth, and the Ice Age arsenal.</p><p>Chronoshift is made by Console and PC Gaming and ITYELABS. Thanks for watching — see you in week nine.</p><button class="listen" type="button" data-t="146.77">Listen <span class="t">2:26</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+  <article class="ep" id="ep-9"><section><div class="wrap">
+    <div class="ep-head"><span class="label">Devlog #9 · Week 9 · 9 – 13 Nov 2026</span><h2>Fall Through the Ice &amp; Swim to Survive</h2>
+      <div class="meta"><span class="chip">20 changes</span><span class="chip">2:53 listen</span><span class="chip live">Latest</span></div>
+      <p class="tease">Walk onto thin ice and it cracks, breaks into floating plates — and drops you into freezing water. But you don&#x27;t just die. You swim under the ice, hunting for a way back up while the cold eats away at you.</p>
+      <div class="player"><b>Listen to the episode</b><audio controls preload="none" src="audio/ep09.m4a"></audio><small>Narration is an AI voice (ElevenLabs). The episode's opening also uses AI-generated Ice Age cinematic shots, which are not shown here. Press Listen next to any part to jump straight to it.</small></div>
+    </div>
+    <div class="part noimg" data-t="0.20"><div class="txt"><h3>Cold open</h3><p>Week nine brings us right up to date. Twenty changes, all in the Ice Age — and a lot of them about ice.</p><button class="listen" type="button" data-t="0.20">Listen <span class="t">0:00</span></button></div></div>
+    <div class="part" data-t="10.83"><div class="txt"><h3>Monday: a full-size Ice Age</h3><p>On Monday, the Ice Age grew to full size: a landscape over a kilometre long, later widened with a steppe and a mountain backdrop.</p><p>The cold became a real threat. Your warmth drains in the open, and campfires bring it back. And high on a cliff, a falcon&#x27;s eyrie was built — with a falcon, rigged and ready.</p><button class="listen" type="button" data-t="10.83">Listen <span class="t">0:10</span></button></div><div class="shots"><figure><button type="button" data-cap="A full-size Ice Age"><img src="img/ep09_s02_0.jpg" alt="A full-size Ice Age" loading="lazy" width="1200" height="675"></button><figcaption>A full-size Ice Age</figcaption></figure><figure><button type="button" data-cap="Widened: steppe + mountains"><img src="img/ep09_s02_1.jpg" alt="Widened: steppe + mountains" loading="lazy" width="1200" height="675"></button><figcaption>Widened: steppe + mountains</figcaption></figure></div></div>
+    <div class="part" data-t="36.97"><div class="txt"><h3>Wednesday: megafauna</h3><p>Wednesday brought the giants. The short-faced bear, Arctodus, rears up on its hind legs. And Megatherium, the giant ground sloth, was modelled, rigged and given twelve animations, with snow clinging to its fur.</p><p>The hero got an atlatl, a spear-thrower. Branches now spring back as you push through them, shedding snow.</p><p>The sloth was also meant to dig burrows. They didn&#x27;t work — so they were removed.</p><button class="listen" type="button" data-t="36.97">Listen <span class="t">0:36</span></button></div><div class="shots"><figure><button type="button" data-cap="Arctodus, the short-faced bear"><img src="img/ep09_s03_0.jpg" alt="Arctodus, the short-faced bear" loading="lazy" width="1200" height="675"></button><figcaption>Arctodus, the short-faced bear</figcaption></figure><figure><button type="button" data-cap="Megatherium"><img src="img/ep09_s03_1.jpg" alt="Megatherium" loading="lazy" width="1200" height="675"></button><figcaption>Megatherium</figcaption></figure></div></div>
+    <div class="part" data-t="68.47"><div class="txt"><h3>Thursday: the lake</h3><p>Thursday was all about the frozen lake. Walk onto thin ice and it cracks — in two stages — then breaks into floating plates, with slush spraying up and a freezing mist hanging in the air. By the evening, fifty-eight physics-driven shards were bobbing in the water.</p><p>And if you fall in, you don&#x27;t just die. You swim — under the ice, in a deep basin, looking for a way back up — while the cold eats away at you.</p><button class="listen" type="button" data-t="68.47">Listen <span class="t">1:08</span></button></div><div class="shots"><figure><button type="button" data-cap="Cracks"><img src="img/ep09_s04_0.jpg" alt="Cracks" loading="lazy" width="1200" height="675"></button><figcaption>Cracks</figcaption></figure><figure><button type="button" data-cap="Breakup"><img src="img/ep09_s04_1.jpg" alt="Breakup" loading="lazy" width="1200" height="675"></button><figcaption>Breakup</figcaption></figure></div></div>
+    <div class="part" data-t="101.67"><div class="txt"><h3>Thursday and Friday: a new hero, new weapons</h3><p>The hero was rebuilt as a new base body, ready to wear a different outfit in every era. A fur outfit with cloth physics was tried, and swapped for the original hero&#x27;s face in furs.</p><p>And the Ice Age arsenal began: a stone hammer, a flint knife for silent kills, and a flint spear that jabs and counters. Spear throwing is on its way.</p><p>Planning has also started on the eras still to come, including Ancient Egypt.</p><button class="listen" type="button" data-t="101.67">Listen <span class="t">1:41</span></button></div><div class="shots"><figure><button type="button" data-cap="The new base hero"><img src="img/ep09_s05_0.jpg" alt="The new base hero" loading="lazy" width="1200" height="675"></button><figcaption>The new base hero</figcaption></figure><figure><button type="button" data-cap="Original face, Ice Age furs"><img src="img/ep09_s05_1.jpg" alt="Original face, Ice Age furs" loading="lazy" width="1200" height="675"></button><figcaption>Original face, Ice Age furs</figcaption></figure></div></div>
+    <div class="part noimg" data-t="134.47"><div class="txt"><h3>What got cut</h3><p>Cut this week: the sloth burrows. The cloth-physics outfit. And, as ever, a few dozen versions of things that weren&#x27;t quite right.</p><button class="listen" type="button" data-t="134.47">Listen <span class="t">2:14</span></button></div></div>
+    <div class="part noimg" data-t="145.80"><div class="txt"><h3>Outro</h3><p>That&#x27;s the whole story so far: nine weeks, four hundred and fourteen changes, two eras, and one hero.</p><p>From now on, there&#x27;ll be a new episode every week. Next time: spears that fly, and the rest of the Ice Age.</p><p>Chronoshift is made by Console and PC Gaming and ITYELABS. Thanks for watching — see you next week.</p><button class="listen" type="button" data-t="145.80">Listen <span class="t">2:25</span></button></div></div>
+    <p class="note"><a class="back" href="#episodes">↑ All episodes</a></p>
+  </div></section></article>
+</main>
+<footer>
+  <div class="wrap">
+    <img class="studio" src="../img/ityelabs.jpg" alt="ITYELABS" width="720" height="720">
+    <div class="who">
+      <strong>A game by ITYELABS</strong>
+      <span>Chronoshift is in development. Screenshots are from the build at the time of each episode and may change. Watch every episode on YouTube at <a href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">@ConsolePCGaming</a>.</span>
+      <span>© 2026 Veeto Ltd. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+<dialog id="lb" aria-label="Image viewer">
+  <img id="lb-img" src="" alt="">
+  <div class="bar"><span id="lb-cap"></span><button id="lb-close" type="button">Close</button></div>
+</dialog>
+<script>
+(function () {
+  var lb = document.getElementById("lb"), img = document.getElementById("lb-img"), cap = document.getElementById("lb-cap");
+  document.querySelectorAll(".shots button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var i = b.querySelector("img"); img.src = i.src; img.alt = i.alt; cap.textContent = b.dataset.cap || "";
+      if (lb.showModal) lb.showModal(); else lb.setAttribute("open", "");
+    });
+  });
+  document.getElementById("lb-close").addEventListener("click", function () { lb.close(); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+
+  // audio: one player per episode, "Listen" jumps to a part, the part being read is highlighted
+  var players = document.querySelectorAll(".ep audio");
+  players.forEach(function (a) {
+    var ep = a.closest(".ep"), parts = Array.prototype.slice.call(ep.querySelectorAll(".part"));
+    a.addEventListener("play", function () { players.forEach(function (o) { if (o !== a) o.pause(); }); });
+    a.addEventListener("timeupdate", function () {
+      var cur = null; parts.forEach(function (p) { if (a.currentTime + 0.3 >= parseFloat(p.dataset.t)) cur = p; });
+      parts.forEach(function (p) { p.classList.toggle("speaking", p === cur && !a.paused); });
+    });
+    a.addEventListener("pause", function () { parts.forEach(function (p) { p.classList.remove("speaking"); }); });
+    ep.querySelectorAll(".listen").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = parseFloat(b.dataset.t);
+        a.preload = "auto";
+        if (a.readyState >= 1) a.currentTime = t; else a.addEventListener("loadedmetadata", function () { a.currentTime = t; }, { once: true });
+        var p = a.play(); if (p && p.catch) p.catch(function () {});
+      });
+    });
+  });
+
+  // timeline tooltip
+  var chart = document.getElementById("chart"), tip = document.getElementById("tip"), svg = chart.querySelector("svg"), last = null;
+  function show(el, x, y) {
+    var r = svg.getBoundingClientRect(), c = chart.getBoundingClientRect(), k = r.width / svg.viewBox.baseVal.width;
+    tip.textContent = el.dataset.tip; tip.style.left = (r.left - c.left + x * k) + "px"; tip.style.top = (r.top - c.top + y * k) + "px"; tip.classList.add("on");
+    if (last) last.classList.remove("on"); if (el.classList.contains("hit")) { el.classList.add("on"); last = el; }
+  }
+  function hide() { tip.classList.remove("on"); if (last) last.classList.remove("on"); last = null; }
+  svg.querySelectorAll(".hit").forEach(function (h) {
+    function on() { show(h, parseFloat(h.dataset.x), Math.min(parseFloat(h.dataset.y), 270)); }
+    h.addEventListener("mouseenter", on); h.addEventListener("click", on);
+  });
+  svg.querySelectorAll(".ms").forEach(function (g) {
+    var c = g.querySelector("circle");
+    function on() { show(g, parseFloat(c.getAttribute("cx")), parseFloat(c.getAttribute("cy")) - 10); }
+    g.addEventListener("mouseenter", on); g.parentNode.addEventListener("focus", on); g.parentNode.addEventListener("blur", hide);
+  });
+  svg.addEventListener("mouseleave", hide);
+})();
+</script>
+</body>
+</html>
