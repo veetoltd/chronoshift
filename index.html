@@ -9,10 +9,10 @@
 <link rel="sitemap" type="application/xml" href="sitemap.xml">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Explore Chronoshift, a time-travel dinosaur survival adventure by ITYELABS (Veeto Ltd). Watch trailers and development updates on the Console and PC Gaming YouTube channel.">
+<meta name="description" content="Explore Chronoshift, a time-travel dinosaur survival adventure by ITYELABS (Veeto Ltd). Discover the game, read the story of the Gauntlet, and follow how it is made, week by week.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Chronoshift - a game by ITYELABS">
-<meta property="og:description" content="Stranded sixty-six million years ago. Survive every era of history and find the way home. New cinematic trailer out now.">
+<meta property="og:description" content="Stranded sixty-six million years ago. Survive every era of history and find the way home. Read the story of the Gauntlet.">
 <meta property="og:image" content="https://veetoltd.github.io/chronoshift/img/og_key_art.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -221,6 +221,25 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 .progress .todo li::before { content: "◇"; position: absolute; left: 2px; color: var(--ember); }
 .era-body .art-head { margin-top: 18px; }
 @media (max-width: 760px) { .progress { grid-template-columns: 1fr; } .era .open { display: inline-block; margin: 6px 0 0; } }
+
+/* about / story / how (2026-11-23) */
+.about { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.about article { background: var(--basalt); border: 1px solid var(--seam); padding: 20px; display: grid; gap: 10px; align-content: start; }
+.about article h3, .about article p { margin: 0; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+.story { display: grid; gap: clamp(28px, 4vw, 44px); }
+.chapter { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(20px, 3.5vw, 40px); align-items: center; }
+.chapter:nth-child(even) img { order: 2; }
+.chapter img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; border: 1px solid var(--seam); }
+.chapter .no { font: 700 0.82rem/1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--portal); }
+.chapter h3 { margin: 8px 0 10px; }
+.chapter p { margin: 0; }
+@media (max-width: 760px) { .chapter { grid-template-columns: 1fr; } .chapter:nth-child(even) img { order: 0; } }
+.how { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; }
+.how div { border-left: 3px solid var(--seam); padding: 4px 0 4px 16px; }
+.how h3 { margin: 0 0 6px; }
+.how p { margin: 0; }
+@media (max-width: 760px) { .how { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -228,13 +247,13 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
   <div class="wrap">
     <a href="#top" aria-label="Chronoshift home"><img src="img/wordmark.png" alt="Chronoshift" width="200" height="56"></a>
     <nav aria-label="Sections">
-      <a href="#trailer">Trailer</a>
-      <a href="#song">Song</a>
+      <a href="#about">The game</a>
+      <a href="#story">Story</a>
       <a href="#powers" class="opt">Powers</a>
       <a href="#eras">Eras</a>
-      <a href="#era-1" class="opt">Dinosaur Era</a>
-      <a href="#era-2">Ice Age</a>
+      <a href="#how" class="opt">How we make it</a>
       <a href="devlog/">Devlog</a>
+      <a href="videos/">Videos</a>
       <a href="#next">Next</a>
       <a href="#follow">Follow</a>
     </nav>
@@ -255,8 +274,9 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
           <span class="chip">Third-person action-survival</span>
         </div>
         <div class="chips">
-          <a class="btn" href="#trailer">Watch the new trailer</a>
-          <a class="btn ghost" href="#song">Listen to the song</a>
+          <a class="btn" href="#about">Discover the game</a>
+          <a class="btn ghost" href="#story">Read the story</a>
+          <a class="btn ghost" href="videos/">Watch the videos</a>
           <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">YouTube channel</a>
         </div>
       </div>
@@ -273,77 +293,72 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     </div>
   </div>
 
-  <section id="trailer">
+  <section id="about">
     <div class="wrap">
       <div class="sec-head">
-        <span class="label">In-engine trailer · 1:29 <span class="new">New</span></span>
-        <h2>One explorer. Every age.</h2>
+        <span class="label">The game</span>
+        <h2>Survive every era of history</h2>
+        <p class="lede">Chronoshift is a third-person action-survival game. You play an explorer flung back through time by a strange brass gauntlet, and the only way home is forward: through thirteen eras, from the age of the dinosaurs to the far future.</p>
       </div>
-      <div class="trailer">
-        <video controls preload="metadata" poster="img/cover_kickstarter90.jpg" playsinline>
-          <source src="media/trailer_kickstarter90.mp4" type="video/mp4">
-        </video>
-        <div class="side">
-          <p class="lede">Ninety seconds of the game as it is today, captured in Unreal Engine 5: raptor packs in the jungle, the volcanic arena and its guardian, the portal, then the Ice Age, with its wolf pack, breaking lake ice and giants of the frozen world.</p>
-          <p class="ainote">All gameplay is captured in-engine from the current build. The end card is key art. Music: Chase at Full Speed by ITYELABS.</p>
-        </div>
+      <div class="about">
+        <article><span class="label">Explore</span><h3>Living worlds</h3><p>Each era is its own world with its own creatures and dangers. Herds drink at the river, raptor packs hunt together, the jungle hides vine snares and tar pits, and the Ice Age brings blizzards, thin lake ice and the cold itself.</p></article>
+        <article><span class="label">Survive</span><h3>Fight, hide or run</h3><p>Spears, thrown stones and the atlatl. Crouch in the undergrowth to slip past predators, pick up power-ups that change how you fight, and find amber to take the form of a dinosaur.</p></article>
+        <article><span class="label">Escape</span><h3>Three keys and a guardian</h3><p>Every era hides three key pieces and the guardians at its heart, from Rex Prime in the volcanic arena to the giants of the Ice Age. Beat them and the stone ring wakes, sending you on to the next age.</p></article>
       </div>
-      <div class="trailer small">
-        <video controls preload="metadata" poster="img/cover_seedance30.jpg" playsinline>
-          <source src="media/trailer_seedance30.mp4" type="video/mp4">
-        </video>
-        <div class="side">
-          <span class="label">Cinematic trailer · 0:30</span>
-          <p class="lede">Thirty seconds across the ages: a volcano at dawn, dinosaur herds in the jungle, a raptor ambush, the lava canyon and its boss, then the time tunnel that throws the hero into the Ice Age, where the snow, the wolves and the mammoths are waiting.</p>
-          <p class="ainote">Trailer made with Seedance 2.5 AI video, from Chronoshift concept art and game stills. Not in-game footage.</p>
-          <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">More on YouTube</a>
-        </div>
+    </div>
+  </section>
+
+  <section id="story" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">The story <span class="new">New</span></span>
+        <h2>The Gauntlet</h2>
+        <p class="lede">How an ordinary man ended up sixty-six million years from home. The animated version, Chronoshift: An Adventure in Time, is on the <a href="videos/#story-video">videos page</a>.</p>
       </div>
-      <div class="trailer small">
-        <video controls preload="metadata" poster="img/cover_seedance.jpg" playsinline>
-          <source src="media/trailer_seedance.mp4" type="video/mp4">
-        </video>
-        <div class="side">
-          <span class="label">Teaser · 0:05</span>
-          <p class="lede">The same journey in five seconds flat, from the volcano to the cave bear guarding the next door through time.</p>
-          <p class="ainote">Made with Seedance 2.5 AI video. Not in-game footage.</p>
-        </div>
+      <div class="story">
+        <article class="chapter">
+          <img src="img/story_01.jpg" alt="A hand reaching for a brass gauntlet set in quarry rock, its stone glowing cyan" width="1280" height="720" loading="lazy">
+          <div><span class="no">Chapter 1 &middot; The find</span><h3>It began in a quarry.</h3><p>Buried in the rock, older than the rock itself, was a brass gauntlet. Set in its heart was a stone that still glowed. He took it home: brass and gears, made by no hand he knew, and inside the stone, something pulsed.</p></div>
+        </article>
+        <article class="chapter">
+          <img src="img/story_02.jpg" alt="The hero at his workshop desk wearing the gauntlet, old monitors showing a pulsing signal" width="1280" height="720" loading="lazy">
+          <div><span class="no">Chapter 2 &middot; The call</span><h3>It was a signal.</h3><p>A call for help, repeating, from the far end of time. Then one night, the stone answered.</p></div>
+        </article>
+        <article class="chapter">
+          <img src="img/story_03.jpg" alt="The hero tumbling through a swirling orange and blue time tunnel" width="1280" height="720" loading="lazy">
+          <div><span class="no">Chapter 3 &middot; The fall</span><h3>The gauntlet was a key.</h3><p>Somewhere in history, a door had opened. He came out sixty-six million years in the past, and the gauntlet dressed him for the world he had fallen into.</p></div>
+        </article>
+        <article class="chapter">
+          <img src="img/story_04.jpg" alt="The hero in the jungle holding glowing amber, a ghostly dinosaur shape rising from it" width="1280" height="720" loading="lazy">
+          <div><span class="no">Chapter 4 &middot; The rings</span><h3>A chain of doors through time.</h3><p>The stone rings were built long ago, by a people no one remembers. Each era holds the power the gauntlet needs, and amber keeps the memory of the beasts.</p></div>
+        </article>
+        <article class="chapter">
+          <img src="img/story_05.jpg" alt="A huge reptile guardian coiled around a glowing stone in a lava field, the hero facing it" width="1280" height="720" loading="lazy">
+          <div><span class="no">Chapter 5 &middot; The guardians</span><h3>Three key pieces in every era.</h3><p>Every source of power is guarded by something the timeline has twisted. In every era, three key pieces lie hidden. Find them all, and the next ring wakes.</p></div>
+        </article>
+        <article class="chapter">
+          <img src="img/story_06.jpg" alt="The hero looking out over a chain of stone rings leading through deserts, pyramids and a far-future city" width="1280" height="720" loading="lazy">
+          <div><span class="no">Chapter 6 &middot; The road</span><h3>Every ring takes him further from home.</h3><p>From the age of the dinosaurs, through the Ice Age, to the very end of time, he has to keep moving. Who sent the call? And will he ever find his way back?</p></div>
+        </article>
       </div>
-      <div class="trailer small">
-        <video controls preload="metadata" poster="img/cover_cinematic.jpg" playsinline>
-          <source src="media/trailer_cinematic.mp4" type="video/mp4">
-        </video>
-        <div class="side">
-          <span class="label">Cinematic trailer · 1:42</span>
-          <p class="vo">“They said time only moves one way… They were wrong.”</p>
-          <p class="lede">One experiment. One breakthrough. One portal that should never have opened. The new trailer follows the hero from his lab to the age of dinosaurs: the weapons, the power-ups, the morphs, Rex Prime, and the eras still to come.</p>
-          <p class="ainote">Cinematic trailer made with AI-generated video. Not in-game footage.</p>
-          <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">More on YouTube</a>
-          <p class="credits">Music and narration: ElevenLabs.</p>
-        </div>
+      <p class="ainote" style="margin-top:clamp(24px,4vw,40px)">Story art made with Google Gemini from the game's character and creature designs. Illustration, not in-game footage.</p>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">How we make it</span>
+        <h2>Built in the open, week by week</h2>
+        <p class="lede">Chronoshift is made by ITYELABS, a small independent studio (Veeto Ltd), with the Console and PC Gaming channel following every step. Here is what we are doing and how.</p>
       </div>
-      <div class="trailer small">
-        <video controls preload="metadata" poster="img/cover.jpg" playsinline>
-          <source src="media/trailer.mp4" type="video/mp4">
-        </video>
-        <div class="side">
-          <span class="label">Gameplay trailer · 1:46</span>
-          <p class="vo">“Sixty-six million years ago. A world ruled by giants… and you, the smallest thing alive in it.”</p>
-          <p class="lede">Rendered in-engine with Movie Render Queue from real gameplay of Era 1: the jungle, the swamp, the lava fields and Rex Prime's arena.</p>
-          <p class="credits">Music: Gregor Quendel, Free Cinematic Trailer Music (CC-BY 4.0). Narration: ElevenLabs.</p>
-        </div>
+      <div class="how">
+        <div><h3>Unreal Engine 5</h3><p>The game runs in Unreal Engine 5, with photoreal lighting, scanned rock and plant assets, physics for ice, water and foliage, and creature AI that herds, hunts, drinks and flees.</p></div>
+        <div><h3>Every creature brought to life</h3><p>Twenty-one species so far. Each one is modelled, rigged and given its own animations, sounds and behaviour, then checked in the game against its concept art.</p></div>
+        <div><h3>One era at a time</h3><p>The Dinosaur Era is playable from the jungle to the volcanic arena and the portal. The Ice Age is being built now, and the eras after it follow in order.</p></div>
+        <div><h3>A devlog every week</h3><p>Every week of work goes into the <a href="devlog/">devlog</a> as text and screenshots, and onto YouTube as an episode, so you can watch the game grow from an empty project.</p></div>
       </div>
-      <div class="trailer small" id="song">
-        <iframe src="https://www.youtube-nocookie.com/embed/lXwFMECKmgM" title="Cross the Ages, a song inspired by Chronoshift" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <div class="side">
-          <span class="label">Song · Cross the Ages <span class="new">New</span></span>
-          <p class="lede">A song about the game: a man thrown back in time and stranded sixty-six million years ago. He has to survive every era of history and find the way home.</p>
-          <a class="btn ghost" href="https://youtu.be/lXwFMECKmgM" target="_blank" rel="noopener">Watch on YouTube</a>
-          <a class="btn" href="https://open.spotify.com/track/1yoWHahqtRs3w1Ds64Td62" target="_blank" rel="noopener">Listen on Spotify</a>
-          <a class="btn ghost" href="https://www.amazon.com/gp/product/B0HRSS15CS" target="_blank" rel="noopener">Buy on Amazon</a>
-          <a class="btn ghost" href="https://suno.com/@ityelabs" target="_blank" rel="noopener">More of our music on Suno</a>
-        </div>
-      </div>
+      <p class="ainote" style="margin-top:clamp(24px,4vw,40px)">We use AI tools and say so: some 3D models start as AI generations before rigging and animation, concept and story art is AI-assisted, our music is made with Suno, and creature sounds and narration use ElevenLabs. Gameplay images and in-engine trailers come from the current build.</p>
     </div>
   </section>
 
@@ -578,7 +593,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
                     <li>Creatures react to hits, wolf tails swing as they run, and the hero braces when armour stops a bite</li>
                     <li>Footprints and paw tracks press into the snow and slowly fill back in</li>
                     <li>Deadwood logs splinter when you swing at them, and young spruces bend as you push through</li>
-                    <li>A title screen with the new logo art and our song, <a href="#song">Cross the Ages</a></li>
+                    <li>A title screen with the new logo art and our song, <a href="videos/#song">Cross the Ages</a></li>
                   </ul>
                 </div>
               </article>
