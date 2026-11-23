@@ -262,12 +262,26 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 .back3 h3 { margin: 0 0 10px; }
 .back3 ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
 @media (max-width: 860px) { .back3 { grid-template-columns: 1fr; } }
+
+/* funnel (2026-11-23 late) */
+nav a.cta { background: var(--ember, #dd6b20); color: #120c08 !important; padding: 6px 12px; border-radius: 2px; font-weight: 700; }
+nav a.cta:hover { filter: brightness(1.1); }
+.proof { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--seam); border: 1px solid var(--seam); margin-top: 18px; }
+.proof > div { background: var(--ash); padding: 14px 16px; display: grid; gap: 4px; }
+.proof b { font: 700 1.5rem/1 var(--f-label); color: var(--bone); }
+.proof span { font: 600 0.78rem/1.3 var(--f-label); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted, #b9ab95); }
+.proof a { color: inherit; text-decoration: none; display: grid; gap: 4px; }
+@media (max-width: 760px) { .proof { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.countdown { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 4px; }
+.countdown div { background: var(--basalt); border: 1px solid var(--seam); padding: 10px 14px; min-width: 72px; text-align: center; }
+.countdown b { display: block; font: 700 1.8rem/1 var(--f-label); color: var(--bone); }
+.countdown span { font: 600 0.72rem/1 var(--f-label); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted, #b9ab95); }
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a href="#top" aria-label="Chronoshift home"><img src="img/wordmark.png" alt="Chronoshift" width="200" height="56"></a>
+    <a href="#top" aria-label="Chronoshift home"><img decoding="async" src="img/wordmark.png" alt="Chronoshift" width="200" height="56"></a>
     <nav aria-label="Sections">
       <a href="#why">Why play</a>
       <a href="#showcase" class="opt">Screens</a>
@@ -277,14 +291,14 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
       <a href="#how" class="opt">How we make it</a>
       <a href="devlog/">Devlog</a>
       <a href="videos/">Videos</a>
-      <a href="#back">Back it</a>
+      <a href="#back" class="cta">Back it</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
   <section class="hero" aria-label="Chronoshift">
-    <img class="bg" src="img/key_art_survive.jpg" alt="Chronoshift key art: the explorer with his spear and glowing brass gauntlet between a raptor in a burning jungle and a bear and mammoth on cracking ice, under the Chronoshift gear logo. Survive every era." width="1800" height="1004">
+    <img decoding="async" class="bg" src="img/key_art_survive.webp" alt="Chronoshift key art: the explorer with his spear and glowing brass gauntlet between a raptor in a burning jungle and a bear and mammoth on cracking ice, under the Chronoshift gear logo. Survive every era." width="1800" height="1004">
     <div class="copy">
       <div class="wrap">
         <h1 style="font-size:clamp(1.8rem,4vw,3rem)">Chronoshift: a time-travel survival game</h1>
@@ -292,6 +306,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <p class="tag">Stranded sixty-six million years ago. Survive every era of history and find the way home.</p>
         <div class="chips">
           <span class="chip live">Era 1 playable · Ice Age in development</span>
+          <span class="chip"><span class="ks-days">Kickstarter 9 March 2027</span></span>
           <span class="chip">Unreal Engine 5</span>
           <span class="chip">Third-person action-survival</span>
         </div>
@@ -306,6 +321,12 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
   </section>
 
   <div class="wrap">
+    <div class="proof" aria-label="Following the build">
+      <div><a href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener"><b>8,000+</b><span>subscribers on YouTube</span></a></div>
+      <div><a href="devlog/"><b>10 weeks</b><span>a new devlog every week, no gaps</span></a></div>
+      <div><a href="https://discord.gg/xaHBZNnN3n" target="_blank" rel="noopener"><b>Discord</b><span>join the community, ask us anything</span></a></div>
+      <div><a href="#back"><b class="ks-n">9 Mar 2027</b><span class="ks-l">Kickstarter launch</span></a></div>
+    </div>
     <div class="tally" aria-label="Development so far">
       <div><b>69</b><span>days of development (16 Sep to 23 Nov 2026)</span></div>
       <div><b>434</b><span>builds committed to the project</span></div>
@@ -323,10 +344,10 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <p class="lede">Survival games usually give you one world. Chronoshift gives you all of history, one era at a time, and every jump changes what you fight, how you hide and what you can become.</p>
       </div>
       <div class="why">
-        <article><img src="img/ss_05_portal_arena.jpg" alt="The stone ring portal glowing in the volcanic arena" width="1280" height="720" loading="lazy"><div><span class="label">Thirteen eras</span><h3>Thirteen worlds in one game</h3><p>Not one setting but the whole of history: dinosaur jungles, the frozen Ice Age, the Bronze Age, Ancient Egypt and on to the far future. Every era is its own world, with its own creatures, weapons and ways to die.</p></div></article>
-        <article><img src="img/morph_raptor.jpg" alt="The hero morphed into a raptor, running across a riverbed" width="1280" height="720" loading="lazy"><div><span class="label">Morph</span><h3>Become the beast</h3><p>Find amber and take the form of the creatures you are running from. Hunt as a Raptor, charge as a Triceratops, glide over the valley as a Pteranodon.</p></div></article>
-        <article><img src="img/ss_02_herd_meadow.jpg" alt="A mixed herd of dinosaurs grazing in a sunlit meadow" width="1280" height="720" loading="lazy"><div><span class="label">Living world</span><h3>A world that does not wait for you</h3><p>Herds graze and drink at the river, raptor packs hunt as a team and scatter when they lose their nerve, wolves circle their prey. You are part of the food chain, not the centre of it.</p></div></article>
-        <article><img src="img/ss_04_pachy_guardian.jpg" alt="The Pachycephalosaurus guardian charging in the volcanic arena" width="1280" height="720" loading="lazy"><div><span class="label">Guardians</span><h3>Every era ends with a giant</h3><p>Each era is guarded by something the timeline has twisted: Rex Prime and the Pachycephalosaurus in the volcanic arena, then the woolly rhino, the steppe mammoth, the Elder Megatherium and the giant bird Aiolornis in the Ice Age.</p></div></article>
+        <article><img decoding="async" src="img/ss_05_portal_arena.webp" alt="The stone ring portal glowing in the volcanic arena" width="1280" height="720" loading="lazy"><div><span class="label">Thirteen eras</span><h3>Thirteen worlds in one game</h3><p>Not one setting but the whole of history: dinosaur jungles, the frozen Ice Age, the Bronze Age, Ancient Egypt and on to the far future. Every era is its own world, with its own creatures, weapons and ways to die.</p></div></article>
+        <article><img decoding="async" src="img/morph_raptor.webp" alt="The hero morphed into a raptor, running across a riverbed" width="1280" height="720" loading="lazy"><div><span class="label">Morph</span><h3>Become the beast</h3><p>Find amber and take the form of the creatures you are running from. Hunt as a Raptor, charge as a Triceratops, glide over the valley as a Pteranodon.</p></div></article>
+        <article><img decoding="async" src="img/ss_02_herd_meadow.webp" alt="A mixed herd of dinosaurs grazing in a sunlit meadow" width="1280" height="720" loading="lazy"><div><span class="label">Living world</span><h3>A world that does not wait for you</h3><p>Herds graze and drink at the river, raptor packs hunt as a team and scatter when they lose their nerve, wolves circle their prey. You are part of the food chain, not the centre of it.</p></div></article>
+        <article><img decoding="async" src="img/ss_04_pachy_guardian.webp" alt="The Pachycephalosaurus guardian charging in the volcanic arena" width="1280" height="720" loading="lazy"><div><span class="label">Guardians</span><h3>Every era ends with a giant</h3><p>Each era is guarded by something the timeline has twisted: Rex Prime and the Pachycephalosaurus in the volcanic arena, then the woolly rhino, the steppe mammoth, the Elder Megatherium and the giant bird Aiolornis in the Ice Age.</p></div></article>
       </div>
     </div>
   </section>
@@ -339,15 +360,15 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <p class="lede">Real screenshots from the current build in Unreal Engine 5, no paint-overs. Select any image to see it larger.</p>
       </div>
       <div class="gallery">
-        <button class="wide" data-cap="A Brontosaurus herd in the jungle"><img src="img/ss_01_jungle_brontosaurus.jpg" alt="Brontosaurus herd moving through the jungle" loading="lazy"></button>
-        <button data-cap="Fighting off a raptor pack"><img src="img/ss_03_raptor_fight.jpg" alt="The hero fighting raptors with a spear" loading="lazy"></button>
-        <button data-cap="Herds in the meadow"><img src="img/ss_02_herd_meadow.jpg" alt="Dinosaur herds grazing in a meadow" loading="lazy"></button>
-        <button data-cap="The portal in the volcanic arena"><img src="img/ss_05_portal_arena.jpg" alt="The stone ring portal glowing in the volcanic arena" loading="lazy"></button>
-        <button data-cap="The Pachycephalosaurus guardian"><img src="img/ss_04_pachy_guardian.jpg" alt="The Pachycephalosaurus charging" loading="lazy"></button>
-        <button data-cap="The Ice Age wolf pack"><img src="img/ss_06_wolf_pack.jpg" alt="A wolf pack closing in through the snow" loading="lazy"></button>
-        <button data-cap="Mammoths at the frozen lake"><img src="img/ss_07_mammoth_lake.jpg" alt="Mammoths beside a frozen lake" loading="lazy"></button>
-        <button data-cap="Under the ice"><img src="img/ss_08_under_the_ice.jpg" alt="The view from beneath the lake ice after falling through" loading="lazy"></button>
-        <button data-cap="The frozen lake"><img src="img/ice_lake.jpg" alt="The hero on the frozen lake looking toward a spruce shoreline and snowy mountains" loading="lazy"></button>
+        <button class="wide" data-cap="A Brontosaurus herd in the jungle"><img decoding="async" src="img/ss_01_jungle_brontosaurus.webp" alt="Brontosaurus herd moving through the jungle" loading="lazy"></button>
+        <button data-cap="Fighting off a raptor pack"><img decoding="async" src="img/ss_03_raptor_fight.webp" alt="The hero fighting raptors with a spear" loading="lazy"></button>
+        <button data-cap="Herds in the meadow"><img decoding="async" src="img/ss_02_herd_meadow.webp" alt="Dinosaur herds grazing in a meadow" loading="lazy"></button>
+        <button data-cap="The portal in the volcanic arena"><img decoding="async" src="img/ss_05_portal_arena.webp" alt="The stone ring portal glowing in the volcanic arena" loading="lazy"></button>
+        <button data-cap="The Pachycephalosaurus guardian"><img decoding="async" src="img/ss_04_pachy_guardian.webp" alt="The Pachycephalosaurus charging" loading="lazy"></button>
+        <button data-cap="The Ice Age wolf pack"><img decoding="async" src="img/ss_06_wolf_pack.webp" alt="A wolf pack closing in through the snow" loading="lazy"></button>
+        <button data-cap="Mammoths at the frozen lake"><img decoding="async" src="img/ss_07_mammoth_lake.webp" alt="Mammoths beside a frozen lake" loading="lazy"></button>
+        <button data-cap="Under the ice"><img decoding="async" src="img/ss_08_under_the_ice.webp" alt="The view from beneath the lake ice after falling through" loading="lazy"></button>
+        <button data-cap="The frozen lake"><img decoding="async" src="img/ice_lake.webp" alt="The hero on the frozen lake looking toward a spruce shoreline and snowy mountains" loading="lazy"></button>
       </div>
       <div class="chips" style="margin-top:22px"><a class="btn ghost" href="videos/">Watch the trailers</a><a class="btn ghost" href="#eras">More screenshots in every era</a></div>
     </div>
@@ -377,39 +398,39 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
       </div>
       <div class="pairs">
         <div class="pair">
-          <figure><img src="img/c_ice_wolves.jpg" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
-          <figure class="game"><img src="img/ice_wolves.jpg" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
+          <figure><img decoding="async" src="img/c_ice_wolves.webp" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
+          <figure class="game"><img decoding="async" src="img/ice_wolves.webp" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
           <p class="pair-cap">The wolf pack: from a concept painting of wolves, a sabre-tooth and mammoths to the pack hunting in the game.</p>
         </div>
         <div class="pair">
-          <figure><img src="img/c_ice_sloth.jpg" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
-          <figure class="game"><img src="img/ice_sloth.jpg" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
+          <figure><img decoding="async" src="img/c_ice_sloth.webp" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
+          <figure class="game"><img decoding="async" src="img/ice_sloth.webp" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
           <p class="pair-cap">The giant ground sloth, Megatherium: the chosen concept, then the creature built, rigged and animated in the game.</p>
         </div>
         <div class="pair">
-          <figure><img src="img/c_ice_teratorn.jpg" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
-          <figure class="game"><img src="img/ice_aiolornis.jpg" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
+          <figure><img decoding="async" src="img/c_ice_teratorn.webp" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
+          <figure class="game"><img decoding="async" src="img/ice_aiolornis.webp" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
           <p class="pair-cap">The giant bird: a stormy concept, then Aiolornis, one of the Ice Age bosses.</p>
         </div>
         <div class="pair">
-          <figure><img src="img/c_ice_bear_portal.jpg" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
-          <figure class="game"><img src="img/ice_bear.jpg" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
+          <figure><img decoding="async" src="img/c_ice_bear_portal.webp" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
+          <figure class="game"><img decoding="async" src="img/ice_bear.webp" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
           <p class="pair-cap">The cave bear: concept art, then the short-faced bear in the snow.</p>
         </div>
       </div>
       <h3 class="sub-h">More from the Ice Age</h3>
       <div class="gallery">
-        <button class="wide" data-cap="Ice Age concept: A frozen river canyon under the aurora"><img src="img/c_ice_canyon.jpg" alt="Ice Age concept art: A frozen river canyon under the aurora" loading="lazy"></button>
-        <button data-cap="Ice Age concept: A mammoth frozen in the wall of an ice cave"><img src="img/c_ice_cave_mammoth.jpg" alt="Ice Age concept art: A mammoth frozen in the wall of an ice cave" loading="lazy"></button>
-        <button data-cap="Ice Age concept: The hero turning into a falcon in a burst of cyan light"><img src="img/c_ice_falcon_morph.jpg" alt="Ice Age concept art: The hero turning into a falcon in a burst of cyan light" loading="lazy"></button>
-        <button data-cap="Ice Age concept: Steaming hot springs in the snow"><img src="img/c_ice_springs.jpg" alt="Ice Age concept art: Steaming hot springs in the snow" loading="lazy"></button>
+        <button class="wide" data-cap="Ice Age concept: A frozen river canyon under the aurora"><img decoding="async" src="img/c_ice_canyon.webp" alt="Ice Age concept art: A frozen river canyon under the aurora" loading="lazy"></button>
+        <button data-cap="Ice Age concept: A mammoth frozen in the wall of an ice cave"><img decoding="async" src="img/c_ice_cave_mammoth.webp" alt="Ice Age concept art: A mammoth frozen in the wall of an ice cave" loading="lazy"></button>
+        <button data-cap="Ice Age concept: The hero turning into a falcon in a burst of cyan light"><img decoding="async" src="img/c_ice_falcon_morph.webp" alt="Ice Age concept art: The hero turning into a falcon in a burst of cyan light" loading="lazy"></button>
+        <button data-cap="Ice Age concept: Steaming hot springs in the snow"><img decoding="async" src="img/c_ice_springs.webp" alt="Ice Age concept art: Steaming hot springs in the snow" loading="lazy"></button>
       </div>
       <h3 class="sub-h">Coming later: Ancient Egypt</h3>
       <p class="lede" style="margin:0 0 14px">One of the eras planned after the Bronze Age. A first look at the concept art.</p>
       <div class="gallery" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-        <button data-cap="Ancient Egypt concept: The Sphinx being carved in its quarry pit"><img src="img/c_egypt_sphinx.jpg" alt="Ancient Egypt concept art: The Sphinx being carved in its quarry pit" loading="lazy"></button>
-        <button data-cap="Ancient Egypt concept: A golden solar barque on the Nile"><img src="img/c_egypt_barque.jpg" alt="Ancient Egypt concept art: A golden solar barque on the Nile" loading="lazy"></button>
-        <button data-cap="Ancient Egypt concept: The great temple gate with its avenue of sphinxes"><img src="img/c_egypt_hall.jpg" alt="Ancient Egypt concept art: The great temple gate with its avenue of sphinxes" loading="lazy"></button>
+        <button data-cap="Ancient Egypt concept: The Sphinx being carved in its quarry pit"><img decoding="async" src="img/c_egypt_sphinx.webp" alt="Ancient Egypt concept art: The Sphinx being carved in its quarry pit" loading="lazy"></button>
+        <button data-cap="Ancient Egypt concept: A golden solar barque on the Nile"><img decoding="async" src="img/c_egypt_barque.webp" alt="Ancient Egypt concept art: A golden solar barque on the Nile" loading="lazy"></button>
+        <button data-cap="Ancient Egypt concept: The great temple gate with its avenue of sphinxes"><img decoding="async" src="img/c_egypt_hall.webp" alt="Ancient Egypt concept art: The great temple gate with its avenue of sphinxes" loading="lazy"></button>
       </div>
       <p class="ainote" style="margin-top:clamp(24px,4vw,40px)">Concept art is made with AI image tools. The game itself is built by us in Unreal Engine 5, and the "in game" images are real screenshots.</p>
     </div>
@@ -424,27 +445,27 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
       </div>
       <div class="story">
         <article class="chapter">
-          <img src="img/story_01.jpg" alt="A hand reaching for a brass gauntlet set in quarry rock, its stone glowing cyan" width="1280" height="720" loading="lazy">
+          <img decoding="async" src="img/story_01.webp" alt="A hand reaching for a brass gauntlet set in quarry rock, its stone glowing cyan" width="1280" height="720" loading="lazy">
           <div><span class="no">Chapter 1 &middot; The find</span><h3>It began in a quarry.</h3><p>Buried in the rock, older than the rock itself, was a brass gauntlet. Set in its heart was a stone that still glowed. He took it home: brass and gears, made by no hand he knew, and inside the stone, something pulsed.</p></div>
         </article>
         <article class="chapter">
-          <img src="img/story_02.jpg" alt="The hero at his workshop desk wearing the gauntlet, old monitors showing a pulsing signal" width="1280" height="720" loading="lazy">
+          <img decoding="async" src="img/story_02.webp" alt="The hero at his workshop desk wearing the gauntlet, old monitors showing a pulsing signal" width="1280" height="720" loading="lazy">
           <div><span class="no">Chapter 2 &middot; The call</span><h3>It was a signal.</h3><p>A call for help, repeating, from the far end of time. Then one night, the stone answered.</p></div>
         </article>
         <article class="chapter">
-          <img src="img/story_03.jpg" alt="The hero tumbling through a swirling orange and blue time tunnel" width="1280" height="720" loading="lazy">
+          <img decoding="async" src="img/story_03.webp" alt="The hero tumbling through a swirling orange and blue time tunnel" width="1280" height="720" loading="lazy">
           <div><span class="no">Chapter 3 &middot; The fall</span><h3>The gauntlet was a key.</h3><p>Somewhere in history, a door had opened. He came out sixty-six million years in the past, and the gauntlet dressed him for the world he had fallen into.</p></div>
         </article>
         <article class="chapter">
-          <img src="img/story_04.jpg" alt="The hero in the jungle holding glowing amber, a ghostly dinosaur shape rising from it" width="1280" height="720" loading="lazy">
+          <img decoding="async" src="img/story_04.webp" alt="The hero in the jungle holding glowing amber, a ghostly dinosaur shape rising from it" width="1280" height="720" loading="lazy">
           <div><span class="no">Chapter 4 &middot; The rings</span><h3>A chain of doors through time.</h3><p>The stone rings were built long ago, by a people no one remembers. Each era holds the power the gauntlet needs, and amber keeps the memory of the beasts.</p></div>
         </article>
         <article class="chapter">
-          <img src="img/story_05.jpg" alt="A huge reptile guardian coiled around a glowing stone in a lava field, the hero facing it" width="1280" height="720" loading="lazy">
+          <img decoding="async" src="img/story_05.webp" alt="A huge reptile guardian coiled around a glowing stone in a lava field, the hero facing it" width="1280" height="720" loading="lazy">
           <div><span class="no">Chapter 5 &middot; The guardians</span><h3>Three key pieces in every era.</h3><p>Every source of power is guarded by something the timeline has twisted. In every era, three key pieces lie hidden. Find them all, and the next ring wakes.</p></div>
         </article>
         <article class="chapter">
-          <img src="img/story_06.jpg" alt="The hero looking out over a chain of stone rings leading through deserts, pyramids and a far-future city" width="1280" height="720" loading="lazy">
+          <img decoding="async" src="img/story_06.webp" alt="The hero looking out over a chain of stone rings leading through deserts, pyramids and a far-future city" width="1280" height="720" loading="lazy">
           <div><span class="no">Chapter 6 &middot; The road</span><h3>Every ring takes him further from home.</h3><p>From the age of the dinosaurs, through the Ice Age, to the very end of time, he has to keep moving. Who sent the call? And will he ever find his way back?</p></div>
         </article>
       </div>
@@ -478,11 +499,11 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <p class="ainote" style="margin:0">Power-up art: concept illustrations made with AI image tools. In the game, each power changes the hero's look in the same way.</p>
       </div>
       <div class="powers">
-        <article class="power"><img src="img/power_fury.jpg" width="1024" height="1280" alt="The hero burning with an orange fury glow, spear raised" loading="lazy"><div><span class="key" style="--c:#ff8a3d">Fury</span><h3>Blood on fire</h3><p>A molten glow over body and weapon, and every blow lands harder.</p></div></article>
-        <article class="power"><img src="img/power_adrenaline.jpg" width="1024" height="1280" alt="The hero sprinting wrapped in blue lightning" loading="lazy"><div><span class="key" style="--c:#86d6ff">Adrenaline</span><h3>Faster than lightning</h3><p>Electric skin, sparks at every footfall and a burst of speed.</p></div></article>
-        <article class="power"><img src="img/power_armour.jpg" width="1024" height="1280" alt="The hero turned to polished bronze" loading="lazy"><div><span class="key" style="--c:#e0b35c">Armour</span><h3>Living bronze</h3><p>Turns the hero to a bronze statue that shrugs off bites and claws.</p></div></article>
-        <article class="power"><img src="img/power_shadow.jpg" width="1024" height="1280" alt="The hero translucent and shimmering beside raptors that cannot see him" loading="lazy"><div><span class="key" style="--c:#9fd7d0">Shadow</span><h3>Hide from every eye</h3><p>A glassy shimmer the predators look straight through.</p></div></article>
-        <article class="power"><img src="img/power_regen.jpg" width="1024" height="1280" alt="The hero glowing green as his wounds heal" loading="lazy"><div><span class="key" style="--c:#6fe08a">Regeneration</span><h3>Heal what should kill</h3><p>A green glow that restores health over time, even mid-fight.</p></div></article>
+        <article class="power"><img decoding="async" src="img/power_fury.webp" width="1024" height="1280" alt="The hero burning with an orange fury glow, spear raised" loading="lazy"><div><span class="key" style="--c:#ff8a3d">Fury</span><h3>Blood on fire</h3><p>A molten glow over body and weapon, and every blow lands harder.</p></div></article>
+        <article class="power"><img decoding="async" src="img/power_adrenaline.webp" width="1024" height="1280" alt="The hero sprinting wrapped in blue lightning" loading="lazy"><div><span class="key" style="--c:#86d6ff">Adrenaline</span><h3>Faster than lightning</h3><p>Electric skin, sparks at every footfall and a burst of speed.</p></div></article>
+        <article class="power"><img decoding="async" src="img/power_armour.webp" width="1024" height="1280" alt="The hero turned to polished bronze" loading="lazy"><div><span class="key" style="--c:#e0b35c">Armour</span><h3>Living bronze</h3><p>Turns the hero to a bronze statue that shrugs off bites and claws.</p></div></article>
+        <article class="power"><img decoding="async" src="img/power_shadow.webp" width="1024" height="1280" alt="The hero translucent and shimmering beside raptors that cannot see him" loading="lazy"><div><span class="key" style="--c:#9fd7d0">Shadow</span><h3>Hide from every eye</h3><p>A glassy shimmer the predators look straight through.</p></div></article>
+        <article class="power"><img decoding="async" src="img/power_regen.webp" width="1024" height="1280" alt="The hero glowing green as his wounds heal" loading="lazy"><div><span class="key" style="--c:#6fe08a">Regeneration</span><h3>Heal what should kill</h3><p>A green glow that restores health over time, even mid-fight.</p></div></article>
       </div>
     </div>
   </section>
@@ -495,9 +516,9 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <p class="lede">Amber pickups let the hero take the form of a dinosaur, each with its own moves.</p>
       </div>
       <div class="morph">
-        <figure><img src="img/morph_trike.jpg" alt="The hero morphed into a triceratops" loading="lazy"><figcaption><b>Triceratops</b><span>Charge and stomp</span></figcaption></figure>
-        <figure><img src="img/morph_raptor.jpg" alt="The hero morphed into a raptor, running across the riverbed" loading="lazy"><figcaption><b>Raptor</b><span>Pounce and slash</span></figcaption></figure>
-        <figure><img src="img/morph_ptera.jpg" alt="The hero morphed into a pteranodon, gliding over the hills" loading="lazy"><figcaption><b>Pteranodon</b><span>Take to the skies</span></figcaption></figure>
+        <figure><img decoding="async" src="img/morph_trike.webp" alt="The hero morphed into a triceratops" loading="lazy"><figcaption><b>Triceratops</b><span>Charge and stomp</span></figcaption></figure>
+        <figure><img decoding="async" src="img/morph_raptor.webp" alt="The hero morphed into a raptor, running across the riverbed" loading="lazy"><figcaption><b>Raptor</b><span>Pounce and slash</span></figcaption></figure>
+        <figure><img decoding="async" src="img/morph_ptera.webp" alt="The hero morphed into a pteranodon, gliding over the hills" loading="lazy"><figcaption><b>Pteranodon</b><span>Take to the skies</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -584,29 +605,29 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
             </div>
             <h4 class="era-sub">Screenshots</h4>
             <div class="morph">
-              <figure><img src="img/ice_arrive.jpg" alt="The hero in his Ice Age furs arriving on a snowy forest trail" loading="lazy"><figcaption><b>Arrival</b><span>The taiga, after the portal</span></figcaption></figure>
-              <figure><img src="img/ice_gust.jpg" alt="Wind blowing powder snow off spruce trees beside the hero" loading="lazy"><figcaption><b>Living snow</b><span>Wind, falling powder, boot prints</span></figcaption></figure>
-              <figure><img src="img/ice_wolves.jpg" alt="A dire wolf pack closing in on the hero on the snowy trail" loading="lazy"><figcaption><b>The dire wolf pack</b><span>The Ice Age's first hunters</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_arrive.webp" alt="The hero in his Ice Age furs arriving on a snowy forest trail" loading="lazy"><figcaption><b>Arrival</b><span>The taiga, after the portal</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_gust.webp" alt="Wind blowing powder snow off spruce trees beside the hero" loading="lazy"><figcaption><b>Living snow</b><span>Wind, falling powder, boot prints</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_wolves.webp" alt="A dire wolf pack closing in on the hero on the snowy trail" loading="lazy"><figcaption><b>The dire wolf pack</b><span>The Ice Age's first hunters</span></figcaption></figure>
             </div>
             <div class="morph">
-              <figure><img src="img/ice_campfire.jpg" alt="The hero beside a stone-ringed campfire in the snowy spruce forest, sunbeams through the trees" loading="lazy"><figcaption><b>Keep warm</b><span>A warmth meter drains in the cold; campfires refill it</span></figcaption></figure>
-              <figure><img src="img/ice_thinice.jpg" alt="The hero on a frozen lake beside a patch of thin ice webbed with cracks" loading="lazy"><figcaption><b>Thin ice</b><span>Slide on the lake, and never stand still on the cracks</span></figcaption></figure>
-              <figure><img src="img/ice_falcon.jpg" alt="A peregrine falcon flying over the misty taiga" loading="lazy"><figcaption><b>Become the falcon</b><span>Climb to the eyrie and take to the air</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_campfire.webp" alt="The hero beside a stone-ringed campfire in the snowy spruce forest, sunbeams through the trees" loading="lazy"><figcaption><b>Keep warm</b><span>A warmth meter drains in the cold; campfires refill it</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_thinice.webp" alt="The hero on a frozen lake beside a patch of thin ice webbed with cracks" loading="lazy"><figcaption><b>Thin ice</b><span>Slide on the lake, and never stand still on the cracks</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_falcon.webp" alt="A peregrine falcon flying over the misty taiga" loading="lazy"><figcaption><b>Become the falcon</b><span>Climb to the eyrie and take to the air</span></figcaption></figure>
             </div>
             <div class="morph">
-              <figure><img src="img/ice_sloth.jpg" alt="A giant ground sloth with shaggy brown fur walking on all fours across the snow, spruces behind" loading="lazy"><figcaption><b>Giant ground sloth</b><span>Megatherium: a calm grazer, until you push it</span></figcaption></figure>
-              <figure><img src="img/ice_sloth_rear.jpg" alt="The giant ground sloth rearing up on its hind legs beside the hero, towering over him" loading="lazy"><figcaption><b>Fair warning</b><span>It rears up and shows its claws before it charges</span></figcaption></figure>
-              <figure><img src="img/ice_bear.jpg" alt="A huge short-faced bear with snow-crusted fur towering over the hero on the snowfield" loading="lazy"><figcaption><b>Short-faced bear</b><span>Arctodus: far bigger than any bear alive today</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_sloth.webp" alt="A giant ground sloth with shaggy brown fur walking on all fours across the snow, spruces behind" loading="lazy"><figcaption><b>Giant ground sloth</b><span>Megatherium: a calm grazer, until you push it</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_sloth_rear.webp" alt="The giant ground sloth rearing up on its hind legs beside the hero, towering over him" loading="lazy"><figcaption><b>Fair warning</b><span>It rears up and shows its claws before it charges</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_bear.webp" alt="A huge short-faced bear with snow-crusted fur towering over the hero on the snowfield" loading="lazy"><figcaption><b>Short-faced bear</b><span>Arctodus: far bigger than any bear alive today</span></figcaption></figure>
             </div>
             <div class="morph">
-              <figure><img src="img/ice_rhino.jpg" alt="A woolly rhinoceros with a huge curved horn on the frozen lake" loading="lazy"><figcaption><b>Woolly rhino</b><span>Boss: it charges on sight</span></figcaption></figure>
-              <figure><img src="img/ice_mammoth.jpg" alt="A steppe mammoth bull with long curved tusks walking across the snow" loading="lazy"><figcaption><b>Steppe mammoth bull</b><span>Boss: the herd's old giant</span></figcaption></figure>
-              <figure><img src="img/ice_elder.jpg" alt="The Elder Megatherium, a frosted giant ground sloth, beside the hero in the snow" loading="lazy"><figcaption><b>The Elder Megatherium</b><span>Boss: the oldest and largest sloth</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_rhino.webp" alt="A woolly rhinoceros with a huge curved horn on the frozen lake" loading="lazy"><figcaption><b>Woolly rhino</b><span>Boss: it charges on sight</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_mammoth.webp" alt="A steppe mammoth bull with long curved tusks walking across the snow" loading="lazy"><figcaption><b>Steppe mammoth bull</b><span>Boss: the herd's old giant</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_elder.webp" alt="The Elder Megatherium, a frosted giant ground sloth, beside the hero in the snow" loading="lazy"><figcaption><b>The Elder Megatherium</b><span>Boss: the oldest and largest sloth</span></figcaption></figure>
             </div>
             <div class="morph">
-              <figure><img src="img/ice_aiolornis.jpg" alt="Aiolornis, a giant prehistoric bird, landing on the snow with its wings spread" loading="lazy"><figcaption><b>Aiolornis</b><span>Boss: the largest flying bird ever known</span></figcaption></figure>
-              <figure><img src="img/ice_hole.jpg" alt="The hero standing beside a hole in the lake ice, broken slabs floating in dark water" loading="lazy"><figcaption><b>Through the ice</b><span>The lake shatters into floating slabs</span></figcaption></figure>
-              <figure><img src="img/ice_wet.jpg" alt="The hero soaked after climbing out of the frozen lake" loading="lazy"><figcaption><b>Climb back out</b><span>Soaked, and colder than ever</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_aiolornis.webp" alt="Aiolornis, a giant prehistoric bird, landing on the snow with its wings spread" loading="lazy"><figcaption><b>Aiolornis</b><span>Boss: the largest flying bird ever known</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_hole.webp" alt="The hero standing beside a hole in the lake ice, broken slabs floating in dark water" loading="lazy"><figcaption><b>Through the ice</b><span>The lake shatters into floating slabs</span></figcaption></figure>
+              <figure><img decoding="async" src="img/ice_wet.webp" alt="The hero soaked after climbing out of the frozen lake" loading="lazy"><figcaption><b>Climb back out</b><span>Soaked, and colder than ever</span></figcaption></figure>
             </div>
             <div class="art-head">
               <span class="label">Artwork</span>
@@ -614,14 +635,14 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
               <p>Every Ice Age area starts as concept art and a hand-drawn map, and the level is built to match them, side by side. These are the taiga trail paintings the forest was built from, clear and in a blizzard, and the map of the Ice Age as it stands today.</p>
             </div>
             <div class="artrow">
-              <figure><img src="img/ice_concept_clear.jpg" alt="Concept art: the hero on a trampled snow trail between tall snowy spruces, sunbeams falling through the forest" loading="lazy"><figcaption><b>The taiga trail</b>Concept art, clear morning</figcaption></figure>
-              <figure><img src="img/ice_concept_blizzard.jpg" alt="Concept art: the same snowy forest trail in a driving blizzard, the hero hunched against the wind" loading="lazy"><figcaption><b>Blizzard</b>Concept art, the storm rolling in</figcaption></figure>
+              <figure><img decoding="async" src="img/ice_concept_clear.webp" alt="Concept art: the hero on a trampled snow trail between tall snowy spruces, sunbeams falling through the forest" loading="lazy"><figcaption><b>The taiga trail</b>Concept art, clear morning</figcaption></figure>
+              <figure><img decoding="async" src="img/ice_concept_blizzard.webp" alt="Concept art: the same snowy forest trail in a driving blizzard, the hero hunched against the wind" loading="lazy"><figcaption><b>Blizzard</b>Concept art, the storm rolling in</figcaption></figure>
             </div>
-            <figure class="mapfig"><img src="img/ice_map.jpg" alt="Map of the Ice Age level: arrival forest, hunters' camp, frozen lake, mammoth steppe and village site in the west; sabre-tooth rocks, hot springs, blizzard pass, ice cave cliff, Neanderthal shelter, glacier, Denisovan camp and the boss bowl in the east" loading="lazy"><figcaption><b>The Ice Age map</b>1.1 km by 250 m, west half on top. Thirteen landmarks, from the arrival forest to the boss bowl.</figcaption></figure>
+            <figure class="mapfig"><img decoding="async" src="img/ice_map.webp" alt="Map of the Ice Age level: arrival forest, hunters' camp, frozen lake, mammoth steppe and village site in the west; sabre-tooth rocks, hot springs, blizzard pass, ice cave cliff, Neanderthal shelter, glacier, Denisovan camp and the boss bowl in the east" loading="lazy"><figcaption><b>The Ice Age map</b>1.1 km by 250 m, west half on top. Thirteen landmarks, from the arrival forest to the boss bowl.</figcaption></figure>
     
             <h4 class="era-sub">The frozen lake</h4>
             <div class="gallery">
-              <button class="wide" data-cap="The frozen lake, with the far shore and mountains"><img src="img/ice_lake.jpg" alt="The hero on the frozen lake looking toward a spruce shoreline and snowy mountains" loading="lazy"></button>
+              <button class="wide" data-cap="The frozen lake, with the far shore and mountains"><img decoding="async" src="img/ice_lake.webp" alt="The hero on the frozen lake looking toward a spruce shoreline and snowy mountains" loading="lazy"></button>
             </div>
             <h4 class="era-sub">Development log</h4>
             <div class="log">
@@ -740,31 +761,31 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
             </div>
             <h4 class="era-sub">Screenshots</h4>
             <div class="gallery">
-              <button class="wide" data-cap="The new waterfall in the jungle gorge (work in progress)"><img src="img/g_waterfall.jpg" alt="Several white streams of water pouring down a dark rock wall in the jungle gorge, with sunbeams through the trees" loading="lazy"></button>
-              <button class="wide" data-cap="The waterfall from the gorge floor (work in progress)"><img src="img/g_waterfall_side.jpg" alt="The waterfall's streams falling past mossy rock, framed by ferns" loading="lazy"></button>
-              <button class="wide" data-cap="The jungle edge, with the volcano on the skyline"><img src="img/g_jungle_volcano.jpg" alt="The hero at the jungle edge looking toward a smoking volcano" loading="lazy"></button>
-              <button class="wide" data-cap="The Raptor pack on the jungle trail"><img src="img/g_raptor_pack.jpg" alt="Two raptors on a sunlit jungle trail, one looking straight at the camera" loading="lazy"></button>
-              <button data-cap="A herd at the water: Triceratops, Stegosaurus and a Brontosaurus"><img src="img/g_herd_drink.jpg" alt="Triceratops, Stegosaurus and a long-necked Brontosaurus in a meadow" loading="lazy"></button>
-              <button data-cap="Wading the jungle stream"><img src="img/g_stream.jpg" alt="The hero wading waist-deep along a jungle stream between rocks" loading="lazy"></button>
-              <button data-cap="The rebuilt jungle gorge"><img src="img/g_gorge.jpg" alt="A sunlit gorge floor with a shallow stream, ferns and mossy rocks" loading="lazy"></button>
-              <button data-cap="New jungle plants"><img src="img/g_plants.jpg" alt="Broad-leaved jungle plants and ferns on the forest floor" loading="lazy"></button>
-              <button data-cap="Jungle trail"><img src="img/g_jungle_trail.jpg" alt="A shaded jungle trail under twisted trees" loading="lazy"></button>
-              <button data-cap="The cliff-and-river valley"><img src="img/g_valley.jpg" alt="A river winding under a tall cliff, with long-necked dinosaurs grazing" loading="lazy"></button>
-              <button data-cap="The lava bridge"><img src="img/g_lava_bridge.jpg" alt="The hero facing an erupting volcano across a lava canyon" loading="lazy"></button>
-              <button data-cap="Inside the volcano cave"><img src="img/g_cave.jpg" alt="The hero in a cave lit by a lava river" loading="lazy"></button>
-              <button class="wide" data-cap="The volcanic arena and the portal"><img src="img/g_arena.jpg" alt="The hero on the cracked slab floor of the volcanic arena, with the portal ring behind" loading="lazy"></button>
-              <button class="wide" data-cap="Lava plains under the rock arch"><img src="img/lava.jpg" alt="Lava plains seen through a rock arch" loading="lazy"></button>
-              <button data-cap="A brachiosaur in the morning fog"><img src="img/shot_brachio.jpg" alt="The hero facing a brachiosaur in fog" loading="lazy"></button>
-              <button data-cap="The grazing meadow"><img src="img/herd.jpg" alt="Long-necked dinosaurs among cycads" loading="lazy"></button>
-              <button data-cap="Jungle trail"><img src="img/shot_jungle.jpg" alt="The hero on a jungle trail beside a hadrosaur" loading="lazy"></button>
-              <button data-cap="Crouched in the clearing"><img src="img/stealth.jpg" alt="The hero crouching to stay hidden" loading="lazy"></button>
-              <button data-cap="Rex Prime's arena"><img src="img/shot_rex_arena.jpg" alt="Rex Prime looming over the hero beside the portal" loading="lazy"></button>
-              <button data-cap="Pteranodons over the dead forest"><img src="img/shot_ptero.jpg" alt="A pteranodon swooping at the hero" loading="lazy"></button>
-              <button class="wide" data-cap="The portal wakes"><img src="img/portal.jpg" alt="The stone portal ring glowing in the dark" loading="lazy"></button>
-              <button data-cap="Fern floor"><img src="img/ferns.jpg" alt="Sunlit ferns under the canopy" loading="lazy"></button>
-              <button data-cap="The volcano"><img src="img/shot_volcano.jpg" alt="The hero facing a smoking volcano" loading="lazy"></button>
-              <button data-cap="Rex Prime in the volcano"><img src="img/rex.jpg" alt="Rex Prime stalking the hero in the red volcano light" loading="lazy"></button>
-              <button data-cap="The portal chamber"><img src="img/shot_portal.jpg" alt="The hero in front of the portal chamber" loading="lazy"></button>
+              <button class="wide" data-cap="The new waterfall in the jungle gorge (work in progress)"><img decoding="async" src="img/g_waterfall.webp" alt="Several white streams of water pouring down a dark rock wall in the jungle gorge, with sunbeams through the trees" loading="lazy"></button>
+              <button class="wide" data-cap="The waterfall from the gorge floor (work in progress)"><img decoding="async" src="img/g_waterfall_side.webp" alt="The waterfall's streams falling past mossy rock, framed by ferns" loading="lazy"></button>
+              <button class="wide" data-cap="The jungle edge, with the volcano on the skyline"><img decoding="async" src="img/g_jungle_volcano.webp" alt="The hero at the jungle edge looking toward a smoking volcano" loading="lazy"></button>
+              <button class="wide" data-cap="The Raptor pack on the jungle trail"><img decoding="async" src="img/g_raptor_pack.webp" alt="Two raptors on a sunlit jungle trail, one looking straight at the camera" loading="lazy"></button>
+              <button data-cap="A herd at the water: Triceratops, Stegosaurus and a Brontosaurus"><img decoding="async" src="img/g_herd_drink.webp" alt="Triceratops, Stegosaurus and a long-necked Brontosaurus in a meadow" loading="lazy"></button>
+              <button data-cap="Wading the jungle stream"><img decoding="async" src="img/g_stream.webp" alt="The hero wading waist-deep along a jungle stream between rocks" loading="lazy"></button>
+              <button data-cap="The rebuilt jungle gorge"><img decoding="async" src="img/g_gorge.webp" alt="A sunlit gorge floor with a shallow stream, ferns and mossy rocks" loading="lazy"></button>
+              <button data-cap="New jungle plants"><img decoding="async" src="img/g_plants.webp" alt="Broad-leaved jungle plants and ferns on the forest floor" loading="lazy"></button>
+              <button data-cap="Jungle trail"><img decoding="async" src="img/g_jungle_trail.webp" alt="A shaded jungle trail under twisted trees" loading="lazy"></button>
+              <button data-cap="The cliff-and-river valley"><img decoding="async" src="img/g_valley.webp" alt="A river winding under a tall cliff, with long-necked dinosaurs grazing" loading="lazy"></button>
+              <button data-cap="The lava bridge"><img decoding="async" src="img/g_lava_bridge.webp" alt="The hero facing an erupting volcano across a lava canyon" loading="lazy"></button>
+              <button data-cap="Inside the volcano cave"><img decoding="async" src="img/g_cave.webp" alt="The hero in a cave lit by a lava river" loading="lazy"></button>
+              <button class="wide" data-cap="The volcanic arena and the portal"><img decoding="async" src="img/g_arena.webp" alt="The hero on the cracked slab floor of the volcanic arena, with the portal ring behind" loading="lazy"></button>
+              <button class="wide" data-cap="Lava plains under the rock arch"><img decoding="async" src="img/lava.webp" alt="Lava plains seen through a rock arch" loading="lazy"></button>
+              <button data-cap="A brachiosaur in the morning fog"><img decoding="async" src="img/shot_brachio.webp" alt="The hero facing a brachiosaur in fog" loading="lazy"></button>
+              <button data-cap="The grazing meadow"><img decoding="async" src="img/herd.webp" alt="Long-necked dinosaurs among cycads" loading="lazy"></button>
+              <button data-cap="Jungle trail"><img decoding="async" src="img/shot_jungle.webp" alt="The hero on a jungle trail beside a hadrosaur" loading="lazy"></button>
+              <button data-cap="Crouched in the clearing"><img decoding="async" src="img/stealth.webp" alt="The hero crouching to stay hidden" loading="lazy"></button>
+              <button data-cap="Rex Prime's arena"><img decoding="async" src="img/shot_rex_arena.webp" alt="Rex Prime looming over the hero beside the portal" loading="lazy"></button>
+              <button data-cap="Pteranodons over the dead forest"><img decoding="async" src="img/shot_ptero.webp" alt="A pteranodon swooping at the hero" loading="lazy"></button>
+              <button class="wide" data-cap="The portal wakes"><img decoding="async" src="img/portal.webp" alt="The stone portal ring glowing in the dark" loading="lazy"></button>
+              <button data-cap="Fern floor"><img decoding="async" src="img/ferns.webp" alt="Sunlit ferns under the canopy" loading="lazy"></button>
+              <button data-cap="The volcano"><img decoding="async" src="img/shot_volcano.webp" alt="The hero facing a smoking volcano" loading="lazy"></button>
+              <button data-cap="Rex Prime in the volcano"><img decoding="async" src="img/rex.webp" alt="Rex Prime stalking the hero in the red volcano light" loading="lazy"></button>
+              <button data-cap="The portal chamber"><img decoding="async" src="img/shot_portal.webp" alt="The hero in front of the portal chamber" loading="lazy"></button>
             </div>
             <h4 class="era-sub">Development log</h4>
             <div class="log">
@@ -948,6 +969,10 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <h2>Help us build every era</h2>
         <p class="lede">Chronoshift is made in the open by a small independent studio. The Dinosaur Era is playable, the Ice Age is well under way, and the Kickstarter is how we fund the eras after it. Here is where things stand.</p>
       </div>
+      <div class="countdown" aria-label="Time until the Kickstarter launch" data-launch="2027-03-09T00:00:00Z">
+        <div><b class="cd-d">--</b><span>days</span></div><div><b class="cd-h">--</b><span>hours</span></div><div><b class="cd-m">--</b><span>minutes</span></div>
+      </div>
+      <p class="lede" style="margin:4px 0 18px">until the Kickstarter campaign opens on Tuesday 9 March 2027.</p>
       <div class="back3">
         <div><span class="label">Built so far</span><h3>Two eras under way</h3><ul>
           <li>The Dinosaur Era, from the jungle to the volcanic arena, its two guardians and the portal</li>
@@ -978,7 +1003,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 
   <section id="devlog" class="band">
     <div class="wrap trailer small">
-      <a href="devlog/"><img src="devlog/img/ep09_s04_0.jpg" alt="Breaking lake ice in the Chronoshift Ice Age" width="1200" height="675" loading="lazy" style="width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--seam)"></a>
+      <a href="devlog/"><img decoding="async" src="devlog/img/ep09_s04_0.jpg" alt="Breaking lake ice in the Chronoshift Ice Age" width="1200" height="675" loading="lazy" style="width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--seam)"></a>
       <div class="side">
         <span class="label">Devlog<span class="new">NEW</span></span>
         <h2>Read every week of the build</h2>
@@ -990,7 +1015,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 
   <section id="follow">
     <div class="wrap follow">
-      <div class="plate"><img src="img/consolepcgaming.png" alt="Console &amp; PC Gaming" width="820" height="233"></div>
+      <div class="plate"><img decoding="async" loading="lazy" src="img/consolepcgaming.png" alt="Console &amp; PC Gaming" width="820" height="233"></div>
       <div class="sec-head" style="margin:0">
         <span class="label">Follow the build</span>
         <h2>Console and PC Gaming YouTube channel</h2>
@@ -1002,6 +1027,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
           <a href="https://www.tiktok.com/@consolepcgaming" target="_blank" rel="noopener"><b>TikTok</b><span>@consolepcgaming</span></a>
           <a href="https://open.spotify.com/artist/0E3Ffxx506RhNI9yR36Z2N" target="_blank" rel="noopener"><b>Music</b><span>ITYELABS on Spotify</span></a>
           <a href="https://suno.com/@ityelabs" target="_blank" rel="noopener"><b>Music</b><span>ITYELABS on Suno</span></a>
+          <a href="presskit/"><b>Press kit</b><span>Logo, fact sheet, screenshots, GIFs</span></a>
         </div>
       </div>
     </div>
@@ -1010,7 +1036,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 
 <footer>
   <div class="wrap">
-    <img class="studio" src="img/ityelabs.jpg" alt="ITYELABS" width="720" height="720">
+    <img decoding="async" loading="lazy" class="studio" src="img/ityelabs.webp" alt="ITYELABS" width="720" height="720">
     <div class="who">
       <strong>A game by ITYELABS</strong>
       <span>Chronoshift is in development. Gameplay images are from the current build and may change. The cinematic trailer uses AI-generated video and is not in-game footage.</span>
@@ -1020,7 +1046,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 </footer>
 
 <dialog id="lb" aria-label="Image viewer">
-  <img id="lb-img" src="" alt="">
+  <img decoding="async" loading="lazy" id="lb-img" src="" alt="">
   <div class="bar"><span id="lb-cap"></span><button id="lb-close" type="button">Close</button></div>
 </dialog>
 
@@ -1050,5 +1076,22 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 })();
 </script>
 
+
+<script>
+(function () {
+  var t = Date.parse("2027-03-09T00:00:00Z");
+  function tick() {
+    var ms = t - Date.now(); if (ms < 0) ms = 0;
+    var d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
+    document.querySelectorAll(".cd-d").forEach(function (e) { e.textContent = d; });
+    document.querySelectorAll(".cd-h").forEach(function (e) { e.textContent = h; });
+    document.querySelectorAll(".cd-m").forEach(function (e) { e.textContent = m; });
+    document.querySelectorAll(".ks-n").forEach(function (e) { e.textContent = d + " days"; });
+    document.querySelectorAll(".ks-l").forEach(function (e) { e.textContent = "to the Kickstarter, 9 Mar 2027"; });
+    document.querySelectorAll(".ks-days").forEach(function (e) { e.textContent = "Kickstarter in " + d + " days"; });
+  }
+  tick(); setInterval(tick, 30000);
+})();
+</script>
 </body>
 </html>
