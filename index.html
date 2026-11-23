@@ -240,6 +240,28 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 .how h3 { margin: 0 0 6px; }
 .how p { margin: 0; }
 @media (max-width: 760px) { .how { grid-template-columns: 1fr; } }
+
+/* pitch (2026-11-23 pm) */
+.why { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.why article { background: var(--basalt); border: 1px solid var(--seam); display: grid; grid-template-rows: auto 1fr; overflow: hidden; }
+.why img { width: 100%; height: auto; aspect-ratio: 16 / 8; object-fit: cover; display: block; }
+.why article div { padding: 18px 20px 20px; display: grid; gap: 8px; align-content: start; }
+.why h3, .why p { margin: 0; }
+@media (max-width: 760px) { .why { grid-template-columns: 1fr; } }
+.pairs { display: grid; gap: 22px; }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.pair figure { margin: 0; position: relative; border: 1px solid var(--seam); overflow: hidden; }
+.pair img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.pair figcaption { position: absolute; left: 0; top: 0; background: rgba(10,8,6,0.78); padding: 6px 10px; font: 700 0.78rem/1 var(--f-label); letter-spacing: 0.12em; text-transform: uppercase; }
+.pair figure.game figcaption { color: var(--portal); }
+.pair-cap { grid-column: 1 / -1; margin: 2px 0 0; color: var(--muted, #b9ab95); }
+@media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+.sub-h { margin: clamp(36px, 6vw, 60px) 0 14px; }
+.back3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.back3 > div { background: var(--basalt); border: 1px solid var(--seam); padding: 20px; }
+.back3 h3 { margin: 0 0 10px; }
+.back3 ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+@media (max-width: 860px) { .back3 { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -247,15 +269,15 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
   <div class="wrap">
     <a href="#top" aria-label="Chronoshift home"><img src="img/wordmark.png" alt="Chronoshift" width="200" height="56"></a>
     <nav aria-label="Sections">
-      <a href="#about">The game</a>
+      <a href="#why">Why play</a>
+      <a href="#showcase" class="opt">Screens</a>
       <a href="#story">Story</a>
-      <a href="#powers" class="opt">Powers</a>
+      <a href="#concept" class="opt">Concept art</a>
       <a href="#eras">Eras</a>
       <a href="#how" class="opt">How we make it</a>
       <a href="devlog/">Devlog</a>
       <a href="videos/">Videos</a>
-      <a href="#next">Next</a>
-      <a href="#follow">Follow</a>
+      <a href="#back">Back it</a>
     </nav>
   </div>
 </header>
@@ -266,7 +288,7 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
     <div class="copy">
       <div class="wrap">
         <h1 style="font-size:clamp(1.8rem,4vw,3rem)">Chronoshift: a time-travel survival game</h1>
-        <p class="lede">A third-person dinosaur survival adventure by ITYELABS (Veeto Ltd), built in Unreal Engine 5. Journey from the Dinosaur Era into the Ice Age and follow the game as new eras take shape.</p>
+        <p class="lede">Thrown sixty-six million years into the past with nothing but a strange brass gauntlet, you have to survive every era of history to find the way home. A third-person action-survival game in Unreal Engine 5 by ITYELABS (Veeto Ltd).</p>
         <p class="tag">Stranded sixty-six million years ago. Survive every era of history and find the way home.</p>
         <div class="chips">
           <span class="chip live">Era 1 playable · Ice Age in development</span>
@@ -274,9 +296,9 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
           <span class="chip">Third-person action-survival</span>
         </div>
         <div class="chips">
-          <a class="btn" href="#about">Discover the game</a>
-          <a class="btn ghost" href="#story">Read the story</a>
-          <a class="btn ghost" href="videos/">Watch the videos</a>
+          <a class="btn" href="#why">Why Chronoshift?</a>
+          <a class="btn ghost" href="#showcase">See it in action</a>
+          <a class="btn ghost" href="https://discord.gg/xaHBZNnN3n" target="_blank" rel="noopener">Join the Discord</a>
           <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">YouTube channel</a>
         </div>
       </div>
@@ -285,13 +307,51 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
 
   <div class="wrap">
     <div class="tally" aria-label="Development so far">
-      <div><b>53</b><span>days of development (16 Sep to 7 Nov 2026)</span></div>
-      <div><b>393</b><span>builds committed to the project</span></div>
+      <div><b>69</b><span>days of development (16 Sep to 23 Nov 2026)</span></div>
+      <div><b>434</b><span>builds committed to the project</span></div>
       <div><b>21</b><span>creature species, from Compsognathus to the dire wolf</span></div>
       <div><b>5 + 3</b><span>power-ups and creature morphs</span></div>
       <div><b>2 / 13</b><span>eras under way: the Dinosaur Era and the Ice Age</span></div>
     </div>
   </div>
+
+  <section id="why" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Why Chronoshift</span>
+        <h2>One explorer. Every age of the Earth.</h2>
+        <p class="lede">Survival games usually give you one world. Chronoshift gives you all of history, one era at a time, and every jump changes what you fight, how you hide and what you can become.</p>
+      </div>
+      <div class="why">
+        <article><img src="img/ss_05_portal_arena.jpg" alt="The stone ring portal glowing in the volcanic arena" width="1280" height="720" loading="lazy"><div><span class="label">Thirteen eras</span><h3>Thirteen worlds in one game</h3><p>Not one setting but the whole of history: dinosaur jungles, the frozen Ice Age, the Bronze Age, Ancient Egypt and on to the far future. Every era is its own world, with its own creatures, weapons and ways to die.</p></div></article>
+        <article><img src="img/morph_raptor.jpg" alt="The hero morphed into a raptor, running across a riverbed" width="1280" height="720" loading="lazy"><div><span class="label">Morph</span><h3>Become the beast</h3><p>Find amber and take the form of the creatures you are running from. Hunt as a Raptor, charge as a Triceratops, glide over the valley as a Pteranodon.</p></div></article>
+        <article><img src="img/ss_02_herd_meadow.jpg" alt="A mixed herd of dinosaurs grazing in a sunlit meadow" width="1280" height="720" loading="lazy"><div><span class="label">Living world</span><h3>A world that does not wait for you</h3><p>Herds graze and drink at the river, raptor packs hunt as a team and scatter when they lose their nerve, wolves circle their prey. You are part of the food chain, not the centre of it.</p></div></article>
+        <article><img src="img/ss_04_pachy_guardian.jpg" alt="The Pachycephalosaurus guardian charging in the volcanic arena" width="1280" height="720" loading="lazy"><div><span class="label">Guardians</span><h3>Every era ends with a giant</h3><p>Each era is guarded by something the timeline has twisted: Rex Prime and the Pachycephalosaurus in the volcanic arena, then the woolly rhino, the steppe mammoth, the Elder Megatherium and the giant bird Aiolornis in the Ice Age.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="showcase">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Straight from the build</span>
+        <h2>This is the game today</h2>
+        <p class="lede">Real screenshots from the current build in Unreal Engine 5, no paint-overs. Select any image to see it larger.</p>
+      </div>
+      <div class="gallery">
+        <button class="wide" data-cap="A Brontosaurus herd in the jungle"><img src="img/ss_01_jungle_brontosaurus.jpg" alt="Brontosaurus herd moving through the jungle" loading="lazy"></button>
+        <button data-cap="Fighting off a raptor pack"><img src="img/ss_03_raptor_fight.jpg" alt="The hero fighting raptors with a spear" loading="lazy"></button>
+        <button data-cap="Herds in the meadow"><img src="img/ss_02_herd_meadow.jpg" alt="Dinosaur herds grazing in a meadow" loading="lazy"></button>
+        <button data-cap="The portal in the volcanic arena"><img src="img/ss_05_portal_arena.jpg" alt="The stone ring portal glowing in the volcanic arena" loading="lazy"></button>
+        <button data-cap="The Pachycephalosaurus guardian"><img src="img/ss_04_pachy_guardian.jpg" alt="The Pachycephalosaurus charging" loading="lazy"></button>
+        <button data-cap="The Ice Age wolf pack"><img src="img/ss_06_wolf_pack.jpg" alt="A wolf pack closing in through the snow" loading="lazy"></button>
+        <button data-cap="Mammoths at the frozen lake"><img src="img/ss_07_mammoth_lake.jpg" alt="Mammoths beside a frozen lake" loading="lazy"></button>
+        <button data-cap="Under the ice"><img src="img/ss_08_under_the_ice.jpg" alt="The view from beneath the lake ice after falling through" loading="lazy"></button>
+        <button data-cap="The frozen lake"><img src="img/ice_lake.jpg" alt="The hero on the frozen lake looking toward a spruce shoreline and snowy mountains" loading="lazy"></button>
+      </div>
+      <div class="chips" style="margin-top:22px"><a class="btn ghost" href="videos/">Watch the trailers</a><a class="btn ghost" href="#eras">More screenshots in every era</a></div>
+    </div>
+  </section>
 
   <section id="about">
     <div class="wrap">
@@ -305,6 +365,53 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <article><span class="label">Survive</span><h3>Fight, hide or run</h3><p>Spears, thrown stones and the atlatl. Crouch in the undergrowth to slip past predators, pick up power-ups that change how you fight, and find amber to take the form of a dinosaur.</p></article>
         <article><span class="label">Escape</span><h3>Three keys and a guardian</h3><p>Every era hides three key pieces and the guardians at its heart, from Rex Prime in the volcanic arena to the giants of the Ice Age. Beat them and the stone ring wakes, sending you on to the next age.</p></article>
       </div>
+    </div>
+  </section>
+
+  <section id="concept">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Concept art</span>
+        <h2>From concept to game</h2>
+        <p class="lede">Every era starts as concept art. Then we build it to match, side by side, until the game looks like the painting.</p>
+      </div>
+      <div class="pairs">
+        <div class="pair">
+          <figure><img src="img/c_ice_wolves.jpg" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
+          <figure class="game"><img src="img/ice_wolves.jpg" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
+          <p class="pair-cap">The wolf pack: from a concept painting of wolves, a sabre-tooth and mammoths to the pack hunting in the game.</p>
+        </div>
+        <div class="pair">
+          <figure><img src="img/c_ice_sloth.jpg" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
+          <figure class="game"><img src="img/ice_sloth.jpg" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
+          <p class="pair-cap">The giant ground sloth, Megatherium: the chosen concept, then the creature built, rigged and animated in the game.</p>
+        </div>
+        <div class="pair">
+          <figure><img src="img/c_ice_teratorn.jpg" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
+          <figure class="game"><img src="img/ice_aiolornis.jpg" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
+          <p class="pair-cap">The giant bird: a stormy concept, then Aiolornis, one of the Ice Age bosses.</p>
+        </div>
+        <div class="pair">
+          <figure><img src="img/c_ice_bear_portal.jpg" alt="Concept art" width="1280" height="720" loading="lazy"><figcaption>Concept</figcaption></figure>
+          <figure class="game"><img src="img/ice_bear.jpg" alt="The same idea in the game" loading="lazy"><figcaption>In game</figcaption></figure>
+          <p class="pair-cap">The cave bear: concept art, then the short-faced bear in the snow.</p>
+        </div>
+      </div>
+      <h3 class="sub-h">More from the Ice Age</h3>
+      <div class="gallery">
+        <button class="wide" data-cap="Ice Age concept: A frozen river canyon under the aurora"><img src="img/c_ice_canyon.jpg" alt="Ice Age concept art: A frozen river canyon under the aurora" loading="lazy"></button>
+        <button data-cap="Ice Age concept: A mammoth frozen in the wall of an ice cave"><img src="img/c_ice_cave_mammoth.jpg" alt="Ice Age concept art: A mammoth frozen in the wall of an ice cave" loading="lazy"></button>
+        <button data-cap="Ice Age concept: The hero turning into a falcon in a burst of cyan light"><img src="img/c_ice_falcon_morph.jpg" alt="Ice Age concept art: The hero turning into a falcon in a burst of cyan light" loading="lazy"></button>
+        <button data-cap="Ice Age concept: Steaming hot springs in the snow"><img src="img/c_ice_springs.jpg" alt="Ice Age concept art: Steaming hot springs in the snow" loading="lazy"></button>
+      </div>
+      <h3 class="sub-h">Coming later: Ancient Egypt</h3>
+      <p class="lede" style="margin:0 0 14px">One of the eras planned after the Bronze Age. A first look at the concept art.</p>
+      <div class="gallery" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+        <button data-cap="Ancient Egypt concept: The Sphinx being carved in its quarry pit"><img src="img/c_egypt_sphinx.jpg" alt="Ancient Egypt concept art: The Sphinx being carved in its quarry pit" loading="lazy"></button>
+        <button data-cap="Ancient Egypt concept: A golden solar barque on the Nile"><img src="img/c_egypt_barque.jpg" alt="Ancient Egypt concept art: A golden solar barque on the Nile" loading="lazy"></button>
+        <button data-cap="Ancient Egypt concept: The great temple gate with its avenue of sphinxes"><img src="img/c_egypt_hall.jpg" alt="Ancient Egypt concept art: The great temple gate with its avenue of sphinxes" loading="lazy"></button>
+      </div>
+      <p class="ainote" style="margin-top:clamp(24px,4vw,40px)">Concept art is made with AI image tools. The game itself is built by us in Unreal Engine 5, and the "in game" images are real screenshots.</p>
     </div>
   </section>
 
@@ -359,20 +466,6 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         <div><h3>A devlog every week</h3><p>Every week of work goes into the <a href="devlog/">devlog</a> as text and screenshots, and onto YouTube as an episode, so you can watch the game grow from an empty project.</p></div>
       </div>
       <p class="ainote" style="margin-top:clamp(24px,4vw,40px)">We use AI tools and say so: some 3D models start as AI generations before rigging and animation, concept and story art is AI-assisted, our music is made with Suno, and creature sounds and narration use ElevenLabs. Gameplay images and in-engine trailers come from the current build.</p>
-    </div>
-  </section>
-
-  <section id="next">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">What's next</span>
-        <h2>Steam and Kickstarter</h2>
-        <p class="lede">The Steam page is coming soon, so you'll be able to wishlist Chronoshift. The Kickstarter campaign is planned for Tuesday 9 March 2027. Join the Discord to hear first, ask questions and watch the game take shape.</p>
-        <div class="chips">
-          <a class="btn" href="https://discord.gg/xaHBZNnN3n" target="_blank" rel="noopener">Join the Discord</a>
-          <a class="btn ghost" href="https://www.kickstarter.com/profile/ityelabs" target="_blank" rel="noopener">ItyeLabs on Kickstarter</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -844,6 +937,41 @@ footer .who strong { color: var(--bone); font: 700 1.2rem/1.2 var(--f-display); 
         </details>
       </div>
       <p class="roadmap-note">Era 1 is playable end to end: the jungle, swamp, canyon, lava plains and volcano cave, two bosses, and the portal. The portal now carries you into the Ice Age, a 1.1 km frozen world with its wolf pack, warmth and thin-ice survival, and the falcon. The Bronze Age comes next.</p>
+    </div>
+  </section>
+
+  <section id="back" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Back the journey</span>
+        <h2>Help us build every era</h2>
+        <p class="lede">Chronoshift is made in the open by a small independent studio. The Dinosaur Era is playable, the Ice Age is well under way, and the Kickstarter is how we fund the eras after it. Here is where things stand.</p>
+      </div>
+      <div class="back3">
+        <div><span class="label">Built so far</span><h3>Two eras under way</h3><ul>
+          <li>The Dinosaur Era, from the jungle to the volcanic arena, its two guardians and the portal</li>
+          <li>The Ice Age: wolf packs, breaking lake ice, blizzards and four bosses</li>
+          <li>21 creature species, each with its own animations, sounds and behaviour</li>
+          <li>Five power-ups, dinosaur morphs, stealth, spears and the atlatl</li>
+        </ul></div>
+        <div><span class="label">Coming next</span><h3>Steam, Kickstarter, the Bronze Age</h3><ul>
+          <li>A Steam page, so you can wishlist the game</li>
+          <li>The Kickstarter campaign, planned for Tuesday 9 March 2027</li>
+          <li>The third era, the Bronze Age</li>
+          <li>A new devlog episode every week until then</li>
+        </ul></div>
+        <div><span class="label">How to help today</span><h3>Follow, share, talk to us</h3><ul>
+          <li>Join the Discord to hear first and tell us what you think</li>
+          <li>Follow ITYELABS on Kickstarter to be told when the campaign opens</li>
+          <li>Subscribe on YouTube for the devlogs and trailers</li>
+          <li>Share the game with a friend who loves dinosaurs</li>
+        </ul></div>
+      </div>
+      <div class="chips" style="margin-top:24px">
+        <a class="btn" href="https://discord.gg/xaHBZNnN3n" target="_blank" rel="noopener">Join the Discord</a>
+        <a class="btn ghost" href="https://www.kickstarter.com/profile/ityelabs" target="_blank" rel="noopener">Follow ITYELABS on Kickstarter</a>
+        <a class="btn ghost" href="https://www.youtube.com/@ConsolePCGaming" target="_blank" rel="noopener">Subscribe on YouTube</a>
+      </div>
     </div>
   </section>
 
